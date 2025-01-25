@@ -1,0 +1,51 @@
+.game-menu {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.game-menu__box {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.game-menu__title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.game-menu__start-button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 5px;
+  background: #e74c3c;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.game-menu__start-button:hover {
+  background: #c0392b;
+}
+
+.game-menu__instructions {
+  font-size: 1em;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.game-menu--hidden {
+  display: none;
+}
