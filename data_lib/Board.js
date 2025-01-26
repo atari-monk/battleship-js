@@ -37,4 +37,9 @@ export class Board {
       return false
     }
   }
+
+  isEmpty(x, y) {
+    if (this._matrix[x][y] === 0) return true
+    else return false
+  }
 }

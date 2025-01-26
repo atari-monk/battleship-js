@@ -157,6 +157,10 @@
 
 - Total 398 min = 6 hours 38 minutes
 
+### 26
+
+1. 15:53 - 18:22, refactor: update AI logic and remove unused classes
+
 ### Plan
 
 1. Game end condition.

@@ -4,17 +4,13 @@ import { Player } from './Player.js'
 import { Fleet } from './Fleet.js'
 import { Board } from './Board.js'
 import { PlayerAI } from './player_ai/PlayerAI.js'
-import { SimpleAI } from './player_ai/SimpleAI.js'
-import { PredictiveAI } from './player_ai/PredictiveAI.js'
-import { FleetGuess } from './FleetGuess.js'
 
 export class DataServiceFactory {
   async generete() {
     const dataService = new DataService()
 
     const config = new Config()
-    config.enableFleetGrid = true
-    config.simpleAI = true
+    config.enableFleetGrid = false
     dataService.config = config
 
     const fleet1 = new Fleet()
@@ -30,11 +26,7 @@ export class DataServiceFactory {
     )
     dataService.player2 = new Player('Player 2', 'Blackbeard', fleet2, board2)
 
-    dataService.playerAI = new PlayerAI(
-      config.simpleAI
-        ? new SimpleAI(board2)
-        : new PredictiveAI(board2, new FleetGuess(board2))
-    )
+    dataService.playerAI = new PlayerAI(board2)
 
     if (!dataService.enableFleetGrid) {
       await dataService.loadMatricesFromURL('./../client/fleet.json')

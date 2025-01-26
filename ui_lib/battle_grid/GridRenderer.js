@@ -40,8 +40,7 @@ export class GridRenderer {
   }
 
   aiMove() {
-    const xy = this._dataService.playerAI.move()
-    //logger.debug(this._dataService.playerAI.toString())
+    const xy = this._dataService.playerAI.attack()
     const screenCoords = this.matrixToScreenCoords(xy[0], xy[1])
     return { clientX: screenCoords.x, clientY: screenCoords.y }
   }
