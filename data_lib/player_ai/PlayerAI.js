@@ -1,7 +1,6 @@
 export class PlayerAI {
   constructor(board) {
     this.board = board
-    this.target = null
     this.hits = []
     this.potentialTargets = []
     this.visited = new Set()
@@ -9,11 +8,10 @@ export class PlayerAI {
   }
 
   attack() {
-    if (this.potentialTargets.length === 0 && this.target === null) {
+    if (this.potentialTargets.length === 0 && this.hits.length === 0) {
       const [x, y] = this.getRandomCell()
       const result = this.board.hit(x, y)
       if (result) {
-        this.target = { x, y }
         this.hits.push({ x, y })
         this.addPotentialTargets(x, y)
       }
@@ -31,7 +29,7 @@ export class PlayerAI {
       } else {
         return this.attack()
       }
-    } else if (this.target !== null) {
+    } else if (this.hits.length > 0) {
       this.resetTargeting()
       return this.attack()
     }
@@ -104,16 +102,15 @@ export class PlayerAI {
 
     this.potentialTargets = this.potentialTargets.filter(({ x, y }) => {
       if (this.orientation === 'vertical') {
-        return x !== this.target.x
+        return x !== this.hits[0].x
       } else if (this.orientation === 'horizontal') {
-        return y !== this.target.y
+        return y !== this.hits[0].y
       }
       return false
     })
   }
 
   resetTargeting() {
-    this.target = null
     this.hits = []
     this.potentialTargets = []
     this.orientation = null
