@@ -42,4 +42,8 @@ export class Board {
     if (this._matrix[x][y] === 0) return true
     else return false
   }
+
+  isWithinBounds(x, y) {
+    return x >= 0 && x < 10 && y >= 0 && y < 10
+  }
 }

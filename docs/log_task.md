@@ -160,6 +160,7 @@
 ### 26
 
 1. 15:53 - 18:22, refactor: update AI logic and remove unused classes
+2. 20:50 - 21:34, feat: enhance PlayerAI with targeted attack logic
 
 ### Plan
 
