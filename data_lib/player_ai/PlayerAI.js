@@ -8,29 +8,49 @@ export class PlayerAI {
   }
 
   attack() {
-    if (this.potentialTargets.length === 0 && this.hits.length === 0) {
-      const [x, y] = this.getRandomCell()
+    if (this.noTargetsOrHits()) {
+      return this.randomAttack()
+    } else if (this.hasPotentialTargets()) {
+      return this.targetedAttack()
+    } else if (this.hasHits()) {
+      this.resetTargeting()
+      return this.attack()
+    }
+  }
+
+  noTargetsOrHits() {
+    return this.potentialTargets.length === 0 && this.hits.length === 0
+  }
+
+  hasPotentialTargets() {
+    return this.potentialTargets.length > 0
+  }
+
+  hasHits() {
+    return this.hits.length > 0
+  }
+
+  randomAttack() {
+    const [x, y] = this.getRandomCell()
+    const result = this.board.hit(x, y)
+    if (result) {
+      this.hits.push({ x, y })
+      this.addPotentialTargets(x, y)
+    }
+    return [x, y]
+  }
+
+  targetedAttack() {
+    const { x, y } = this.potentialTargets.shift()
+    if (this.board.isEmpty(x, y)) {
       const result = this.board.hit(x, y)
       if (result) {
         this.hits.push({ x, y })
+        this.determineOrientation()
         this.addPotentialTargets(x, y)
       }
       return [x, y]
-    } else if (this.potentialTargets.length > 0) {
-      const { x, y } = this.potentialTargets.shift()
-      if (this.board.isEmpty(x, y)) {
-        const result = this.board.hit(x, y)
-        if (result) {
-          this.hits.push({ x, y })
-          this.determineOrientation()
-          this.addPotentialTargets(x, y)
-        }
-        return [x, y]
-      } else {
-        return this.attack()
-      }
-    } else if (this.hits.length > 0) {
-      this.resetTargeting()
+    } else {
       return this.attack()
     }
   }
@@ -40,53 +60,51 @@ export class PlayerAI {
   }
 
   addPotentialTargets(x, y) {
+    const directions = this.getDirectionsForOrientation()
+
+    for (const [dx, dy] of directions) {
+      const newX = x + dx
+      const newY = y + dy
+      const key = this.getKey(newX, newY)
+
+      if (this.isValidTarget(newX, newY, key)) {
+        this.potentialTargets.push({ x: newX, y: newY })
+        this.visited.add(key)
+      }
+    }
+  }
+
+  getDirectionsForOrientation() {
     if (this.orientation === null) {
-      const directions = [
+      return [
         [-1, 0],
         [1, 0],
         [0, -1],
         [0, 1],
       ]
-
-      for (const [dx, dy] of directions) {
-        const newX = x + dx
-        const newY = y + dy
-        const key = `${newX},${newY}`
-        if (
-          this.board.isWithinBounds(newX, newY) &&
-          !this.visited.has(key) &&
-          this.board.isEmpty(newX, newY)
-        ) {
-          this.potentialTargets.push({ x: newX, y: newY })
-          this.visited.add(key)
-        }
-      }
-    } else {
-      const offsets =
-        this.orientation === 'vertical'
-          ? [
-              [-1, 0],
-              [1, 0],
-            ]
-          : [
-              [0, -1],
-              [0, 1],
-            ]
-
-      for (const [dx, dy] of offsets) {
-        const newX = x + dx
-        const newY = y + dy
-        const key = `${newX},${newY}`
-        if (
-          this.board.isWithinBounds(newX, newY) &&
-          !this.visited.has(key) &&
-          this.board.isEmpty(newX, newY)
-        ) {
-          this.potentialTargets.push({ x: newX, y: newY })
-          this.visited.add(key)
-        }
-      }
     }
+
+    return this.orientation === 'vertical'
+      ? [
+          [-1, 0],
+          [1, 0],
+        ]
+      : [
+          [0, -1],
+          [0, 1],
+        ]
+  }
+
+  getKey(x, y) {
+    return `${x},${y}`
+  }
+
+  isValidTarget(x, y, key) {
+    return (
+      this.board.isWithinBounds(x, y) &&
+      !this.visited.has(key) &&
+      this.board.isEmpty(x, y)
+    )
   }
 
   determineOrientation() {
@@ -100,6 +118,10 @@ export class PlayerAI {
       this.orientation = 'horizontal'
     }
 
+    this.filterPotentialTargets()
+  }
+
+  filterPotentialTargets() {
     this.potentialTargets = this.potentialTargets.filter(({ x, y }) => {
       if (this.orientation === 'vertical') {
         return x !== this.hits[0].x
