@@ -22,14 +22,6 @@ export class PlayerAI {
     return this.potentialTargets.length === 0 && this.hits.length === 0
   }
 
-  hasPotentialTargets() {
-    return this.potentialTargets.length > 0
-  }
-
-  hasHits() {
-    return this.hits.length > 0
-  }
-
   randomAttack() {
     const [x, y] = this.getRandomCell()
     const result = this.board.hit(x, y)
@@ -38,21 +30,6 @@ export class PlayerAI {
       this.addPotentialTargets(x, y)
     }
     return [x, y]
-  }
-
-  targetedAttack() {
-    const { x, y } = this.potentialTargets.shift()
-    if (this.board.isEmpty(x, y)) {
-      const result = this.board.hit(x, y)
-      if (result) {
-        this.hits.push({ x, y })
-        this.determineOrientation()
-        this.addPotentialTargets(x, y)
-      }
-      return [x, y]
-    } else {
-      return this.attack()
-    }
   }
 
   getRandomCell() {
@@ -107,6 +84,25 @@ export class PlayerAI {
     )
   }
 
+  hasPotentialTargets() {
+    return this.potentialTargets.length > 0
+  }
+
+  targetedAttack() {
+    const { x, y } = this.potentialTargets.shift()
+    if (this.board.isEmpty(x, y)) {
+      const result = this.board.hit(x, y)
+      if (result) {
+        this.hits.push({ x, y })
+        this.determineOrientation()
+        this.addPotentialTargets(x, y)
+      }
+      return [x, y]
+    } else {
+      return this.attack()
+    }
+  }
+
   determineOrientation() {
     if (this.hits.length < 2 || this.orientation !== null) return
 
@@ -130,6 +126,10 @@ export class PlayerAI {
       }
       return false
     })
+  }
+
+  hasHits() {
+    return this.hits.length > 0
   }
 
   resetTargeting() {
