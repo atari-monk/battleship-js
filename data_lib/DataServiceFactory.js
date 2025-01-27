@@ -10,7 +10,8 @@ export class DataServiceFactory {
     const dataService = new DataService()
 
     const config = new Config()
-    config.enableFleetGrid = true
+    config.enableFleetGrid = false
+    config.loadFleetFromFile = false
     dataService.config = config
 
     const fleet1 = new Fleet()
@@ -28,9 +29,12 @@ export class DataServiceFactory {
 
     dataService.playerAI = new PlayerAI(board2)
 
-    if (!dataService.enableFleetGrid) {
+    if (dataService.config.loadFleetFromFile) {
       await dataService.loadMatricesFromURL('./../client/fleet.json')
-    } else dataService.player2.fleet.setFleetRandomly()
+    } else {
+      dataService.player1.fleet.setFleetRandomly()
+      dataService.player2.fleet.setFleetRandomly()
+    }
 
     dataService.logPlayers()
 

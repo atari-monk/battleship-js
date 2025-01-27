@@ -39,3 +39,7 @@ If there is 2 hits orientation of ship is determined.
 When axis value changes for 2 hits, that is the orientation of the ship.  
 After orientation is determined, remove potential targets in other orientations.  
 Returns coordinates.  
+
+## TODO
+Fleet placing, broken battle grid in it
+Fleet random placment, ship should not toutch
