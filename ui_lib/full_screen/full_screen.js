@@ -1,42 +1,21 @@
 import { guiContener } from './../../client/script.js'
 import { logger } from './../../data_lib/LogService.js'
+import { FULL_SCREEN_CONFIG, MENU_CONFIG } from './config.js'
 
 export class FullScreen {
-  constructor() {
-    this.config = {
-      fsOverlay: '.fs-overlay',
-      hidden: 'fs-overlay--hidden',
-      fsOverlayButton: 'fsOverlayButton',
-      click: 'click',
-      initMsg: 'Load component: full_screen',
-    }
-    this.menuConfig = {
-      componentName: 'menu',
-      rootDivClass: 'game-menu',
-      divId: 'game-menu-1',
-    }
-    this.error = {
-      goFullScreen: 'Error in goFullScreen:',
-      showMenu: 'Error in showMenu:',
-    }
-    this.warn = {
-      requestFullscreen: 'Fullscreen request not supported',
-      overlay: 'Overlay element not found',
-      button: 'Button element not found',
-    }
-  }
-
   async goFullScreen() {
+    const { goFullScreenError } = FULL_SCREEN_CONFIG
     try {
       this.requestFullscreen()
       this.hide()
       await this.showMenu()
     } catch (error) {
-      logger.error(this.error.goFullScreen, error)
+      logger.error(goFullScreenError, error)
     }
   }
 
   requestFullscreen() {
+    const { requestFullscreenWarn } = FULL_SCREEN_CONFIG
     const el = document.documentElement
     const request =
       el.requestFullscreen ||
@@ -47,46 +26,47 @@ export class FullScreen {
     if (request) {
       request.call(el)
     } else {
-      logger.warn(this.warn.requestFullscreen)
+      logger.warn(requestFullscreenWarn)
     }
   }
 
   hide() {
-    const { fsOverlay, hidden } = this.config
+    const { fsOverlay, hiddenStyle } = FULL_SCREEN_CONFIG
     const overlay = document.querySelector(fsOverlay)
     if (overlay) {
-      overlay.classList.add(hidden)
+      overlay.classList.add(hiddenStyle)
     } else {
       logger.warn(this.warn.overlay)
     }
   }
 
   async showMenu() {
-    const { componentName, rootDivClass, divId } = this.menuConfig
-
+    const { name, cssClass, id, showMenuError } = MENU_CONFIG
     try {
-      await guiContener.loadComponentResources(componentName)
-      guiContener.createInstance(componentName, rootDivClass, divId)
+      await guiContener.loadComponentResources(name)
+      guiContener.createInstance(name, cssClass, id)
     } catch (error) {
-      logger.error(this.error.showMenu, error)
+      logger.error(showMenuError, error)
     }
   }
 
   init() {
-    const { initMsg } = this.config
-
+    const { initMsg } = FULL_SCREEN_CONFIG
     this.setButtonClick()
-
     logger.debug(initMsg)
   }
 
   setButtonClick() {
-    const { fsOverlayButton, click } = this.config
+    const {
+      fsOverlayButton,
+      clickEvent: click,
+      buttonWarn,
+    } = FULL_SCREEN_CONFIG
     const button = document.getElementById(fsOverlayButton)
     if (button) {
       button.addEventListener(click, (event) => this.goFullScreen(event))
     } else {
-      logger.warn(this.warn.button)
+      logger.warn(buttonWarn)
     }
   }
 }
