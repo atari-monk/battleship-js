@@ -171,7 +171,9 @@
 
 ### 28
 
-1. 14:08 - , 
+1. 14:08 - 15:18, refactor: FullScreen class for improved configuration and event handling,  
+                  refactor: improve error handling and logging in FullScreen class methods
+2. 16:30 - 17:25, refactor: Menu class structure and enhance error handling
 
 ### Plan
 

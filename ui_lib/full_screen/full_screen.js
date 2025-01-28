@@ -92,6 +92,5 @@ export class FullScreen {
 }
 
 export default function init() {
-  const fs = new FullScreen()
-  fs.init()
+  new FullScreen().init()
 }
