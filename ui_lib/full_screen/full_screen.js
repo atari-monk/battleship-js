@@ -1,52 +1,63 @@
 import { guiContener } from './../../client/script.js'
 import { logger } from './../../data_lib/LogService.js'
 
-const className = {
-  fsOverlay: '.fs-overlay',
-}
-
-const ids = {
-  fsOverlayButton: 'fsOverlayButton',
-}
-
-const styles = {
-  hidden: 'fs-overlay--hidden',
-}
-
-const events = {
-  click: 'click',
-}
-
-const messages = {
-  initMsg: 'Load component: full_screen',
-}
-
-const componentFile = {
-  menu: 'menu',
-}
-
-const goFullScreen = async () => {
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen()
-  } else if (document.documentElement.mozRequestFullScreen) {
-    document.documentElement.mozRequestFullScreen()
-  } else if (document.documentElement.webkitRequestFullscreen) {
-    document.documentElement.webkitRequestFullscreen()
-  } else if (document.documentElement.msRequestFullscreen) {
-    document.documentElement.msRequestFullscreen()
+export class FullScreen {
+  constructor() {
+    this.config = {
+      fsOverlay: '.fs-overlay',
+      hidden: 'fs-overlay--hidden',
+      fsOverlayButton: 'fsOverlayButton',
+      click: 'click',
+      initMsg: 'Load component: full_screen',
+    }
+    this.menuConfig = {
+      componentName: 'menu',
+      rootDivClass: 'game-menu',
+      divId: 'game-menu-1',
+    }
   }
-  document.querySelector(className.fsOverlay).classList.add(styles.hidden)
 
-  await showMenu()
-}
+  async goFullScreen() {
+    this.requestFullscreen()
+    this.hide()
+    await this.showMenu()
+  }
 
-async function showMenu() {
-  await guiContener.loadComponentResources(componentFile.menu)
-  guiContener.createInstance(componentFile.menu, 'game-menu', 'game-menu-1')
+  requestFullscreen() {
+    const el = document.documentElement
+    const request =
+      el.requestFullscreen ||
+      el.mozRequestFullScreen ||
+      el.webkitRequestFullscreen ||
+      el.msRequestFullscreen
+    request?.call(el)
+  }
+
+  hide() {
+    const { fsOverlay, hidden } = this.config
+    document.querySelector(fsOverlay).classList.add(hidden)
+  }
+
+  async showMenu() {
+    const { componentName, rootDivClass, divId } = this.menuConfig
+    await guiContener.loadComponentResources(componentName)
+    guiContener.createInstance(componentName, rootDivClass, divId)
+  }
+
+  init() {
+    const { fsOverlayButton, click, initMsg } = this.config
+    this.setButtonClick(fsOverlayButton, click)
+    logger.debug(initMsg)
+  }
+
+  setButtonClick(fsOverlayButton, click) {
+    document
+      .getElementById(fsOverlayButton)
+      .addEventListener(click, (event) => this.goFullScreen(event))
+  }
 }
 
 export default function init() {
-  const button = document.getElementById(ids.fsOverlayButton)
-  button.addEventListener(events.click, goFullScreen)
-  logger.debug(messages.initMsg)
+  const fs = new FullScreen()
+  fs.init()
 }

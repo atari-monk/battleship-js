@@ -169,6 +169,10 @@
 2. 18:47 - 19:21, refactor: PlayerAI, doc
 3. 19:22 - 23:00, feat: enhance PlayerAI with preloaded targeting logic
 
+### 28
+
+1. 14:08 - , 
+
 ### Plan
 
 1. Game end condition.
