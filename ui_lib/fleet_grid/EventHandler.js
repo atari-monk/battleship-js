@@ -1,4 +1,4 @@
-import { FLEET_GRID_CONFIG } from './FLEET_GRID_CONFIG'
+import { FLEET_GRID_CONFIG, EVENT } from './config.js'
 
 export class EventHandler {
   constructor(fleetGrid) {
@@ -6,41 +6,41 @@ export class EventHandler {
   }
 
   attachEvents() {
-    const {
-      fleetGrid,
-      mousemove,
-      mouseenter,
-      touchmove,
-      touchstart,
-      click,
-      wheel,
-    } = FLEET_GRID_CONFIG
-    const ui = document.querySelector(fleetGrid)
+    const { fleetGrid, events, handlerWarn } = FLEET_GRID_CONFIG
+    const element = document.querySelector(fleetGrid)
+    const eventHandlers = this.getHandlers()
 
-    ui.addEventListener(
-      mousemove,
-      this.fleetGrid.paintOnHover.bind(this.fleetGrid)
-    )
-    ui.addEventListener(
-      mouseenter,
-      this.fleetGrid.paintOnHover.bind(this.fleetGrid)
-    )
-    ui.addEventListener(
-      touchmove,
-      this.fleetGrid.paintOnHover.bind(this.fleetGrid),
-      { passive: true }
-    )
-    ui.addEventListener(
-      touchstart,
-      this.fleetGrid.paintOnHover.bind(this.fleetGrid),
-      { passive: true }
-    )
-    ui.addEventListener(click, this.fleetGrid.handleClick.bind(this.fleetGrid))
+    for (const eventName of events) {
+      const handler = eventHandlers[eventName]
+      const options = this.getOptions(eventName)
 
-    ui.addEventListener(
-      wheel,
-      this.fleetGrid.handleWheel.bind(this.fleetGrid),
-      { passive: true }
-    )
+      if (handler) {
+        element.addEventListener(
+          eventName,
+          handler.bind(this.fleetGrid),
+          options
+        )
+      } else {
+        console.warn(handlerWarn)
+      }
+    }
+  }
+
+  getOptions(eventName) {
+    return [EVENT.touchmove, EVENT.touchstart, EVENT.wheel].includes(eventName)
+      ? { passive: true }
+      : undefined
+  }
+
+  getHandlers() {
+    const { paintOnHover, handleClick, handleWheel } = this.fleetGrid
+    return {
+      mousemove: paintOnHover,
+      mouseenter: paintOnHover,
+      touchmove: paintOnHover,
+      touchstart: paintOnHover,
+      click: handleClick,
+      wheel: handleWheel,
+    }
   }
 }
