@@ -1,39 +1,44 @@
+import { FLEET_GRID_CONFIG } from './FLEET_GRID_CONFIG'
+
 export class EventHandler {
-  constructor(fleetGrid, config) {
+  constructor(fleetGrid) {
     this.fleetGrid = fleetGrid
-    this.config = config
   }
 
   attachEvents() {
-    const container = document.querySelector(
-      this.config.dot(this.config.cssClass.fleetGrid)
-    )
+    const {
+      fleetGrid,
+      mousemove,
+      mouseenter,
+      touchmove,
+      touchstart,
+      click,
+      wheel,
+    } = FLEET_GRID_CONFIG
+    const ui = document.querySelector(fleetGrid)
 
-    container.addEventListener(
-      this.config.event.mousemove,
+    ui.addEventListener(
+      mousemove,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid)
     )
-    container.addEventListener(
-      this.config.event.mouseenter,
+    ui.addEventListener(
+      mouseenter,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid)
     )
-    container.addEventListener(
-      this.config.event.touchmove,
+    ui.addEventListener(
+      touchmove,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid),
       { passive: true }
     )
-    container.addEventListener(
-      this.config.event.touchstart,
+    ui.addEventListener(
+      touchstart,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid),
       { passive: true }
     )
-    container.addEventListener(
-      this.config.event.click,
-      this.fleetGrid.handleClick.bind(this.fleetGrid)
-    )
+    ui.addEventListener(click, this.fleetGrid.handleClick.bind(this.fleetGrid))
 
-    container.addEventListener(
-      this.config.event.wheel,
+    ui.addEventListener(
+      wheel,
       this.fleetGrid.handleWheel.bind(this.fleetGrid),
       { passive: true }
     )
