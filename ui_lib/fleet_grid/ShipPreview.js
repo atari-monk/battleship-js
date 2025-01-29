@@ -1,8 +1,4 @@
 export class ShipPreview {
-  constructor(config) {
-    this.config = config
-  }
-
   paintPreview(
     startIndex,
     shipSize,
@@ -15,32 +11,82 @@ export class ShipPreview {
     const startCol = (startIndex - 1) % 10
 
     if (isHorizontal) {
-      for (let i = 0; i < shipSize; i++) {
-        const currentIndex = startIndex + i
-        if (startCol + i >= 10 || currentIndex > 100) break
-        if (!placedShips.has(currentIndex)) {
-          gridItems[currentIndex - 1].style.backgroundColor = color
-        }
-      }
+      this.paintHorizontal(
+        startIndex,
+        shipSize,
+        startCol,
+        placedShips,
+        gridItems,
+        color
+      )
     } else {
-      for (let i = 0; i < shipSize; i++) {
-        const currentIndex = startIndex + i * 10
-        const currentRow = Math.floor((currentIndex - 1) / 10)
-        if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
-          break
-        if (!placedShips.has(currentIndex)) {
-          gridItems[currentIndex - 1].style.backgroundColor = color
-        }
+      this.paintVertical(
+        startIndex,
+        shipSize,
+        startRow,
+        startCol,
+        placedShips,
+        gridItems,
+        color
+      )
+    }
+  }
+
+  paintHorizontal(
+    startIndex,
+    shipSize,
+    startCol,
+    placedShips,
+    gridItems,
+    color
+  ) {
+    for (let offset = 0; offset < shipSize; offset++) {
+      const currentIndex = startIndex + offset
+
+      if (startCol + offset >= 10 || currentIndex > 100) break
+
+      if (!placedShips.has(currentIndex)) {
+        this.applyColorToGridItem(currentIndex, gridItems, color)
       }
     }
   }
 
+  paintVertical(
+    startIndex,
+    shipSize,
+    startRow,
+    startCol,
+    placedShips,
+    gridItems,
+    color
+  ) {
+    for (let offset = 0; offset < shipSize; offset++) {
+      const currentIndex = startIndex + offset * 10
+      const currentRow = Math.floor((currentIndex - 1) / 10)
+
+      if (
+        currentRow !== startRow + offset ||
+        currentIndex > 100 ||
+        startCol >= 10
+      )
+        break
+
+      if (!placedShips.has(currentIndex)) {
+        this.applyColorToGridItem(currentIndex, gridItems, color)
+      }
+    }
+  }
+
+  applyColorToGridItem(index, gridItems, color) {
+    gridItems[index - 1].style.backgroundColor = color
+  }
+
   resetPreview(gridItems) {
     gridItems.forEach((item) => {
-      if (item.style.backgroundColor === this.config.color.blue) {
-        return
-      }
-      if (item.style.backgroundColor) {
+      if (
+        item.style.backgroundColor !== COLOR.blue &&
+        item.style.backgroundColor
+      ) {
         item.style.backgroundColor = ''
       }
     })

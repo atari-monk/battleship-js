@@ -19,3 +19,9 @@ export const FLEET_GRID_CONFIG = {
   ],
   handlerWarn: 'Handler for event not found',
 }
+
+export const COLOR = {
+  blue: 'blue',
+  green: 'green',
+  red: 'red',
+}

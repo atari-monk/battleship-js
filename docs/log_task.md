@@ -181,6 +181,7 @@
 1. 11:00 - 12:08, refactor: Toggle class with configuration, event handling
 2. 14:45 - 15:11, refactor: centralize event configuration in FLEET_GRID_CONFIG and simplify EventHandler 
 3. 15:12 - 16:30, refactor: migrate event handling to centralized configuration and enhance event management
+4. 17:43 - 17:54, refactor: simplify ShipPreview class by extracting painting logic and removing config dependency
 
 ### Plan
 
