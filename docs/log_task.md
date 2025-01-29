@@ -163,11 +163,15 @@
 2. 20:50 - 21:34, feat: enhance PlayerAI with targeted attack logic
 3. 21:42 - 22:20, refactor: streamline attack logic in PlayerAI with helper methods
 
+- Total 231 minutes = 3 hours 51 minutes
+
 ### 27
 
 1. 16:00 - 17:00
 2. 18:47 - 19:21, refactor: PlayerAI, doc
 3. 19:22 - 23:00, feat: enhance PlayerAI with preloaded targeting logic
+
+- Total 312 minutes = 5 hours 12 minutes
 
 ### 28
 
@@ -176,6 +180,8 @@
 2. 16:30 - 17:25, refactor: Menu class structure and enhance error handling
 3. 17:26 - 19:00, refactor: extract configuration constants for FullScreen and Menu classes
 
+- Total 219 minutes = 3 hours 39 minutes
+
 ### 29
 
 1. 11:00 - 12:08, refactor: Toggle class with configuration, event handling
@@ -183,6 +189,9 @@
 3. 15:12 - 16:30, refactor: migrate event handling to centralized configuration and enhance event management
 4. 17:43 - 17:54, refactor: simplify ShipPreview class by extracting painting logic and removing config dependency
 5. 17:55 - 18:36, refactor: remove config dependency from FleetService and centralize configuration for fleet and battle grids
+
+- Total 224 minutes = 3 hours 44 minutes
+- Refactoring code to make it pretty
 
 ### Plan
 
