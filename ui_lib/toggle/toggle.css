@@ -46,3 +46,7 @@
 .toggle__button--toggled-off {
   background: rgba(255, 255, 255, 0.3);
 }
+
+.toggle--hidden {
+  display: none;
+}

@@ -20,7 +20,7 @@ export class FleetGrid {
     this.shipPreview = new ShipPreview()
     this.gridRenderer = new GridRenderer(config)
     this.eventHandler = new EventHandler(this)
-    this.fleetService = new FleetService(config)
+    this.fleetService = new FleetService()
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,

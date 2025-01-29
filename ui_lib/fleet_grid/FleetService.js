@@ -1,12 +1,17 @@
 import { guiContener } from './../../client/script.js'
+import {
+  FLEET_GRID_CONFIG,
+  TOGGLE_CONFIG,
+  BATTLE_GRID_CONFIG,
+  COLOR,
+} from './config.js'
 
 export class FleetService {
   set dataService(dataService) {
     this._dataService = dataService
   }
 
-  constructor(config, shipSizes = [5, 4, 3, 3, 2]) {
-    this.config = config
+  constructor(shipSizes = [5, 4, 3, 3, 2]) {
     this.shipSizes = shipSizes
     this.currentShipIndex = 0
     this.isHorizontal = true
@@ -35,7 +40,7 @@ export class FleetService {
         this.isHorizontal,
         this.placedShips,
         gridItems,
-        this.config.color.blue
+        COLOR.blue
       )
 
       if (this.isHorizontal) {
@@ -86,41 +91,42 @@ export class FleetService {
   }
 
   hideFleetGrid() {
-    document
-      .querySelector(this.config.dot(this.config.cssClass.fleetGrid))
-      .classList.add(this.config.style.hidden)
-    document
-      .querySelector(this.config.dot(this.config.cssClass.toogle))
-      .classList.add(this.config.style.hidden)
+    const { fleetGrid, hiddenStyle: hidden1 } = FLEET_GRID_CONFIG
+    const { toogle, hiddenStyle: hidden2 } = TOGGLE_CONFIG
+    document.querySelector(fleetGrid).classList.add(hidden1)
+    document.querySelector(toogle).classList.add(hidden2)
   }
 
   async loadBattleGrid() {
-    await guiContener.loadComponentResources(this.config.component.battleGrid)
+    const {
+      battleGrid,
+      battleGridClass,
+      battleGridId1,
+      battleGridId2,
+      hiddenStyle,
+    } = BATTLE_GRID_CONFIG
+    await guiContener.loadComponentResources(battleGrid)
     const battleGrid1 = guiContener.createInstance(
-      'battle_grid',
-      'battle-grid',
-      'battle-grid-1'
+      battleGrid,
+      battleGridClass,
+      battleGridId1
     ).jsInstance
     const battleGrid2 = guiContener.createInstance(
-      'battle_grid',
-      'battle-grid',
-      'battle-grid-2'
+      battleGrid,
+      battleGridClass,
+      battleGridId2
     ).jsInstance
-    battleGrid1.init('battle-grid-1', true)
-    battleGrid2.init('battle-grid-2')
+    battleGrid1.init(battleGridId1, true)
+    battleGrid2.init(battleGridId2)
     if (this._dataService && battleGrid1 && battleGrid2) {
       battleGrid1.gridRenderer.dataService = this._dataService
       battleGrid2.gridRenderer.dataService = this._dataService
     }
 
     if (this._dataService.turn.currentPlayer === this._dataService.player1.name)
-      document
-        .getElementById('battle-grid-1')
-        .classList.add('battle-grid--hidden')
+      document.getElementById(battleGridId1).classList.add(hiddenStyle)
     if (this._dataService.turn.currentPlayer === this._dataService.player2.name)
-      document
-        .getElementById('battle-grid-2')
-        .classList.add('battle-grid--hidden')
+      document.getElementById(battleGridId2).classList.add(hiddenStyle)
 
     this._dataService.turn.printTurnInfo()
   }

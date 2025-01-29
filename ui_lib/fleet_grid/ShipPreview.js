@@ -1,3 +1,5 @@
+import { COLOR } from './config.js'
+
 export class ShipPreview {
   paintPreview(
     startIndex,
