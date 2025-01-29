@@ -176,6 +176,10 @@
 2. 16:30 - 17:25, refactor: Menu class structure and enhance error handling
 3. 17:26 - 19:00, refactor: extract configuration constants for FullScreen and Menu classes
 
+### 29
+
+1. 11:00 - 12:08, refactor: Toggle class with configuration, event handling
+
 ### Plan
 
 1. Game end condition.

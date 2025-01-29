@@ -1,53 +1,67 @@
 import { guiContener } from './../../client/script.js'
 import { logger } from './../../data_lib/LogService.js'
+import { TOGGLE_CONFIG } from './config.js'
 
-let isToggled = false
-let isTouch = false
+export class Toggle {
+  constructor() {
+    this.isToggled = false
+    this.isTouch = false
+  }
 
-const messages = {
-  initMsg: 'Load component: toggle',
+  init() {
+    const { toggleButtonId, fleetGridId, initMsg, componentsNotFoundWarn } =
+      TOGGLE_CONFIG
+    this.toggleButton = document.getElementById(toggleButtonId)
+    this.fleetGrid = guiContener.getInstanceById(fleetGridId).jsInstance
+
+    if (this.toggleButton && this.fleetGrid) {
+      this.setButtonClick()
+      logger.debug(initMsg)
+    } else {
+      logger.warn(componentsNotFoundWarn)
+    }
+  }
+
+  setButtonClick() {
+    const { touchStartEvent, clickEvent } = TOGGLE_CONFIG
+    this.toggleButton.addEventListener(
+      touchStartEvent,
+      (event) => {
+        this.isTouch = true
+        this.handleToggle(event)
+      },
+      { passive: true }
+    )
+
+    this.toggleButton.addEventListener(clickEvent, (event) => {
+      if (this.isTouch) {
+        this.isTouch = false
+        return
+      }
+      this.handleToggle(event)
+    })
+
+    this.toggleButton.classList.add(TOGGLE_CONFIG.toggledOff)
+  }
+
+  handleToggle(event) {
+    this.isToggled = !this.isToggled
+
+    if (this.isToggled) {
+      this.toggleButton.classList.add(TOGGLE_CONFIG.toggledOn)
+      this.toggleButton.classList.remove(TOGGLE_CONFIG.toggledOff)
+    } else {
+      this.toggleButton.classList.add(TOGGLE_CONFIG.toggledOff)
+      this.toggleButton.classList.remove(TOGGLE_CONFIG.toggledOn)
+    }
+
+    this.fleetGrid.fleetService.toggleOrientation()
+    this.fleetGrid.paintOnHover(
+      this.fleetGrid.placementHandler.currentHoverPosition
+    )
+  }
 }
 
 export default function init() {
-  const toggleButton = document.getElementById('toggle-button')
-  const gridInstance = guiContener.getInstanceById('fleet-grid-1').jsInstance
-
-  function handleToggle(event) {
-    isToggled = !isToggled
-
-    if (isToggled) {
-      toggleButton.classList.add('toggle__button--toggled-on')
-      toggleButton.classList.remove('toggle__button--toggled-off')
-    } else {
-      toggleButton.classList.add('toggle__button--toggled-off')
-      toggleButton.classList.remove('toggle__button--toggled-on')
-    }
-
-    gridInstance.fleetService.toggleOrientation()
-
-    gridInstance.paintOnHover(
-      gridInstance.placementHandler.currentHoverPosition
-    )
-  }
-
-  toggleButton.addEventListener(
-    'touchstart',
-    (event) => {
-      isTouch = true
-      handleToggle(event)
-    },
-    { passive: true }
-  )
-
-  toggleButton.addEventListener('click', (event) => {
-    if (isTouch) {
-      isTouch = false
-      return
-    }
-    handleToggle(event)
-  })
-
-  toggleButton.classList.add('toggle__button--toggled-off')
-
-  logger.debug(messages.initMsg)
+  new Toggle().init()
 }
