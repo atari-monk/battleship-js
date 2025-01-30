@@ -7,8 +7,14 @@ export const EVENT = {
   wheel: 'wheel',
 }
 
+export const HTML_CONFIG = {
+  div: 'div',
+}
+
 export const FLEET_GRID_CONFIG = {
   fleetGrid: '.fleet-grid',
+  fleetGridGrid: '.fleet-grid__grid',
+  fleetGridCell: 'fleet-grid__item',
   hiddenStyle: 'fleet-grid--hidden',
   events: [
     EVENT.mousemove,
@@ -19,6 +25,8 @@ export const FLEET_GRID_CONFIG = {
     EVENT.wheel,
   ],
   handlerWarn: 'Handler for event not found',
+  gridError: (selector) => `Container with selector ${selector} not found.`,
+  itemsError: 'Grid items have not been generated yet.',
 }
 
 export const TOGGLE_CONFIG = {

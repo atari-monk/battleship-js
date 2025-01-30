@@ -1,36 +1,36 @@
+import { FLEET_GRID_CONFIG, HTML_CONFIG } from './config.js'
+
 export class GridRenderer {
-  constructor(config) {
-    this.config = config
+  constructor() {
     this.gridItems = null
   }
 
   generateGridItems() {
-    const selector = this.config.dot(this.config.cssClass.fleetGridGrid)
-    const container = document.querySelector(selector)
+    const { fleetGridGrid, fleetGridCell, gridError } = FLEET_GRID_CONFIG
+    const container = document.querySelector(fleetGridGrid)
     if (!container) {
-      throw new Error(`Container with selector ${selector} not found.`)
+      throw new Error(gridError(fleetGridGrid))
     }
 
     for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(this.config.html.div)
-      gridItem.classList.add(this.config.cssClass.fleetGridCell)
+      const gridItem = document.createElement(HTML_CONFIG.div)
+      gridItem.classList.add(fleetGridCell)
       container.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(
-      this.config.dot(this.config.cssClass.fleetGridCell)
-    )
+    this.gridItems = document.querySelectorAll(`.${fleetGridCell}`)
   }
 
   getGridItems() {
     if (!this.gridItems) {
-      throw new Error('Grid items have not been generated yet.')
+      throw new Error(FLEET_GRID_CONFIG.itemsError)
     }
     return this.gridItems
   }
 
   getCellIndex(x, y) {
+    const { fleetGridCell } = FLEET_GRID_CONFIG
     const cellSize = document
-      .querySelector(this.config.dot(this.config.cssClass.fleetGridCell))
+      .querySelector(`.${fleetGridCell}`)
       .getBoundingClientRect()
     const col = Math.floor(x / cellSize.width)
     const row = Math.floor(y / cellSize.height)

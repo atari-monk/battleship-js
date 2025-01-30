@@ -193,6 +193,11 @@
 - Total 224 minutes = 3 hours 44 minutes
 - Refactoring code to make it pretty
 
+### 30
+
+1. 08:52 - 09:20, refactor: centralize grid configuration in FLEET_GRID_CONFIG and simplify GridRenderer
+2.
+
 ### Plan
 
 1. Game end condition.
