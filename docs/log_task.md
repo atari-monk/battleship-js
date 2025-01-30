@@ -203,6 +203,10 @@
 6. 14:32 - 15:53, refactor: update import paths to centralize configuration usage and remove obsolete config files
 7. 17:15 - 18:53, refactor: update FULL_SCREEN configuration structure and improve logging for fullscreen functionality
 
+- Total 580 minutes = 9 hours 40 minutes
+- Refactoring code to make it pretty
+- Merging configs to one file
+
 ### Plan
 
 1. Game end condition.
