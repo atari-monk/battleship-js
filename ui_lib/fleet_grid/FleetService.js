@@ -4,7 +4,7 @@ import {
   TOGGLE_CONFIG,
   BATTLE_GRID_CONFIG,
   COLOR,
-} from './config.js'
+} from './../config.js'
 
 export class FleetService {
   set dataService(dataService) {
@@ -99,20 +99,21 @@ export class FleetService {
 
   async loadBattleGrid() {
     const {
+      name,
       battleGrid,
       battleGridClass,
       battleGridId1,
       battleGridId2,
       hiddenStyle,
     } = BATTLE_GRID_CONFIG
-    await guiContener.loadComponentResources(battleGrid)
+    await guiContener.loadComponentResources(name)
     const battleGrid1 = guiContener.createInstance(
-      battleGrid,
+      name,
       battleGridClass,
       battleGridId1
     ).jsInstance
     const battleGrid2 = guiContener.createInstance(
-      battleGrid,
+      name,
       battleGridClass,
       battleGridId2
     ).jsInstance

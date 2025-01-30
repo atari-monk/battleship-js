@@ -1,5 +1,5 @@
 import { logger } from './../../data_lib/LogService.js'
-import { BATTLE_GRID_CONFIG } from './config.js'
+import { BATTLE_GRID_CONFIG } from './../config.js'
 
 export class BattleGrid {
   set dataService(dataService) {

@@ -1,4 +1,4 @@
-import { FLEET_GRID_CONFIG, HTML_CONFIG } from './config.js'
+import { FLEET_GRID_CONFIG, HTML_CONFIG } from './../config.js'
 
 export class GridRenderer {
   constructor() {

@@ -1,4 +1,4 @@
-import { FLEET_GRID_CONFIG, EVENT } from './config.js'
+import { FLEET_GRID_CONFIG, EVENT } from './../config.js'
 
 export class EventHandler {
   constructor(fleetGrid) {

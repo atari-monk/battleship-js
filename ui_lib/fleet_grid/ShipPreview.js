@@ -1,4 +1,4 @@
-import { COLOR } from './config.js'
+import { COLOR } from './../config.js'
 
 export class ShipPreview {
   paintPreview(

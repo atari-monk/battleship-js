@@ -5,7 +5,7 @@ import {
   FLEET_GRID_CONFIG,
   TOGGLE_CONFIG,
   BATTLE_GRID_CONFIG,
-} from './config.js'
+} from './../config.js'
 
 export class Menu {
   init() {

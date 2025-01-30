@@ -1,6 +1,6 @@
 import { guiContener } from './../../client/script.js'
 import { logger } from './../../data_lib/LogService.js'
-import { FULL_SCREEN_CONFIG, MENU_CONFIG } from './config.js'
+import { FULL_SCREEN_CONFIG, MENU_CONFIG } from './../config.js'
 
 export class FullScreen {
   async goFullScreen() {

@@ -1,5 +1,5 @@
 import { logger } from './../../data_lib/LogService.js'
-import { FLEET_GRID_CONFIG, COLOR, EVENT } from './config.js'
+import { FLEET_GRID_CONFIG, COLOR, EVENT } from './../config.js'
 
 export class PlacementHandler {
   set dataService(dataService) {

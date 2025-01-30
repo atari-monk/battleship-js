@@ -5,7 +5,7 @@ import { PlacementHandler } from './PlacementHandler.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
 import { logger } from './../../data_lib/LogService.js'
-import { FLEET_GRID_CONFIG } from './config.js'
+import { FLEET_GRID_CONFIG } from './../config.js'
 
 export class FleetGrid {
   set dataService(dataService) {

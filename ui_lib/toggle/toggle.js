@@ -1,6 +1,6 @@
 import { guiContener } from './../../client/script.js'
 import { logger } from './../../data_lib/LogService.js'
-import { TOGGLE_CONFIG } from './config.js'
+import { TOGGLE_CONFIG } from './../config.js'
 
 export class Toggle {
   constructor() {

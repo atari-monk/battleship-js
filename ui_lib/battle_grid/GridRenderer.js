@@ -1,9 +1,4 @@
-import {
-  BATTLE_GRID_CONFIG,
-  HTML_CONFIG,
-  EVENT_CONFIG,
-  COLOR,
-} from './config.js'
+import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT, COLOR } from './../config.js'
 
 export class GridRenderer {
   set dataService(dataService) {
@@ -31,7 +26,7 @@ export class GridRenderer {
     }
     this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
 
-    grid.addEventListener(EVENT_CONFIG.click, (event) =>
+    grid.addEventListener(EVENT.click, (event) =>
       this.handleGlobalAtack(event, id)
     )
 
