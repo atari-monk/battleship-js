@@ -7,16 +7,17 @@ export const EVENT = {
   wheel: 'wheel',
 }
 
-export const FULL_SCREEN_CONFIG = {
-  fsOverlay: '.fs-overlay',
-  hiddenStyle: 'fs-overlay--hidden',
-  fsOverlayButton: 'fsOverlayButton',
-  clickEvent: 'click',
-  initMsg: 'Load component: full_screen',
-  goFullScreenError: 'Error in goFullScreen:',
-  requestFullscreenWarn: 'Fullscreen request not supported',
-  overlayWarn: 'Overlay element not found',
-  buttonWarn: 'Button element not found',
+export const FULL_SCREEN = {
+  root: 'fs-overlay',
+  get rootSelector() {
+    return `.${this.root}`
+  },
+  buttonId: 'fsOverlayButton',
+  hidden: 'fs-overlay--hidden',
+  initMsg: 'Loading component: full_screen',
+  notFoundWarn: (id) => `Element ${id} not found`,
+  fullscreenWarn: 'Fullscreen request not supported',
+  fullScreenError: 'Error switching to full screen mode:',
 }
 
 export const MENU_CONFIG = {

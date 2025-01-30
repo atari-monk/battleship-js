@@ -1,21 +1,34 @@
 import { guiContener } from './../../client/script.js'
 import { logger } from './../../data_lib/LogService.js'
-import { FULL_SCREEN_CONFIG, MENU_CONFIG } from './../config.js'
+import { EVENT, FULL_SCREEN, MENU_CONFIG } from './../config.js'
 
 export class FullScreen {
+  init() {
+    logger.debug(FULL_SCREEN.initMsg)
+    this.setButtonClick()
+  }
+
+  setButtonClick() {
+    const { buttonId, notFoundWarn } = FULL_SCREEN
+    const button = document.getElementById(buttonId)
+    if (button) {
+      button.addEventListener(EVENT.click, (event) => this.goFullScreen(event))
+    } else {
+      logger.warn(notFoundWarn(buttonId))
+    }
+  }
+
   async goFullScreen() {
-    const { goFullScreenError } = FULL_SCREEN_CONFIG
     try {
       this.requestFullscreen()
       this.hide()
       await this.showMenu()
     } catch (error) {
-      logger.error(goFullScreenError, error)
+      logger.error(FULL_SCREEN.fullScreenError, error)
     }
   }
 
   requestFullscreen() {
-    const { requestFullscreenWarn } = FULL_SCREEN_CONFIG
     const el = document.documentElement
     const request =
       el.requestFullscreen ||
@@ -26,17 +39,17 @@ export class FullScreen {
     if (request) {
       request.call(el)
     } else {
-      logger.warn(requestFullscreenWarn)
+      logger.warn(FULL_SCREEN.fullscreenWarn)
     }
   }
 
   hide() {
-    const { fsOverlay, hiddenStyle } = FULL_SCREEN_CONFIG
-    const overlay = document.querySelector(fsOverlay)
-    if (overlay) {
-      overlay.classList.add(hiddenStyle)
+    const { rootSelector, hidden, notFoundWarn } = FULL_SCREEN
+    const el = document.querySelector(rootSelector)
+    if (el) {
+      el.classList.add(hidden)
     } else {
-      logger.warn(this.warn.overlay)
+      logger.warn(notFoundWarn(rootSelector))
     }
   }
 
@@ -47,26 +60,6 @@ export class FullScreen {
       guiContener.createInstance(name, cssClass, id)
     } catch (error) {
       logger.error(showMenuError, error)
-    }
-  }
-
-  init() {
-    const { initMsg } = FULL_SCREEN_CONFIG
-    this.setButtonClick()
-    logger.debug(initMsg)
-  }
-
-  setButtonClick() {
-    const {
-      fsOverlayButton,
-      clickEvent: click,
-      buttonWarn,
-    } = FULL_SCREEN_CONFIG
-    const button = document.getElementById(fsOverlayButton)
-    if (button) {
-      button.addEventListener(click, (event) => this.goFullScreen(event))
-    } else {
-      logger.warn(buttonWarn)
     }
   }
 }
