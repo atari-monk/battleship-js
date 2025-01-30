@@ -27,6 +27,9 @@ export const FLEET_GRID_CONFIG = {
   handlerWarn: 'Handler for event not found',
   gridError: (selector) => `Container with selector ${selector} not found.`,
   itemsError: 'Grid items have not been generated yet.',
+  player1Data: (playerName, fleet) =>
+    `7. Load data:\n\tPlayer 1 - '${playerName}'\n\tFleet:\n\t\t${fleet}`,
+  initMsg: 'Load component: fleet_grid',
 }
 
 export const TOGGLE_CONFIG = {

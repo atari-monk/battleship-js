@@ -1,22 +1,16 @@
 import { logger } from './../../data_lib/LogService.js'
+import { FLEET_GRID_CONFIG, COLOR, EVENT } from './config.js'
 
 export class PlacementHandler {
   set dataService(dataService) {
     this._dataService = dataService
   }
 
-  constructor(
-    gridRenderer,
-    placementValidator,
-    shipPreview,
-    fleetService,
-    config
-  ) {
+  constructor(gridRenderer, placementValidator, shipPreview, fleetService) {
     this.gridRenderer = gridRenderer
     this.placementValidator = placementValidator
     this.shipPreview = shipPreview
     this.fleetService = fleetService
-    this.config = config
     this.currentHoverPosition = null
   }
 
@@ -48,7 +42,7 @@ export class PlacementHandler {
         this.fleetService.isHorizontal,
         this.fleetService.placedShips,
         gridItems,
-        this.config.color.green
+        COLOR.green
       )
     } else {
       this.shipPreview.paintPreview(
@@ -57,12 +51,13 @@ export class PlacementHandler {
         this.fleetService.isHorizontal,
         this.fleetService.placedShips,
         gridItems,
-        this.config.color.red
+        COLOR.red
       )
     }
   }
 
   handleClick(event, gridItems) {
+    const { fleetGridGrid, player1Data } = FLEET_GRID_CONFIG
     const touch = event.touches ? event.touches[0] : event
     const index = this.getCellIndex(touch.clientX, touch.clientY)
 
@@ -71,22 +66,19 @@ export class PlacementHandler {
         index,
         this.placementValidator,
         this.shipPreview,
-        gridItems,
-        this.config
+        gridItems
       )
     ) {
       if (this.fleetService.isPlacementComplete()) {
         document
-          .querySelector('.fleet-grid__grid')
-          .removeEventListener('click', this.handleClick.bind(this))
+          .querySelector(fleetGridGrid)
+          .removeEventListener(EVENT.click, this.handleClick.bind(this))
 
         this.fleetService.saveGridData()
         const fleet = this.fleetService.gridArray
           .map((row) => row.join(' '))
           .join('\n\t\t')
-        logger.debug(
-          this.config.message.player1Data(this._dataService.player1.name, fleet)
-        )
+        logger.debug(player1Data(this._dataService.player1.name, fleet))
       }
     }
   }
