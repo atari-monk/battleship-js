@@ -1,34 +1,32 @@
 import { logger } from './../../data_lib/LogService.js'
+import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT_CONFIG } from './config.js'
 
 export class GridRenderer {
   set dataService(dataService) {
     this._dataService = dataService
   }
 
-  constructor(config) {
+  constructor() {
     this.gridItems = null
-    this.config = config
     this.isFiring = true
   }
 
   generateGridItems(id, isAI = false) {
-    const { cssClass: css, html, event, dot } = this.config
-    const gridId = `#${id} ${dot(css.battleGridGrid)}`
+    const { battleGridGrid, battleGridCell } = BATTLE_GRID_CONFIG
+    const gridId = `#${id} .${battleGridGrid}`
     const grid = document.querySelector(gridId)
     if (!grid) {
       throw new Error(`Container with selector ${gridId} not found.`)
     }
 
     for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(html.div)
-      gridItem.classList.add(css.battleGridCell)
+      const gridItem = document.createElement(HTML_CONFIG.div)
+      gridItem.classList.add(battleGridCell)
       grid.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(
-      `#${id} ${dot(css.battleGridCell)}`
-    )
+    this.gridItems = document.querySelectorAll(`#${id} .${battleGridCell}`)
 
-    grid.addEventListener(event.click, (event) =>
+    grid.addEventListener(EVENT_CONFIG.click, (event) =>
       this.handleGlobalAtack(event, id)
     )
 
@@ -46,10 +44,8 @@ export class GridRenderer {
   }
 
   matrixToScreenCoords(row, col) {
-    const { cssClass: css, dot } = this.config
-    const cell = document.querySelector(
-      `#battle-grid-1 ${dot(css.battleGridCell)}`
-    )
+    const { battleGridCell } = BATTLE_GRID_CONFIG
+    const cell = document.querySelector(`#battle-grid-1 .${battleGridCell}`)
     const cellSize = cell.getBoundingClientRect()
     const container = document.getElementById('battle-grid-1')
     const containerRect = container.getBoundingClientRect()
@@ -68,9 +64,9 @@ export class GridRenderer {
   }
 
   getCellIndex(x, y, id) {
-    const { cssClass: css, dot } = this.config
+    const { battleGridCell } = BATTLE_GRID_CONFIG
     const cellSize = document
-      .querySelector(`#${id} ${dot(css.battleGridCell)}`)
+      .querySelector(`#${id} .${battleGridCell}`)
       .getBoundingClientRect()
     const col = Math.floor(x / cellSize.width)
     const row = Math.floor(y / cellSize.height)

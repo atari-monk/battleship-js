@@ -15,8 +15,8 @@ export const FLEET_GRID_CONFIG = {
   cssClass: 'fleet-grid',
   id: 'fleet-grid-1',
   scripts: [
+    'config.js',
     'EventHandler.js',
-    'FleetGridConfig.js',
     'FleetService.js',
     'GridRenderer.js',
     'PlacementValidator.js',
