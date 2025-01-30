@@ -1,5 +1,9 @@
-import { logger } from './../../data_lib/LogService.js'
-import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT_CONFIG } from './config.js'
+import {
+  BATTLE_GRID_CONFIG,
+  HTML_CONFIG,
+  EVENT_CONFIG,
+  COLOR,
+} from './config.js'
 
 export class GridRenderer {
   set dataService(dataService) {
@@ -12,11 +16,12 @@ export class GridRenderer {
   }
 
   generateGridItems(id, isAI = false) {
-    const { battleGridGrid, battleGridCell } = BATTLE_GRID_CONFIG
-    const gridId = `#${id} .${battleGridGrid}`
+    const { battleGridGrid, battleGridCell, getSelector, notFoundError } =
+      BATTLE_GRID_CONFIG
+    const gridId = getSelector(id, battleGridGrid)
     const grid = document.querySelector(gridId)
     if (!grid) {
-      throw new Error(`Container with selector ${gridId} not found.`)
+      throw new Error(notFoundError(gridId))
     }
 
     for (let i = 1; i <= 100; i++) {
@@ -24,7 +29,7 @@ export class GridRenderer {
       gridItem.classList.add(battleGridCell)
       grid.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(`#${id} .${battleGridCell}`)
+    this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
 
     grid.addEventListener(EVENT_CONFIG.click, (event) =>
       this.handleGlobalAtack(event, id)
@@ -44,10 +49,12 @@ export class GridRenderer {
   }
 
   matrixToScreenCoords(row, col) {
-    const { battleGridCell } = BATTLE_GRID_CONFIG
-    const cell = document.querySelector(`#battle-grid-1 .${battleGridCell}`)
+    const { battleGridCell, battleGrid1, getSelector } = BATTLE_GRID_CONFIG
+    const cell = document.querySelector(
+      getSelector(battleGrid1, battleGridCell)
+    )
     const cellSize = cell.getBoundingClientRect()
-    const container = document.getElementById('battle-grid-1')
+    const container = document.getElementById(battleGrid1)
     const containerRect = container.getBoundingClientRect()
 
     const x = containerRect.left + col * cellSize.width + cellSize.width / 2
@@ -58,7 +65,7 @@ export class GridRenderer {
 
   getGridItems() {
     if (!this.gridItems) {
-      throw new Error('Grid items have not been generated yet.')
+      throw new Error(BATTLE_GRID_CONFIG.itemsError)
     }
     return this.gridItems
   }
@@ -74,15 +81,16 @@ export class GridRenderer {
   }
 
   handleAtack(cell, cellIndex, fleet, board) {
+    const { red, grey } = COLOR
     const row = Math.floor(cellIndex / 10)
     const col = cellIndex % 10
 
     const isHit = board.hit(row, col, fleet)
 
     if (isHit) {
-      cell.style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
+      cell.style.backgroundColor = red
     } else {
-      cell.style.backgroundColor = 'rgba(128, 128, 128, 0.7)'
+      cell.style.backgroundColor = grey
     }
   }
 
@@ -115,33 +123,26 @@ export class GridRenderer {
         this._dataService.getBoard()
       )
     } else {
-      throw new Error('No cell found!')
+      throw new Error(BATTLE_GRID_CONFIG.cellError)
     }
   }
 
   endTurn() {
+    const { battleGrid1, battleGrid2, hiddenStyle } = BATTLE_GRID_CONFIG
     this._dataService.turn.incrementTurn()
     this._dataService.turn.printTurnInfo()
     if (
       this._dataService.turn.currentPlayer === this._dataService.player1.name
     ) {
-      document
-        .getElementById('battle-grid-1')
-        .classList.add('battle-grid--hidden')
-      document
-        .getElementById('battle-grid-2')
-        .classList.remove('battle-grid--hidden')
+      document.getElementById(battleGrid1).classList.add(hiddenStyle)
+      document.getElementById(battleGrid2).classList.remove(hiddenStyle)
     }
 
     if (
       this._dataService.turn.currentPlayer === this._dataService.player2.name
     ) {
-      document
-        .getElementById('battle-grid-1')
-        .classList.remove('battle-grid--hidden')
-      document
-        .getElementById('battle-grid-2')
-        .classList.add('battle-grid--hidden')
+      document.getElementById(battleGrid1).classList.remove(hiddenStyle)
+      document.getElementById(battleGrid2).classList.add(hiddenStyle)
     }
   }
 
