@@ -199,6 +199,7 @@
 2. 09:21 - 10:09, refactor: remove config dependency from FleetGrid and PlacementHandler, centralize configuration usage
 3. 12:48 - 13:43, refactor: remove FleetGridConfig dependency, centralize grid configuration in BATTLE_GRID_CONFIG and HTML_CONFIG
 4. 13:44 - 14:19, refactor: enhance GridRenderer and config for improved selector handling and error messages
+5. 14:20 - 14:31, refactor: remove BattleGridConfig, centralize configuration in BATTLE_GRID_CONFIG and simplify BattleGrid initialization
 
 ### Plan
 

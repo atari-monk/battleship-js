@@ -5,6 +5,7 @@ export const BATTLE_GRID_CONFIG = {
   battleGrid1: 'battle-grid-1',
   battleGrid2: 'battle-grid-2',
   hiddenStyle: 'battle-grid--hidden',
+  initMsg: (id) => `Load component: ${id}`,
   getSelector: (id, cssClass) => `#${id} .${cssClass}`,
   notFoundError: (id) => `Container with selector ${id} not found.`,
   itemsError: 'Grid items have not been generated yet.',
