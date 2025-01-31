@@ -207,6 +207,12 @@
 - Refactoring code to make it pretty
 - Merging configs to one file
 
+### 31
+
+1. 17:29 - 18:29, refactor: integrate BattleAI into GridRenderer and simplify attack handling
+
+- When i think about it i just freeze, when i am doing, i am doing
+
 ### Plan
 
 1. Game end condition.
