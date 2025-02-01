@@ -211,7 +211,14 @@
 
 1. 17:29 - 18:29, refactor: integrate BattleAI into GridRenderer and simplify attack handling
 
+- Total 60 minutes = 1 hour
 - When i think about it i just freeze, when i am doing, i am doing
+
+## 2
+
+### 1
+
+1. 13:41 - 14:44, refactor: modularize menu loading by introducing FleetGridLoader and ToggleLoader classes
 
 ### Plan
 

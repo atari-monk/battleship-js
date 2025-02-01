@@ -1,13 +1,15 @@
 import { guiContener, serviceContener } from '../../client/script.js'
 import { logger } from '../../data_lib/LogService.js'
-import {
-  MENU_CONFIG,
-  FLEET_GRID_CONFIG,
-  TOGGLE_CONFIG,
-  BATTLE_GRID_CONFIG,
-} from './../config.js'
+import { MENU_CONFIG, BATTLE_GRID_CONFIG } from './../config.js'
+import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
+import { ToggleLoader } from './../toggle/ToggleLoader.js'
 
 export class Menu {
+  constructor(fleetGridLoader, toggleLoader) {
+    this.fleetGridLoader = fleetGridLoader
+    this.toggleLoader = toggleLoader
+  }
+
   init() {
     const { startButtonId, clickEvent, initMsg, buttonNotFoundWarn } =
       MENU_CONFIG
@@ -22,6 +24,11 @@ export class Menu {
     }
   }
 
+  async loadFleetGrid(dataService) {
+    await this.fleetGridLoader.load(dataService)
+    await this.toggleLoader.load()
+  }
+
   async handleClick() {
     const { dataServiceName, handleClickError } = MENU_CONFIG
     try {
@@ -31,7 +38,6 @@ export class Menu {
 
       if (dataService.config.enableFleetGrid) {
         await this.loadFleetGrid(dataService)
-        await this.loadToggle()
       } else {
         dataService.initializeTurn()
         await this.loadBattleGrid(dataService)
@@ -48,31 +54,6 @@ export class Menu {
       menuElement.classList.add(hiddenStyle)
     } else {
       logger.warn(menuNotFoundWarn)
-    }
-  }
-
-  async loadFleetGrid(dataService) {
-    const { name, cssClass, id, scripts, loadFleetGridError } =
-      FLEET_GRID_CONFIG
-    try {
-      await guiContener.loadComponentResources(name, scripts)
-      const fleetGrid = guiContener.createInstance(name, cssClass, id)
-
-      if (dataService && fleetGrid) {
-        fleetGrid.jsInstance.dataService = dataService
-      }
-    } catch (error) {
-      logger.error(loadFleetGridError, error)
-    }
-  }
-
-  async loadToggle() {
-    const { name, cssClass, id, loadToggleError } = TOGGLE_CONFIG
-    try {
-      await guiContener.loadComponentResources(name)
-      guiContener.createInstance(name, cssClass, id)
-    } catch (error) {
-      logger.error(loadToggleError, error)
     }
   }
 
@@ -115,5 +96,5 @@ export class Menu {
 }
 
 export default function init() {
-  new Menu().init()
+  new Menu(new FleetGridLoader(), new ToggleLoader()).init()
 }
