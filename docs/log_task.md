@@ -221,6 +221,9 @@
 1. 13:41 - 14:44, refactor: modularize menu loading by introducing FleetGridLoader and ToggleLoader classes
 2. 19:58 - 20:29, refactor: introduce BattleGridLoader for improved battle grid loading in Menu
 
+- Total 94 minutes = 1 hour 34 minutes
+- Refactoring, making parts smaller and SRP.
+
 ### Plan
 
 1. Game end condition.
