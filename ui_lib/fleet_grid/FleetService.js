@@ -1,18 +1,13 @@
-import { guiContener } from './../../client/script.js'
-import {
-  FLEET_GRID_CONFIG,
-  TOGGLE_CONFIG,
-  BATTLE_GRID_CONFIG,
-  COLOR,
-} from './../config.js'
+import { FLEET_GRID_CONFIG, TOGGLE_CONFIG, COLOR } from './../config.js'
 
 export class FleetService {
   set dataService(dataService) {
     this._dataService = dataService
   }
 
-  constructor(shipSizes = [5, 4, 3, 3, 2]) {
-    this.shipSizes = shipSizes
+  constructor(battleGridLoader) {
+    this.battleGridLoader = battleGridLoader
+    this.shipSizes = [5, 4, 3, 3, 2]
     this.currentShipIndex = 0
     this.isHorizontal = true
     this.placedShips = new Set()
@@ -80,14 +75,16 @@ export class FleetService {
   }
 
   async saveGridData() {
-    if (!this._dataService) return
+    if (!this._dataService) {
+      console.warn('FleetService dataService prop not found')
+      return
+    }
     this._dataService.player1.board.matrix = this.gridArray
 
     this.hideFleetGrid()
 
     this._dataService.initializeTurn()
-
-    await this.loadBattleGrid()
+    await this.battleGridLoader.load(this._dataService)
   }
 
   hideFleetGrid() {
@@ -95,40 +92,5 @@ export class FleetService {
     const { toogle, hiddenStyle: hidden2 } = TOGGLE_CONFIG
     document.querySelector(fleetGrid).classList.add(hidden1)
     document.querySelector(toogle).classList.add(hidden2)
-  }
-
-  async loadBattleGrid() {
-    const {
-      name,
-      battleGrid,
-      battleGridClass,
-      battleGridId1,
-      battleGridId2,
-      hiddenStyle,
-    } = BATTLE_GRID_CONFIG
-    await guiContener.loadComponentResources(name)
-    const battleGrid1 = guiContener.createInstance(
-      name,
-      battleGridClass,
-      battleGridId1
-    ).jsInstance
-    const battleGrid2 = guiContener.createInstance(
-      name,
-      battleGridClass,
-      battleGridId2
-    ).jsInstance
-    battleGrid1.init(battleGridId1, true)
-    battleGrid2.init(battleGridId2)
-    if (this._dataService && battleGrid1 && battleGrid2) {
-      battleGrid1.gridRenderer.dataService = this._dataService
-      battleGrid2.gridRenderer.dataService = this._dataService
-    }
-
-    if (this._dataService.turn.currentPlayer === this._dataService.player1.name)
-      document.getElementById(battleGridId1).classList.add(hiddenStyle)
-    if (this._dataService.turn.currentPlayer === this._dataService.player2.name)
-      document.getElementById(battleGridId2).classList.add(hiddenStyle)
-
-    this._dataService.turn.printTurnInfo()
   }
 }

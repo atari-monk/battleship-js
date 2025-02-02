@@ -6,6 +6,7 @@ import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
 import { logger } from './../../data_lib/LogService.js'
 import { FLEET_GRID_CONFIG } from './../config.js'
+import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
 
 export class FleetGrid {
   set dataService(dataService) {
@@ -20,7 +21,7 @@ export class FleetGrid {
     this.shipPreview = new ShipPreview()
     this.gridRenderer = new GridRenderer()
     this.eventHandler = new EventHandler(this)
-    this.fleetService = new FleetService()
+    this.fleetService = new FleetService(new BattleGridLoader())
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,

@@ -227,6 +227,7 @@
 ### 2
 
 1. 16:16 - 16:56, refactor: enhance Board class with hit tracking and win condition; simplify DataService methods
+2. 17:33 - 17:47, refactor: integrate BattleGridLoader into FleetService
 
 ### Plan
 
