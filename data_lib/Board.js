@@ -4,6 +4,7 @@ export class Board {
     this._matrix = Array(10)
       .fill()
       .map(() => Array(10).fill(0))
+    this.hitSum = 0
   }
 
   get matrix() {
@@ -31,6 +32,7 @@ export class Board {
   hit(x, y) {
     if (this.fleet.hit(x, y)) {
       this._matrix[x][y] = 1
+      this.hitSum++
       return true
     } else {
       this._matrix[x][y] = 2
@@ -45,5 +47,9 @@ export class Board {
 
   isWithinBounds(x, y) {
     return x >= 0 && x < 10 && y >= 0 && y < 10
+  }
+
+  isWin() {
+    return this.hitSum === 17
   }
 }

@@ -224,6 +224,10 @@
 - Total 94 minutes = 1 hour 34 minutes
 - Refactoring, making parts smaller and SRP.
 
+### 2
+
+1. 16:16 - 16:56, refactor: enhance Board class with hit tracking and win condition; simplify DataService methods
+
 ### Plan
 
 1. Game end condition.

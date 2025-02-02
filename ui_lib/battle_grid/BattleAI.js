@@ -33,6 +33,16 @@ export class BattleAI {
   handleGlobalAtack(event, id, gridItems) {
     if (this.isFiring) {
       this.atack(id, event, gridItems)
+      if (this._dataService.getBoard().isWin()) {
+        if (this._dataService.isPlayer1())
+          console.debug(
+            `Player1 ${this._dataService.turn.currentPlayer} WON!`
+          )
+        else
+          console.debug(
+            `Player2 ${this._dataService.turn.currentPlayer} WON!`
+          )
+      }
       this.isFiring = false
       return
     } else {

@@ -34,13 +34,15 @@ export class DataService {
   }
 
   getEnemyFleet() {
-    const player1 = this.turn.currentPlayer === this.player1.name
-    return player1 ? this.player2.fleet : this.player1.fleet
+    return this.isPlayer1() ? this.player2.fleet : this.player1.fleet
   }
 
   getBoard() {
-    const player1 = this.turn.currentPlayer === this.player1.name
-    return player1 ? this.player1.board : this.player2.board
+    return this.isPlayer1() ? this.player1.board : this.player2.board
+  }
+
+  isPlayer1() {
+    return this.turn.currentPlayer === this.player1.name
   }
 
   toString() {
