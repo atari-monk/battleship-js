@@ -1,12 +1,9 @@
 import { BATTLE_GRID_CONFIG, COLOR } from '../config.js'
+import { logger } from './../../data_lib/LogService.js'
 
 export class BattleAI {
   set dataService(dataService) {
     this._dataService = dataService
-  }
-
-  constructor() {
-    this.isFiring = true
   }
 
   aiMove() {
@@ -30,24 +27,25 @@ export class BattleAI {
     return { x, y }
   }
 
-  handleGlobalAtack(event, id, gridItems) {
-    if (this.isFiring) {
-      this.atack(id, event, gridItems)
-      if (this._dataService.getBoard().isWin()) {
-        if (this._dataService.isPlayer1())
-          console.debug(
-            `Player1 ${this._dataService.turn.currentPlayer} WON!`
-          )
-        else
-          console.debug(
-            `Player2 ${this._dataService.turn.currentPlayer} WON!`
-          )
-      }
-      this.isFiring = false
-      return
+  handleGlobalAtack(event, id, gridItems, isAI) {
+    this.atack(id, event, gridItems)
+
+    if (this._dataService.getBoard().isWin()) {
+      if (this._dataService.isPlayer1())
+        logger.debug(`Player1 ${this._dataService.turn.currentPlayer} WON!`)
+      else logger.debug(`Player2 ${this._dataService.turn.currentPlayer} WON!`)
+    }
+
+    if (isAI) {
+      setTimeout(() => {
+        logger.debug('AI wait 3s')
+        this.endTurn()
+      }, 3000)
     } else {
-      this.endTurn()
-      this.isFiring = true
+      setTimeout(() => {
+        logger.debug('Player wait 2s')
+        this.endTurn()
+      }, 2000)
     }
   }
 

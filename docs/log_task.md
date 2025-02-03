@@ -229,6 +229,10 @@
 1. 16:16 - 16:56, refactor: enhance Board class with hit tracking and win condition; simplify DataService methods
 2. 17:33 - 17:47, refactor: integrate BattleGridLoader into FleetService
 
+### 3
+
+1. 13:42 - 15:42, refactor: update PlayerAI and BattleAI to use logger for debug messages; modify GridRenderer to pass AI flag; use delay instead click to end turn
+
 ### Plan
 
 1. Game end condition.

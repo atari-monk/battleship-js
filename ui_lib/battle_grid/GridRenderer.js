@@ -27,7 +27,7 @@ export class GridRenderer {
     this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
 
     grid.addEventListener(EVENT.click, (event) =>
-      this.battleAI.handleGlobalAtack(event, id, this.gridItems)
+      this.battleAI.handleGlobalAtack(event, id, this.gridItems, isAI)
     )
 
     if (!isAI) return
@@ -36,7 +36,8 @@ export class GridRenderer {
       this.battleAI.handleGlobalAtack(
         this.battleAI.aiMove(),
         id,
-        this.gridItems
+        this.gridItems,
+        isAI
       )
     })
   }

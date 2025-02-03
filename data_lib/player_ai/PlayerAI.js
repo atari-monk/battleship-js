@@ -1,3 +1,5 @@
+import { logger } from './../../data_lib/LogService.js'
+
 export class PlayerAI {
   constructor(board) {
     this.board = board
@@ -6,7 +8,6 @@ export class PlayerAI {
     this.visited = new Set()
     this.orientation = null
 
-    // Initialize targets from matrix
     this.preloadedTargets = this.loadMatrixTargets([
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
@@ -21,7 +22,6 @@ export class PlayerAI {
     ])
   }
 
-  // Load all coordinates with value 1 from the matrix
   loadMatrixTargets(matrix) {
     const targets = []
     for (let x = 0; x < matrix.length; x++) {
@@ -37,14 +37,14 @@ export class PlayerAI {
   attack() {
     if (this.noTargetsOrHits()) {
       if (this.preloadedTargets.length > 0) {
-        console.log(`Preloaded, left ${this.preloadedTargets.length}`)
+        logger.debug(`Preloaded, left ${this.preloadedTargets.length}`)
         return this.attackFromPreloadedTargets()
       } else {
-        console.log(`Random, ${100 - this.visited.size}`)
+        logger.debug(`Random, ${100 - this.visited.size}`)
         return this.randomAttack()
       }
     } else if (this.hasPotentialTargets()) {
-      console.log(`Targeted`)
+      logger.debug(`Targeted`)
       return this.targetedAttack()
     } else if (this.hasHits()) {
       this.resetTargeting()
@@ -59,7 +59,7 @@ export class PlayerAI {
   attackFromPreloadedTargets() {
     const { x, y } = this.preloadedTargets.shift()
     const result = this.board.hit(x, y)
-    this.visited.add(this.getKey(x, y)) // Mark as visited
+    this.visited.add(this.getKey(x, y))
 
     if (result) {
       this.hits.push({ x, y })
@@ -76,7 +76,7 @@ export class PlayerAI {
     } while (this.visited.has(this.getKey(x, y)))
 
     const result = this.board.hit(x, y)
-    this.visited.add(this.getKey(x, y)) // Mark as visited
+    this.visited.add(this.getKey(x, y))
 
     if (result) {
       this.hits.push({ x, y })
