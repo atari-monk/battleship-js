@@ -21,7 +21,7 @@ export class FullScreen {
   async goFullScreen() {
     try {
       this.requestFullscreen()
-      this.hide()
+      this.toggleVisibility(false)
       await this.showMenu()
     } catch (error) {
       logger.error(FULL_SCREEN.fullScreenError, error)
@@ -43,13 +43,23 @@ export class FullScreen {
     }
   }
 
-  hide() {
+  toggleVisibility(forceState) {
     const { rootSelector, hidden, notFoundWarn } = FULL_SCREEN
     const el = document.querySelector(rootSelector)
-    if (el) {
-      el.classList.add(hidden)
-    } else {
+
+    if (!el) {
       logger.warn(notFoundWarn(rootSelector))
+      return
+    }
+
+    if (typeof forceState === 'boolean') {
+      if (forceState) {
+        el.classList.remove(hidden)
+      } else {
+        el.classList.add(hidden)
+      }
+    } else {
+      el.classList.toggle(hidden)
     }
   }
 
@@ -65,5 +75,7 @@ export class FullScreen {
 }
 
 export default function init() {
-  new FullScreen().init()
+  const fs = new FullScreen()
+  fs.init()
+  return fs
 }

@@ -231,7 +231,8 @@
 
 ### 3
 
-1. 13:42 - 15:42, refactor: update PlayerAI and BattleAI to use logger for debug messages; modify GridRenderer to pass AI flag; use delay instead click to end turn
+1. 13:42 - 15:52, refactor: update PlayerAI and BattleAI to use logger for debug messages; modify GridRenderer to pass AI flag; use delay instead click to end turn
+2. 16:49 - ,
 
 ### Plan
 
