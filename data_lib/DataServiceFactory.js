@@ -12,24 +12,28 @@ export class DataServiceFactory {
     const config = new Config()
     config.enableFleetGrid = false
     config.loadFleetFromFile = false
+    config.enableTest = true
     dataService.config = config
 
     const fleet1 = new Fleet()
     const fleet2 = new Fleet()
 
-    const board2 = new Board(fleet1)
+    const board2 = new Board(fleet1, dataService.config)
 
     dataService.player1 = new Player(
       'Player 1',
       'Captain Jack',
       fleet1,
-      new Board(fleet2)
+      new Board(fleet2, dataService.config)
     )
     dataService.player2 = new Player('Player 2', 'Blackbeard', fleet2, board2)
 
     dataService.playerAI = new PlayerAI(board2)
 
-    if (dataService.config.loadFleetFromFile) {
+    if (dataService.config.enableTest) {
+      dataService.player1.fleet.setTestCell()
+      dataService.player2.fleet.setTestCell()
+    } else if (dataService.config.loadFleetFromFile) {
       await dataService.loadMatricesFromURL('./../client/fleet.json')
     } else {
       dataService.player1.fleet.setFleetRandomly()

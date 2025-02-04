@@ -1,6 +1,7 @@
 export class Board {
-  constructor(fleet) {
+  constructor(fleet, config) {
     this.fleet = fleet
+    this.config = config
     this._matrix = Array(10)
       .fill()
       .map(() => Array(10).fill(0))
@@ -50,6 +51,7 @@ export class Board {
   }
 
   isWin() {
-    return this.hitSum === 17
+    if (this.config.enableTest) return this.hitSum === 1
+    else return this.hitSum === 17
   }
 }

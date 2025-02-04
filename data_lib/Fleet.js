@@ -68,6 +68,10 @@ export class Fleet {
     }
   }
 
+  setTestCell() {
+    this._matrix[0][0] = 1
+  }
+
   toString() {
     return `Fleet:\n\t\t${this._matrix
       .map((row) => row.join(' '))

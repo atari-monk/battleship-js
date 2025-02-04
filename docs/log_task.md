@@ -237,6 +237,8 @@
 ### 4
 
 1. 06:32 - 07:03, refactor: update BattleAI and GridRenderer to improve turn management and click handling
+2. 07:04 - 07:14, refactor: update Board and DataServiceFactory to support configuration; add test cell functionality in Fleet
+3. 07:15 - 07:29, refactor: update Board and DataServiceFactory to support configuration; add test cell functionality in Fleet
 
 ### Plan
 
