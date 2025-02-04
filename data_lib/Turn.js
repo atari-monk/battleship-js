@@ -34,4 +34,10 @@ export class Turn {
       } - '${this.currentPlayer}'`
     )
   }
+
+  reset() {
+    this.turnNr = 1
+    this.currentPlayer = null
+    this.players = []
+  }
 }

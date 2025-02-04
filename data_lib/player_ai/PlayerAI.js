@@ -191,4 +191,22 @@ export class PlayerAI {
     this.potentialTargets = []
     this.orientation = null
   }
+
+  reset() {
+    this.resetTargeting()
+    this.visited = new Set()
+    this.preloadedTargets = this.loadMatrixTargets([
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ])
+    this.orientation = null
+  }
 }

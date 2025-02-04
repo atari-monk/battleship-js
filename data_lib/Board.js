@@ -54,4 +54,11 @@ export class Board {
     if (this.config.enableTest) return this.hitSum === 1
     else return this.hitSum === 17
   }
+
+  reset() {
+    this._matrix = Array(10)
+      .fill()
+      .map(() => Array(10).fill(0))
+    this.hitSum = 0
+  }
 }

@@ -9,4 +9,9 @@ export class Player {
   toString() {
     return `${this.role} - '${this.name}'\n\t${this.fleet.toString()}`
   }
+
+  reset() {
+    this.board.reset()
+    this.fleet.reset()
+  }
 }

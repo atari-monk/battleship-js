@@ -85,4 +85,10 @@ export class Fleet {
       return false
     }
   }
+
+  reset() {
+    this._matrix = Array(10)
+      .fill()
+      .map(() => Array(10).fill(0))
+  }
 }

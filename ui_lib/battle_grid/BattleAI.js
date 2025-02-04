@@ -41,10 +41,14 @@ export class BattleAI {
         logger.debug('Wait 3s before reset')
         //const fs = guiContener.getInstanceById('fs-overlay-1')
         //fs.jsInstance.toggleVisibility(true)
+        this._dataService.reset()
+        const bg1 = guiContener.getInstanceById(
+          BATTLE_GRID_CONFIG.battleGridId1
+        )
         const bg2 = guiContener.getInstanceById(
           BATTLE_GRID_CONFIG.battleGridId2
         )
-        //const test =
+        bg1.jsInstance.resetGrid()
         bg2.jsInstance.resetGrid()
         return
       }, 3000)

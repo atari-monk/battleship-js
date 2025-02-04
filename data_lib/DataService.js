@@ -54,4 +54,32 @@ export class DataService {
   logPlayers() {
     logger.debug(`Load data: \n\t${this.toString()}`)
   }
+
+  async reset() {
+    this.player1.reset()
+    this.player2.reset()
+    this.turn.reset()
+    this.playerAI.reset()
+    await this.setFleet()
+  }
+
+  async setFleet() {
+    if (this.setFleetForTest()) return
+    if (await this.setFleetFromFile()) return
+    this.player1.fleet.setFleetRandomly()
+    this.player2.fleet.setFleetRandomly()
+  }
+
+  setFleetForTest() {
+    if (!this.config.enableTest) return false
+    this.player1.fleet.setTestCell()
+    this.player2.fleet.setTestCell()
+    return true
+  }
+
+  async setFleetFromFile() {
+    if (!this.config.enableTest) return false
+    await this.loadMatricesFromURL('./../client/fleet.json')
+    return true
+  }
 }
