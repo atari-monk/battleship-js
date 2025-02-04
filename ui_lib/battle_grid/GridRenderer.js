@@ -8,6 +8,7 @@ export class GridRenderer {
   constructor(battleAI) {
     this.battleAI = battleAI
     this.gridItems = null
+    this.isPlayerTurn = true
   }
 
   generateGridItems(id, isAI = false) {
@@ -26,9 +27,16 @@ export class GridRenderer {
     }
     this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
 
-    grid.addEventListener(EVENT.click, (event) =>
-      this.battleAI.handleGlobalAtack(event, id, this.gridItems, isAI)
-    )
+    if (!isAI) {
+      grid.addEventListener(EVENT.click, (event) => {
+        if (this.isPlayerTurn) {
+          this.isPlayerTurn = false
+          this.battleAI.handleGlobalAtack(event, id, this.gridItems, () =>
+            this.enableClick()
+          )
+        }
+      })
+    }
 
     if (!isAI) return
     const board = document.getElementById(id)
@@ -37,7 +45,7 @@ export class GridRenderer {
         this.battleAI.aiMove(),
         id,
         this.gridItems,
-        isAI
+        () => this.enableClick()
       )
     })
   }
@@ -59,5 +67,9 @@ export class GridRenderer {
     })
 
     observer.observe(element)
+  }
+
+  enableClick() {
+    this.isPlayerTurn = true
   }
 }

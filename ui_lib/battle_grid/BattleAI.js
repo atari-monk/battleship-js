@@ -28,7 +28,7 @@ export class BattleAI {
     return { x, y }
   }
 
-  handleGlobalAtack(event, id, gridItems, isAI) {
+  handleGlobalAtack(event, id, gridItems, enableClick) {
     this.atack(id, event, gridItems)
 
     if (this._dataService.getBoard().isWin()) {
@@ -39,19 +39,14 @@ export class BattleAI {
       }
       const fs = guiContener.getInstanceById('fs-overlay-1')
       fs.jsInstance.toggleVisibility(true)
+      return
     }
 
-    if (isAI) {
-      setTimeout(() => {
-        logger.debug('AI wait 3s')
-        this.endTurn()
-      }, 3000)
-    } else {
-      setTimeout(() => {
-        logger.debug('Player wait 2s')
-        this.endTurn()
-      }, 2000)
-    }
+    setTimeout(() => {
+      logger.debug('Wait 2s')
+      this.endTurn()
+      enableClick()
+    }, 2000)
   }
 
   atack(id, event, gridItems) {

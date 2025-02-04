@@ -234,6 +234,10 @@
 1. 13:42 - 15:52, refactor: update PlayerAI and BattleAI to use logger for debug messages; modify GridRenderer to pass AI flag; use delay instead click to end turn
 2. 16:49 - 18:00, refactor: enhance LogService with error logging; update FullScreen methods for better visibility control; rename generate to init in battle_grid
 
+### 4
+
+1. 06:32 - 07:03, refactor: update BattleAI and GridRenderer to improve turn management and click handling
+
 ### Plan
 
 1. Game end condition.
