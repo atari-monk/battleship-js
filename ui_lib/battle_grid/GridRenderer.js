@@ -20,6 +20,8 @@ export class GridRenderer {
       throw new Error(notFoundError(gridId))
     }
 
+    grid.innerHTML = ''
+
     for (let i = 1; i <= 100; i++) {
       const gridItem = document.createElement(HTML_CONFIG.div)
       gridItem.classList.add(battleGridCell)
@@ -71,5 +73,15 @@ export class GridRenderer {
 
   enableClick() {
     this.isPlayerTurn = true
+  }
+
+  resetGrid() {
+    if (!this.gridItems) {
+      throw new Error(BATTLE_GRID_CONFIG.itemsError)
+    }
+    this.gridItems.forEach((cell) => {
+      cell.removeAttribute('style')
+    })
+    this.enableClick()
   }
 }

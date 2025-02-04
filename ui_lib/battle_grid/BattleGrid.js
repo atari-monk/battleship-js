@@ -12,4 +12,8 @@ export class BattleGrid {
     this.gridItems = this.gridRenderer.getGridItems()
     logger.debug(BATTLE_GRID_CONFIG.initMsg(id))
   }
+
+  resetGrid() {
+    this.gridRenderer.resetGrid()
+  }
 }

@@ -37,16 +37,24 @@ export class BattleAI {
       } else {
         logger.debug(`Player2 ${this._dataService.turn.currentPlayer} WON!`)
       }
-      const fs = guiContener.getInstanceById('fs-overlay-1')
-      fs.jsInstance.toggleVisibility(true)
-      return
+      setTimeout(() => {
+        logger.debug('Wait 3s before reset')
+        //const fs = guiContener.getInstanceById('fs-overlay-1')
+        //fs.jsInstance.toggleVisibility(true)
+        const bg2 = guiContener.getInstanceById(
+          BATTLE_GRID_CONFIG.battleGridId2
+        )
+        //const test =
+        bg2.jsInstance.resetGrid()
+        return
+      }, 3000)
+    } else {
+      setTimeout(() => {
+        logger.debug('Wait 2s')
+        this.endTurn()
+        enableClick()
+      }, 2000)
     }
-
-    setTimeout(() => {
-      logger.debug('Wait 2s')
-      this.endTurn()
-      enableClick()
-    }, 2000)
   }
 
   atack(id, event, gridItems) {
