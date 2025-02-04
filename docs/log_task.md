@@ -229,10 +229,14 @@
 1. 16:16 - 16:56, refactor: enhance Board class with hit tracking and win condition; simplify DataService methods
 2. 17:33 - 17:47, refactor: integrate BattleGridLoader into FleetService
 
+- Total 54 minutes
+
 ### 3
 
 1. 13:42 - 15:52, refactor: update PlayerAI and BattleAI to use logger for debug messages; modify GridRenderer to pass AI flag; use delay instead click to end turn
 2. 16:49 - 18:00, refactor: enhance LogService with error logging; update FullScreen methods for better visibility control; rename generate to init in battle_grid
+
+- Total 201 minutes = 3 hour 21 minutes
 
 ### 4
 
@@ -242,6 +246,9 @@
 4. 09:33 - 10:01, refactor: bind console methods in LogService for improved logging functionality
 5. 10:02 - 10:32, refactor: implement resetGrid functionality in BattleGrid and GridRenderer; update BattleAI for improved turn management
 6. 12:20 - 13:13, refactor: implement reset functionality across Board, Fleet, Player, Turn, and PlayerAI classes; update DataService and BattleAI for improved game state management
+7. 20:02 - 21:47, refactor: replace logger with format methods for improved logging consistency across FleetService, BattleGrid, FleetGridLoader, ToggleLoader, and DataService
+
+- Total 271 minutes = 4 hour 31 minutes
 
 ### Plan
 

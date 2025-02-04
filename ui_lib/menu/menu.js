@@ -1,5 +1,5 @@
 import { serviceContener } from '../../client/script.js'
-import { logger } from '../../data_lib/LogService.js'
+import { format } from '../../data_lib/LogService.js'
 import { MENU_CONFIG } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'
@@ -20,9 +20,9 @@ export class Menu {
       startButton.addEventListener(clickEvent, async () => {
         await this.handleClick()
       })
-      logger.debug(initMsg)
+      console.debug(...format.debug(initMsg))
     } else {
-      logger.warn(buttonNotFoundWarn)
+      console.warn(...format.warn(buttonNotFoundWarn))
     }
   }
 
@@ -41,11 +41,12 @@ export class Menu {
       if (dataService.config.enableFleetGrid) {
         await this.loadFleetGrid(dataService)
       } else {
-        dataService.initializeTurn()
         await this.battleGridLoader.load(dataService)
+        dataService.initializeTurn()
+        this.battleGridLoader.setVisability(dataService)
       }
     } catch (error) {
-      logger.error(handleClickError, error)
+      console.error(...format.error(handleClickError, error))
     }
   }
 
@@ -55,7 +56,7 @@ export class Menu {
     if (menuElement) {
       menuElement.classList.add(hiddenStyle)
     } else {
-      logger.warn(menuNotFoundWarn)
+      console.warn(...format.warn(menuNotFoundWarn))
     }
   }
 }

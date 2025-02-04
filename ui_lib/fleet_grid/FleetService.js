@@ -83,8 +83,9 @@ export class FleetService {
 
     this.hideFleetGrid()
 
-    this._dataService.initializeTurn()
     await this.battleGridLoader.load(this._dataService)
+
+    this._dataService.initializeTurn()
   }
 
   hideFleetGrid() {

@@ -1,5 +1,5 @@
 import { guiContener } from './../../client/script.js'
-import { logger } from './../../data_lib/LogService.js'
+import { format } from './../../data_lib/LogService.js'
 import { TOGGLE_CONFIG } from './../config.js'
 
 export class Toggle {
@@ -16,9 +16,9 @@ export class Toggle {
 
     if (this.toggleButton && this.fleetGrid) {
       this.setButtonClick()
-      logger.debug(initMsg)
+      console.debug(...format.debug(initMsg))
     } else {
-      logger.warn(componentsNotFoundWarn)
+      console.warn(...format.warn(componentsNotFoundWarn))
     }
   }
 

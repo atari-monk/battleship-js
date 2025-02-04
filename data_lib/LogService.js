@@ -1,28 +1,26 @@
-class LogService {
+class LogFormatter {
   constructor() {
-    this.debugNr = 1
-    this.warnNr = 1
-    this.errorNr = 1
-
-    this.debug = console.debug.bind(console)
-    this.warn = console.warn.bind(console)
-    this.error = console.error.bind(console)
+    this.counters = {
+      debug: 1,
+      warn: 1,
+      error: 1,
+    }
   }
 
-  debug(log) {
-    console.debug(`${this.debugNr}. ${log}`)
-    this.debugNr++
+  debug(...args) {
+    const count = this.counters.debug++
+    return [`${count}.`, ...args]
   }
 
-  warn(log) {
-    console.warn(`${this.warnNr}. ${log}`)
-    this.warnNr++
+  warn(...args) {
+    const count = this.counters.warn++
+    return [`${count}.`, ...args]
   }
 
-  error(log, error) {
-    console.error(`${this.errorNr}. ${log}`, error)
-    this.errorNr++
+  error(...args) {
+    const count = this.counters.error++
+    return [`${count}.`, ...args]
   }
 }
 
-export const logger = new LogService()
+export const format = new LogFormatter()

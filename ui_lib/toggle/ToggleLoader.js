@@ -1,5 +1,5 @@
 import { guiContener } from './../../client/script.js'
-import { logger } from './../../data_lib/LogService.js'
+import { format } from './../../data_lib/LogService.js'
 import { TOGGLE_CONFIG } from './../config.js'
 
 export class ToggleLoader {
@@ -9,7 +9,7 @@ export class ToggleLoader {
       await guiContener.loadComponentResources(name)
       guiContener.createInstance(name, cssClass, id)
     } catch (error) {
-      logger.error(loadToggleError, error)
+      console.error(...format.error(loadToggleError, error))
     }
   }
 }

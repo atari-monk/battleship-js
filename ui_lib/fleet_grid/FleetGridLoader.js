@@ -1,5 +1,5 @@
 import { guiContener } from '../../client/script.js'
-import { logger } from '../../data_lib/LogService.js'
+import { format } from '../../data_lib/LogService.js'
 import { FLEET_GRID_CONFIG } from '../config.js'
 
 export class FleetGridLoader {
@@ -14,7 +14,7 @@ export class FleetGridLoader {
         fleetGrid.jsInstance.dataService = dataService
       }
     } catch (error) {
-      logger.error(loadFleetGridError, error)
+      console.error(...format.error(loadFleetGridError, error))
     }
   }
 }

@@ -1,10 +1,10 @@
 import { guiContener } from './../../client/script.js'
-import { logger } from './../../data_lib/LogService.js'
+import { format } from './../../data_lib/LogService.js'
 import { EVENT, FULL_SCREEN, MENU_CONFIG } from './../config.js'
 
 export class FullScreen {
   init() {
-    logger.debug(FULL_SCREEN.initMsg)
+    console.debug(...format.debug(FULL_SCREEN.initMsg))
     this.setButtonClick()
   }
 
@@ -14,7 +14,7 @@ export class FullScreen {
     if (button) {
       button.addEventListener(EVENT.click, (event) => this.goFullScreen(event))
     } else {
-      logger.warn(notFoundWarn(buttonId))
+      console.warn(...format.warn(notFoundWarn(buttonId)))
     }
   }
 
@@ -24,7 +24,7 @@ export class FullScreen {
       this.toggleVisibility(false)
       await this.showMenu()
     } catch (error) {
-      logger.error(FULL_SCREEN.fullScreenError, error)
+      console.error(...format.error(FULL_SCREEN.fullScreenError, error))
     }
   }
 
@@ -39,7 +39,7 @@ export class FullScreen {
     if (request) {
       request.call(el)
     } else {
-      logger.warn(FULL_SCREEN.fullscreenWarn)
+      console.warn(...format.warn(FULL_SCREEN.fullscreenWarn))
     }
   }
 
@@ -48,7 +48,7 @@ export class FullScreen {
     const el = document.querySelector(rootSelector)
 
     if (!el) {
-      logger.warn(notFoundWarn(rootSelector))
+      console.warn(...format.warn(notFoundWarn(rootSelector)))
       return
     }
 
@@ -69,7 +69,7 @@ export class FullScreen {
       await guiContener.loadComponentResources(name)
       guiContener.createInstance(name, cssClass, id)
     } catch (error) {
-      logger.error(showMenuError, error)
+      console.error(...format.error(showMenuError, error))
     }
   }
 }

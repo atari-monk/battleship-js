@@ -1,4 +1,4 @@
-import { logger } from './../../data_lib/LogService.js'
+import { format } from './../../data_lib/LogService.js'
 import { FLEET_GRID_CONFIG, COLOR, EVENT } from './../config.js'
 
 export class PlacementHandler {
@@ -78,7 +78,10 @@ export class PlacementHandler {
         const fleet = this.fleetService.gridArray
           .map((row) => row.join(' '))
           .join('\n\t\t')
-        logger.debug(player1Data(this._dataService.player1.name, fleet))
+
+        console.debug(
+          ...format.debug(player1Data(this._dataService.player1.name, fleet))
+        )
       }
     }
   }

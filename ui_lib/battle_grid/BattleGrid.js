@@ -1,4 +1,4 @@
-import { logger } from './../../data_lib/LogService.js'
+import { format } from './../../data_lib/LogService.js'
 import { BATTLE_GRID_CONFIG } from './../config.js'
 
 export class BattleGrid {
@@ -10,7 +10,7 @@ export class BattleGrid {
   init(id, isAI = false) {
     this.gridRenderer.generateGridItems(id, isAI)
     this.gridItems = this.gridRenderer.getGridItems()
-    logger.debug(BATTLE_GRID_CONFIG.initMsg(id))
+    console.debug(...format.debug(BATTLE_GRID_CONFIG.initMsg(id)))
   }
 
   resetGrid() {

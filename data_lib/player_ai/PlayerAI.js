@@ -1,4 +1,4 @@
-import { logger } from './../../data_lib/LogService.js'
+import { format } from './../../data_lib/LogService.js'
 
 export class PlayerAI {
   constructor(board) {
@@ -37,14 +37,16 @@ export class PlayerAI {
   attack() {
     if (this.noTargetsOrHits()) {
       if (this.preloadedTargets.length > 0) {
-        logger.debug(`Preloaded, left ${this.preloadedTargets.length}`)
+        console.debug(
+          ...format.debug(`Preloaded, left ${this.preloadedTargets.length}`)
+        )
         return this.attackFromPreloadedTargets()
       } else {
-        logger.debug(`Random, ${100 - this.visited.size}`)
+        console.debug(...format.debug(`Random, ${100 - this.visited.size}`))
         return this.randomAttack()
       }
     } else if (this.hasPotentialTargets()) {
-      logger.debug(`Targeted`)
+      console.debug(...format.debug(`Targeted`))
       return this.targetedAttack()
     } else if (this.hasHits()) {
       this.resetTargeting()

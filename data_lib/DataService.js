@@ -1,5 +1,5 @@
 import { Turn } from './Turn.js'
-import { logger } from './../data_lib/LogService.js'
+import { format } from './../data_lib/LogService.js'
 
 export class DataService {
   constructor() {
@@ -14,8 +14,11 @@ export class DataService {
     if (this.player1 && this.player2) {
       this.turn = new Turn(this.player1.name, this.player2.name)
       this.turn.randomlySelectPlayer()
+      this.turn.printTurnInfo()
     } else {
-      console.error('Players must be initialized before starting turns.')
+      console.error(
+        ...format.error('Players must be initialized before starting turns.')
+      )
     }
   }
 
@@ -52,7 +55,7 @@ export class DataService {
   }
 
   logPlayers() {
-    logger.debug(`Load data: \n\t${this.toString()}`)
+    console.debug(...format.debug(`Load data: \n\t${this.toString()}`))
   }
 
   async reset() {

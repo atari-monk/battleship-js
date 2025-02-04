@@ -1,4 +1,4 @@
-import { logger } from './../data_lib/LogService.js'
+import { format } from './../data_lib/LogService.js'
 
 export class Turn {
   constructor(player1Name, player2Name) {
@@ -28,10 +28,12 @@ export class Turn {
   printTurnInfo() {
     const currentIndex = this.players.indexOf(this.currentPlayer)
 
-    logger.debug(
-      `Turn: ${this.turnNr}, ${
-        currentIndex === 0 ? 'Player 1' : 'Player 2'
-      } - '${this.currentPlayer}'`
+    console.debug(
+      ...format.debug(
+        `Turn: ${this.turnNr}, ${
+          currentIndex === 0 ? 'Player 1' : 'Player 2'
+        } - '${this.currentPlayer}'`
+      )
     )
   }
 

@@ -1,4 +1,4 @@
-import { logger } from '../../data_lib/LogService.js'
+import { format } from '../../data_lib/LogService.js'
 
 export class ServiceContainer {
   constructor(serviceLoader, serviceUnloader, serviceStorage) {
@@ -16,7 +16,7 @@ export class ServiceContainer {
 
   loadService(serviceName, serviceInstance) {
     if (this.storage.isServiceLoaded(serviceName)) {
-      logger.warn(this.msg.SERVICE_ALREADY_LOADED(serviceName))
+      console.warn(...format.warn(this.msg.SERVICE_ALREADY_LOADED(serviceName)))
       return
     }
 
@@ -26,14 +26,14 @@ export class ServiceContainer {
     const serviceData = this.loader.loadService()
     if (serviceData) {
       this.storage.addService(serviceName, serviceData.instance)
-      logger.debug(this.msg.SERVICE_LOADED(serviceName))
+      console.debug(...format.debug(this.msg.SERVICE_LOADED(serviceName)))
     }
   }
 
   unloadService(serviceName) {
     const serviceIndex = this.storage.findServiceIndex(serviceName)
     if (serviceIndex === -1) {
-      logger.warn(this.msg.SERVICE_NOT_LOADED(serviceName))
+      console.warn(...format.warn(this.msg.SERVICE_NOT_LOADED(serviceName)))
       return
     }
 
@@ -41,7 +41,7 @@ export class ServiceContainer {
     this.unloader.unloadService(serviceData.instance)
 
     this.storage.removeService(serviceIndex)
-    logger.debug(this.msg.SERVICE_UNLOADED(serviceName))
+    console.debug(...format.debug(this.msg.SERVICE_UNLOADED(serviceName)))
   }
 
   getServiceByName(serviceName) {
