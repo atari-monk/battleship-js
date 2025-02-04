@@ -3,6 +3,10 @@ class LogService {
     this.debugNr = 1
     this.warnNr = 1
     this.errorNr = 1
+
+    this.debug = console.debug.bind(console)
+    this.warn = console.warn.bind(console)
+    this.error = console.error.bind(console)
   }
 
   debug(log) {
