@@ -46,7 +46,11 @@ export class FullScreen {
 
   toggle(forceState) {
     const { classSelector, hidden } = FULL_SCREEN
-    toggleClass(classSelector, hidden, forceState)
+    toggleClass({
+      selector: classSelector,
+      cssClass: hidden,
+      forceState: forceState,
+    })
   }
 
   async showMenu() {

@@ -8,18 +8,15 @@ class LogFormatter {
   }
 
   debug(...args) {
-    const count = this.counters.debug++
-    return [`${count}.`, ...args]
+    return [`${this.counters.debug++}.`, ...args]
   }
 
   warn(...args) {
-    const count = this.counters.warn++
-    return [`${count}.`, ...args]
+    return [`${this.counters.warn++}.`, ...args]
   }
 
   error(...args) {
-    const count = this.counters.error++
-    return [`${count}.`, ...args]
+    return [`${this.counters.error++}`.toString(), ...args]
   }
 }
 

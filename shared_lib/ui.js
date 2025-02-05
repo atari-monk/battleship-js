@@ -1,11 +1,11 @@
 import { format } from './LogFormatter.js'
 
-export function toggleClass(
+export function toggleClass({
   selector,
   cssClass,
   forceState,
-  notFoundMsg = (selector) => `Element with selector "${selector}" not found`
-) {
+  notFoundMsg = (selector) => `Element with selector "${selector}" not found`,
+}) {
   const el = document.querySelector(selector)
 
   if (!el) {
