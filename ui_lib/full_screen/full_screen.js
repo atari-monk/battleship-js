@@ -21,14 +21,16 @@ export class FullScreen {
     console.debug(...format.debug(FULL_SCREEN.initMsg))
     setEvent({
       ...FULL_SCREEN_BUTTON,
-      handler: async (event) => this.goFullScreen(event),
+      handler: async (event) => this.requestFullscreen(event),
     })
   }
 
-  async goFullScreen() {
+  async requestFullscreen() {
     try {
-      requestFullscreen()
       toggle({ ...FULL_SCREEN_HIDE })
+
+      requestFullscreen()
+
       await showComponent({
         uiContainer: this.uiContainer,
         ...MENU_COMPONENT,

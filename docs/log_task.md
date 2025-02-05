@@ -255,6 +255,7 @@
 1. 08:55 - 10:39, refactor: replace LogService with LogFormatter for improved logging consistency; update imports across various components
 2. 11:58 - 12:51, refactor: simplify LogFormatter methods and update toggleClass function signature for improved readability
 3. 13:58 - 16:52, refactor: update GUIComponentContainer to pass context to jsModule; enhance event handling and fullscreen functionality in UI components
+4. 16:52 - 17:12, refactor: rename goFullScreen to requestFullscreen for clarity; update event handler to use new method
 
 ### Plan
 
