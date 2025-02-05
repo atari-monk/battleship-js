@@ -64,7 +64,7 @@ export class GUIComponentContainer {
       component.jsModule &&
       typeof component.jsModule.default === 'function'
     ) {
-      jsInstance = component.jsModule.default()
+      jsInstance = component.jsModule.default(this)
     }
 
     this.instanceStorage.addInstance(
