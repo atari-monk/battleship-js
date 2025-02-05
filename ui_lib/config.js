@@ -8,14 +8,13 @@ export const EVENT = {
 }
 
 export const FULL_SCREEN = {
-  root: 'fs-overlay',
-  get rootSelector() {
-    return `.${this.root}`
+  selector: 'fs-overlay',
+  get classSelector() {
+    return `.${this.selector}`
   },
   buttonId: 'fsOverlayButton',
   hidden: 'fs-overlay--hidden',
   initMsg: 'Loading component: full_screen',
-  notFoundWarn: (id) => `Element ${id} not found`,
   fullscreenWarn: 'Fullscreen request not supported',
   fullScreenError: 'Error switching to full screen mode:',
 }

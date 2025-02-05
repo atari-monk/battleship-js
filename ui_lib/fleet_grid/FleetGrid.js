@@ -4,7 +4,7 @@ import { GridRenderer } from './GridRenderer.js'
 import { PlacementHandler } from './PlacementHandler.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
-import { format } from './../../data_lib/LogService.js'
+import { format } from './../../shared_lib/LogFormatter.js'
 import { FLEET_GRID_CONFIG } from './../config.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
 

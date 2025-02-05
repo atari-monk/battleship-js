@@ -1,6 +1,6 @@
 import { BATTLE_GRID_CONFIG, COLOR } from '../config.js'
-import { format } from './../../data_lib/LogService.js'
-import { guiContener } from './../../client/script.js'
+import { format } from './../../shared_lib/LogFormatter.js'
+import { guiContener } from '../../client/script.js'
 
 export class BattleAI {
   set dataService(dataService) {
@@ -34,17 +34,21 @@ export class BattleAI {
     if (this._dataService.getBoard().isWin()) {
       if (this._dataService.isPlayer1()) {
         console.debug(
-          ...format.debug(`Player1 ${this._dataService.turn.currentPlayer} WON!`)
+          ...format.debug(
+            `Player1 ${this._dataService.turn.currentPlayer} WON!`
+          )
         )
       } else {
         console.debug(
-          ...format.debug(`Player2 ${this._dataService.turn.currentPlayer} WON!`)
+          ...format.debug(
+            `Player2 ${this._dataService.turn.currentPlayer} WON!`
+          )
         )
       }
       setTimeout(() => {
         console.debug(...format.debug('Wait 3s before reset'))
         //const fs = guiContener.getInstanceById('fs-overlay-1')
-        //fs.jsInstance.toggleVisibility(true)
+        //fs.jsInstance.toggle(true)
         this._dataService.reset()
         const bg1 = guiContener.getInstanceById(
           BATTLE_GRID_CONFIG.battleGridId1

@@ -1,5 +1,5 @@
 import { serviceContener } from '../../client/script.js'
-import { format } from '../../data_lib/LogService.js'
+import { format } from './../../shared_lib/LogFormatter.js'
 import { MENU_CONFIG } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'

@@ -10,7 +10,9 @@ export const serviceContener = new ServiceContainerFactory().generete()
 async function init() {
   const dataService = await new DataServiceFactory().generete()
   serviceContener.loadService('data_service', dataService)
+
   await guiContener.loadComponentResources('full_screen')
+  
   guiContener.createInstance('full_screen', 'fs-overlay', 'fs-overlay-1')
 }
 

@@ -1,5 +1,5 @@
 import { Turn } from './Turn.js'
-import { format } from './../data_lib/LogService.js'
+import { format } from './../shared_lib/LogFormatter.js'
 
 export class DataService {
   constructor() {

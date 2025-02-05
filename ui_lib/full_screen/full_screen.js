@@ -1,5 +1,6 @@
 import { guiContener } from './../../client/script.js'
-import { format } from './../../data_lib/LogService.js'
+import { format } from './../../shared_lib/LogFormatter.js'
+import { toggleClass } from './../../shared_lib/ui.js'
 import { EVENT, FULL_SCREEN, MENU_CONFIG } from './../config.js'
 
 export class FullScreen {
@@ -21,7 +22,7 @@ export class FullScreen {
   async goFullScreen() {
     try {
       this.requestFullscreen()
-      this.toggleVisibility(false)
+      this.toggle()
       await this.showMenu()
     } catch (error) {
       console.error(...format.error(FULL_SCREEN.fullScreenError, error))
@@ -43,24 +44,9 @@ export class FullScreen {
     }
   }
 
-  toggleVisibility(forceState) {
-    const { rootSelector, hidden, notFoundWarn } = FULL_SCREEN
-    const el = document.querySelector(rootSelector)
-
-    if (!el) {
-      console.warn(...format.warn(notFoundWarn(rootSelector)))
-      return
-    }
-
-    if (typeof forceState === 'boolean') {
-      if (forceState) {
-        el.classList.remove(hidden)
-      } else {
-        el.classList.add(hidden)
-      }
-    } else {
-      el.classList.toggle(hidden)
-    }
+  toggle(forceState) {
+    const { classSelector, hidden } = FULL_SCREEN
+    toggleClass(classSelector, hidden, forceState)
   }
 
   async showMenu() {

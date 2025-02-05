@@ -1,5 +1,5 @@
 import { guiContener } from './../../client/script.js'
-import { format } from './../../data_lib/LogService.js'
+import { format } from './../../shared_lib/LogFormatter.js'
 import { TOGGLE_CONFIG } from './../config.js'
 
 export class ToggleLoader {

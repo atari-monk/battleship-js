@@ -1,4 +1,4 @@
-import { format } from './../../data_lib/LogService.js'
+import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID_CONFIG } from './../config.js'
 
 export class BattleGrid {

@@ -1,4 +1,4 @@
-import { format } from './../data_lib/LogService.js'
+import { format } from './../shared_lib/LogFormatter.js'
 
 export class Turn {
   constructor(player1Name, player2Name) {
