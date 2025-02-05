@@ -47,6 +47,16 @@ export const MENU_CONFIG = {
   showMenuError: 'Error in showMenu:',
 }
 
+export const MENU_BUTTON = {
+  id: MENU_CONFIG.startButtonId,
+  eventType: EVENT.click,
+}
+
+export const MENU_HIDE = {
+  selector: MENU_CONFIG.menuDivClass,
+  cssClass: MENU_CONFIG.hiddenStyle,
+}
+
 export const FLEET_GRID_CONFIG = {
   name: 'fleet_grid',
   fleetGrid: '.fleet-grid',

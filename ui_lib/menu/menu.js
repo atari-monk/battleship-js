@@ -1,9 +1,10 @@
 import { serviceContener } from '../../client/script.js'
 import { format } from './../../shared_lib/LogFormatter.js'
-import { MENU_CONFIG } from './../config.js'
+import { MENU_CONFIG, MENU_BUTTON, MENU_HIDE } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
+import { setEvent, toggle } from './../../shared_lib/ui.js'
 
 export class Menu {
   constructor(fleetGridLoader, toggleLoader, battleGridLoader) {
@@ -13,33 +14,25 @@ export class Menu {
   }
 
   init() {
-    const { startButtonId, clickEvent, initMsg, buttonNotFoundWarn } =
-      MENU_CONFIG
-    const startButton = document.getElementById(startButtonId)
-    if (startButton) {
-      startButton.addEventListener(clickEvent, async () => {
+    console.debug(...format.debug(MENU_CONFIG.initMsg))
+    setEvent({
+      ...MENU_BUTTON,
+      handler: async () => {
         await this.handleClick()
-      })
-      console.debug(...format.debug(initMsg))
-    } else {
-      console.warn(...format.warn(buttonNotFoundWarn))
-    }
-  }
-
-  async loadFleetGrid(dataService) {
-    await this.fleetGridLoader.load(dataService)
-    await this.toggleLoader.load()
+      },
+    })
   }
 
   async handleClick() {
     const { dataServiceName, handleClickError } = MENU_CONFIG
     try {
-      this.hideMenu()
+      toggle({ ...MENU_HIDE })
 
       const dataService = serviceContener.getServiceByName(dataServiceName)
 
       if (dataService.config.enableFleetGrid) {
-        await this.loadFleetGrid(dataService)
+        await this.fleetGridLoader.load(dataService)
+        await this.toggleLoader.load()
       } else {
         await this.battleGridLoader.load(dataService)
         dataService.initializeTurn()
@@ -47,16 +40,6 @@ export class Menu {
       }
     } catch (error) {
       console.error(...format.error(handleClickError, error))
-    }
-  }
-
-  hideMenu() {
-    const { menuDivClass, hiddenStyle, menuNotFoundWarn } = MENU_CONFIG
-    const menuElement = document.querySelector(menuDivClass)
-    if (menuElement) {
-      menuElement.classList.add(hiddenStyle)
-    } else {
-      console.warn(...format.warn(menuNotFoundWarn))
     }
   }
 }

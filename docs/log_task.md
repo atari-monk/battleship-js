@@ -256,6 +256,9 @@
 2. 11:58 - 12:51, refactor: simplify LogFormatter methods and update toggleClass function signature for improved readability
 3. 13:58 - 16:52, refactor: update GUIComponentContainer to pass context to jsModule; enhance event handling and fullscreen functionality in UI components
 4. 16:52 - 17:12, refactor: rename goFullScreen to requestFullscreen for clarity; update event handler to use new method
+5. 20:59 - 22:29, refactor: enhance menu initialization by utilizing MENU_BUTTON and MENU_HIDE for event handling and visibility management
+
+- Total 441 minutes = 7 hour 21 minutes
 
 ### Plan
 
