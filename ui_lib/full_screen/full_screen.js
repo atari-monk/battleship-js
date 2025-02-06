@@ -6,7 +6,7 @@ import {
   MENU_COMPONENT,
 } from './../config.js'
 import {
-  toggle,
+  selectAndToggle,
   setEvent,
   requestFullscreen,
   showComponent,
@@ -27,7 +27,7 @@ export class FullScreen {
 
   async requestFullscreen() {
     try {
-      toggle({ ...FULL_SCREEN_HIDE })
+      selectAndToggle({ ...FULL_SCREEN_HIDE })
 
       requestFullscreen()
 

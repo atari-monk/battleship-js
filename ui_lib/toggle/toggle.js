@@ -1,5 +1,11 @@
 import { format } from './../../shared_lib/LogFormatter.js'
-import { TOGGLE_CONFIG } from './../config.js'
+import { selectById, setEvent, toggle } from './../../shared_lib/ui.js'
+import {
+  TOGGLE_CONFIG,
+  TOGGLE_SELECT,
+  TOGGLE_CLICK,
+  TOGGLE_TOUCH,
+} from './../config.js'
 
 export class Toggle {
   constructor(guiContainer) {
@@ -9,50 +15,63 @@ export class Toggle {
   }
 
   init() {
-    const { toggleButtonId, fleetGridId, initMsg, componentsNotFoundWarn } =
-      TOGGLE_CONFIG
-    this.toggleButton = document.getElementById(toggleButtonId)
-    this.fleetGrid = this.guiContainer.getInstanceById(fleetGridId).jsInstance
+    console.debug(...format.debug(TOGGLE_CONFIG.initMsg))
 
-    if (this.toggleButton && this.fleetGrid) {
-      this.setButtonClick()
-      console.debug(...format.debug(initMsg))
-    } else {
-      console.warn(...format.warn(componentsNotFoundWarn))
+    this.setToggleButton()
+
+    this.fleetGrid = this.guiContainer.getInstanceById(
+      TOGGLE_CONFIG.fleetGridId
+    ).jsInstance
+
+    if (!this.fleetGrid || !this.toggleButton) {
+      console.warn(...format.warn(TOGGLE_CONFIG.componentsNotFoundWarn))
+      return
+    }
+
+    setEvent({
+      ...TOGGLE_CLICK,
+      handler: (event) => {
+        if (this.isTouch) {
+          this.isTouch = false
+          return
+        }
+        this.handleToggle(event)
+      },
+    })
+
+    setEvent({
+      ...TOGGLE_TOUCH,
+      handler: () => {
+        this.isTouch = true
+        this.handleToggle()
+      },
+      isPassive: true,
+    })
+
+    toggle(this.toggleOff)
+  }
+
+  setToggleButton() {
+    this.toggleButton = selectById(TOGGLE_SELECT)
+
+    this.toggleOff = {
+      element: this.toggleButton,
+      cssClass: TOGGLE_CONFIG.toggledOff,
+    }
+
+    this.toggleOn = {
+      element: this.toggleButton,
+      cssClass: TOGGLE_CONFIG.toggledOn,
     }
   }
 
-  setButtonClick() {
-    const { touchStartEvent, clickEvent } = TOGGLE_CONFIG
-    this.toggleButton.addEventListener(
-      touchStartEvent,
-      (event) => {
-        this.isTouch = true
-        this.handleToggle(event)
-      },
-      { passive: true }
-    )
-
-    this.toggleButton.addEventListener(clickEvent, (event) => {
-      if (this.isTouch) {
-        this.isTouch = false
-        return
-      }
-      this.handleToggle(event)
-    })
-
-    this.toggleButton.classList.add(TOGGLE_CONFIG.toggledOff)
-  }
-
-  handleToggle(event) {
+  handleToggle() {
     this.isToggled = !this.isToggled
 
     if (this.isToggled) {
-      this.toggleButton.classList.add(TOGGLE_CONFIG.toggledOn)
-      this.toggleButton.classList.remove(TOGGLE_CONFIG.toggledOff)
+      toggle(this.toggleOn)
     } else {
-      this.toggleButton.classList.add(TOGGLE_CONFIG.toggledOff)
-      this.toggleButton.classList.remove(TOGGLE_CONFIG.toggledOn)
+      toggle(this.toggleOff)
     }
 
     this.fleetGrid.fleetService.toggleOrientation()

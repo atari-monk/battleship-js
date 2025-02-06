@@ -1,5 +1,5 @@
 import { format } from './../../shared_lib/LogFormatter.js'
-import { setEvent, toggle } from './../../shared_lib/ui.js'
+import { setEvent, selectAndToggle } from './../../shared_lib/ui.js'
 import { MENU_CONFIG, MENU_BUTTON, MENU_HIDE } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'
@@ -32,7 +32,7 @@ export class Menu {
 
   async handleClick() {
     try {
-      toggle({ ...MENU_HIDE })
+      selectAndToggle({ ...MENU_HIDE })
       await this.loadFleetGrid()
       await this.loadBattleGrid()
     } catch (error) {

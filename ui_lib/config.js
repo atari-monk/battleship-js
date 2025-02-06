@@ -109,6 +109,20 @@ export const TOGGLE_CONFIG = {
   hiddenStyle: 'toggle--hidden',
 }
 
+export const TOGGLE_SELECT = {
+  id: TOGGLE_CONFIG.toggleButtonId,
+}
+
+export const TOGGLE_CLICK = {
+  id: TOGGLE_CONFIG.toggleButtonId,
+  eventType: EVENT.click,
+}
+
+export const TOGGLE_TOUCH = {
+  id: TOGGLE_CONFIG.toggleButtonId,
+  eventType: EVENT.touchstart,
+}
+
 export const BATTLE_GRID_CONFIG = {
   name: 'battle_grid',
   cssClass: 'battle-grid',

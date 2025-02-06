@@ -264,6 +264,7 @@
 
 1. 09:43 - 10:33, refactor(menu): fix serviceContainer dependency
 2. 10:52 - 11:36, refactor(toggle): fix container dependency
+3. 12:31 - 13:50, refactor(toggle): use util functions
 
 ### Plan
 
