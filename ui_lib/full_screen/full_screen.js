@@ -13,8 +13,8 @@ import {
 } from './../../shared_lib/ui.js'
 
 export class FullScreen {
-  constructor(uiContainer) {
-    this.uiContainer = uiContainer
+  constructor(guiContainer) {
+    this.guiContainer = guiContainer
   }
 
   init() {
@@ -32,7 +32,7 @@ export class FullScreen {
       requestFullscreen()
 
       await showComponent({
-        uiContainer: this.uiContainer,
+        uiContainer: this.guiContainer,
         ...MENU_COMPONENT,
       })
     } catch (error) {

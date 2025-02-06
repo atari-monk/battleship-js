@@ -1,9 +1,9 @@
-import { guiContener } from './../../client/script.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 import { TOGGLE_CONFIG } from './../config.js'
 
 export class Toggle {
-  constructor() {
+  constructor(guiContainer) {
+    this.guiContainer = guiContainer
     this.isToggled = false
     this.isTouch = false
   }
@@ -12,7 +12,7 @@ export class Toggle {
     const { toggleButtonId, fleetGridId, initMsg, componentsNotFoundWarn } =
       TOGGLE_CONFIG
     this.toggleButton = document.getElementById(toggleButtonId)
-    this.fleetGrid = guiContener.getInstanceById(fleetGridId).jsInstance
+    this.fleetGrid = this.guiContainer.getInstanceById(fleetGridId).jsInstance
 
     if (this.toggleButton && this.fleetGrid) {
       this.setButtonClick()
@@ -62,6 +62,6 @@ export class Toggle {
   }
 }
 
-export default function init() {
-  new Toggle().init()
+export default function init({ serviceContainer, guiContainer } = {}) {
+  new Toggle(guiContainer).init()
 }

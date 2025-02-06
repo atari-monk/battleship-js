@@ -1,4 +1,4 @@
-import { format } from './../../data_lib/LogService.js'
+import { format } from './../../shared_lib/LogFormatter.js'
 import { FLEET_GRID_CONFIG, COLOR, EVENT } from './../config.js'
 
 export class PlacementHandler {

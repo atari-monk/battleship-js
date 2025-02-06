@@ -10,9 +10,9 @@ export class DataServiceFactory {
     const dataService = new DataService()
 
     const config = new Config()
-    config.enableFleetGrid = false
+    config.enableFleetGrid = true
     config.loadFleetFromFile = false
-    config.enableTest = true
+    config.enableTest = false
     dataService.config = config
 
     const fleet1 = new Fleet()
