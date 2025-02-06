@@ -68,11 +68,8 @@ export class Toggle {
   handleToggle() {
     this.isToggled = !this.isToggled
 
-    if (this.isToggled) {
-      toggle(this.toggleOn)
-    } else {
-      toggle(this.toggleOff)
-    }
+    toggle(this.toggleOn)
+    toggle(this.toggleOff)
 
     this.fleetGrid.fleetService.toggleOrientation()
     this.fleetGrid.paintOnHover(

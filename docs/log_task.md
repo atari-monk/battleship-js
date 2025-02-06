@@ -265,6 +265,7 @@
 1. 09:43 - 10:33, refactor(menu): fix serviceContainer dependency
 2. 10:52 - 11:36, refactor(toggle): fix container dependency
 3. 12:31 - 13:50, refactor(toggle): use util functions
+4. 14:25 - 14:43, refactor: pass guiContainer to FleetGridLoader and simplify toggle handling
 
 ### Plan
 
