@@ -41,8 +41,8 @@ export class FullScreen {
   }
 }
 
-export default function init(uiContainer) {
-  const fs = new FullScreen(uiContainer)
+export default function init({ serviceContainer, guiContainer } = {}) {
+  const fs = new FullScreen(guiContainer)
   fs.init()
   return fs
 }

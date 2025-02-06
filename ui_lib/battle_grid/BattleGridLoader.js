@@ -1,4 +1,4 @@
-import { guiContener } from './../../client/script.js'
+import { guiContainer } from './../../client/script.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID_CONFIG } from './../config.js'
 
@@ -6,13 +6,13 @@ export class BattleGridLoader {
   async load(dataService) {
     const { name, cssClass, id1, id2, loadBattleGridError } = BATTLE_GRID_CONFIG
     try {
-      await guiContener.loadComponentResources(name)
-      const battleGrid1 = guiContener.createInstance(
+      await guiContainer.loadComponentResources(name)
+      const battleGrid1 = guiContainer.createInstance(
         name,
         cssClass,
         id1
       ).jsInstance
-      const battleGrid2 = guiContener.createInstance(
+      const battleGrid2 = guiContainer.createInstance(
         name,
         cssClass,
         id2

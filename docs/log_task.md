@@ -260,6 +260,10 @@
 
 - Total 441 minutes = 7 hour 21 minutes
 
+### 6
+
+1. 09:43 - 10:33, refactor(menu): fix serviceContainer dependency
+
 ### Plan
 
 1. Game end condition.

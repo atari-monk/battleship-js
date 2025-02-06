@@ -4,11 +4,13 @@ export class GUIComponentContainer {
   }
 
   constructor(
+    serviceContainer,
     componentLoader,
     componentUnloader,
     componentStorage,
     instanceStorage
   ) {
+    this.serviceContainer = serviceContainer
     this.loader = componentLoader
     this.unloader = componentUnloader
     this.componentStorage = componentStorage
@@ -64,7 +66,10 @@ export class GUIComponentContainer {
       component.jsModule &&
       typeof component.jsModule.default === 'function'
     ) {
-      jsInstance = component.jsModule.default(this)
+      jsInstance = component.jsModule.default({
+        serviceContainer: this.serviceContainer,
+        guiContainer: this,
+      })
     }
 
     this.instanceStorage.addInstance(

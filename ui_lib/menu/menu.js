@@ -1,13 +1,20 @@
-import { serviceContener } from '../../client/script.js'
 import { format } from './../../shared_lib/LogFormatter.js'
+import { setEvent, toggle } from './../../shared_lib/ui.js'
 import { MENU_CONFIG, MENU_BUTTON, MENU_HIDE } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
-import { setEvent, toggle } from './../../shared_lib/ui.js'
 
 export class Menu {
-  constructor(fleetGridLoader, toggleLoader, battleGridLoader) {
+  constructor(
+    serviceContainer,
+    fleetGridLoader,
+    toggleLoader,
+    battleGridLoader
+  ) {
+    this.dataService = serviceContainer.getServiceByName(
+      MENU_CONFIG.dataServiceName
+    )
     this.fleetGridLoader = fleetGridLoader
     this.toggleLoader = toggleLoader
     this.battleGridLoader = battleGridLoader
@@ -24,28 +31,32 @@ export class Menu {
   }
 
   async handleClick() {
-    const { dataServiceName, handleClickError } = MENU_CONFIG
     try {
       toggle({ ...MENU_HIDE })
-
-      const dataService = serviceContener.getServiceByName(dataServiceName)
-
-      if (dataService.config.enableFleetGrid) {
-        await this.fleetGridLoader.load(dataService)
-        await this.toggleLoader.load()
-      } else {
-        await this.battleGridLoader.load(dataService)
-        dataService.initializeTurn()
-        this.battleGridLoader.setVisability(dataService)
-      }
+      await this.loadFleetGrid()
+      await this.loadBattleGrid()
     } catch (error) {
-      console.error(...format.error(handleClickError, error))
+      console.error(...format.error(MENU_CONFIG.handleClickError, error))
     }
+  }
+
+  async loadFleetGrid() {
+    if (!this.dataService.config.enableFleetGrid) return
+    await this.fleetGridLoader.load(this.dataService)
+    await this.toggleLoader.load()
+  }
+
+  async loadBattleGrid() {
+    if (this.dataService.config.enableFleetGrid) return
+    await this.battleGridLoader.load(this.dataService)
+    this.dataService.initializeTurn()
+    this.battleGridLoader.setVisability(this.dataService)
   }
 }
 
-export default function init() {
+export default function init({ serviceContainer, guiContainer } = {}) {
   new Menu(
+    serviceContainer,
     new FleetGridLoader(),
     new ToggleLoader(),
     new BattleGridLoader()
