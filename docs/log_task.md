@@ -266,6 +266,9 @@
 2. 10:52 - 11:36, refactor(toggle): fix container dependency
 3. 12:31 - 13:50, refactor(toggle): use util functions
 4. 14:25 - 14:43, refactor: pass guiContainer to FleetGridLoader and simplify toggle handling
+5. 14:44 - 15:05, refactor(BattleAI): pass guiContainer to constructor and update instance usage
+
+- Total 212 minutes = 3 hour 32 minutes
 
 ### Plan
 

@@ -1,10 +1,13 @@
 import { BATTLE_GRID_CONFIG, COLOR } from '../config.js'
 import { format } from './../../shared_lib/LogFormatter.js'
-import { guiContainer } from '../../client/script.js'
 
 export class BattleAI {
   set dataService(dataService) {
     this._dataService = dataService
+  }
+
+  constructor(guiContainer) {
+    this.guiContainer = guiContainer
   }
 
   aiMove() {
@@ -47,13 +50,12 @@ export class BattleAI {
       }
       setTimeout(() => {
         console.debug(...format.debug('Wait 3s before reset'))
-        //const fs = guiContainer.getInstanceById('fs-overlay-1')
-        //fs.jsInstance.toggle(true)
+
         this._dataService.reset()
-        const bg1 = guiContainer.getInstanceById(
+        const bg1 = this.guiContainer.getInstanceById(
           BATTLE_GRID_CONFIG.battleGridId1
         )
-        const bg2 = guiContainer.getInstanceById(
+        const bg2 = this.guiContainer.getInstanceById(
           BATTLE_GRID_CONFIG.battleGridId2
         )
         bg1.jsInstance.resetGrid()
