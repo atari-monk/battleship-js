@@ -11,13 +11,10 @@ export class GridRenderer {
     this.isPlayerTurn = true
   }
 
-  generateGridItems(id, isAI = false) {
-    const grid = this._getGridElement(id)
-    this._createGridCells(grid)
-    this.gridItems = document.querySelectorAll(
-      BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
-    )
-    isAI ? this._setupAIGrid(id) : this._setupPlayerGrid(grid, id)
+  resetGrid() {
+    if (!this.gridItems) throw new Error(BATTLE_GRID_CONFIG.itemsError)
+    this.gridItems.forEach((cell) => cell.removeAttribute('style'))
+    this._enableClick()
   }
 
   getGridItems() {
@@ -25,24 +22,13 @@ export class GridRenderer {
     return this.gridItems
   }
 
-  resetGrid() {
-    if (!this.gridItems) throw new Error(BATTLE_GRID_CONFIG.itemsError)
-    this.gridItems.forEach((cell) => cell.removeAttribute('style'))
-    this.enableClick()
-  }
-
-  enableClick() {
-    this.isPlayerTurn = true
-  }
-
-  onVisibilityChange(element, callback) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) callback()
-      })
-    })
-
-    observer.observe(element)
+  generateGridItems(id, isAI = false) {
+    const grid = this._getGridElement(id)
+    this._createGridCells(grid)
+    this.gridItems = document.querySelectorAll(
+      BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
+    )
+    isAI ? this._setupAIGrid(id) : this._setupPlayerGrid(grid, id)
   }
 
   _getGridElement(id) {
@@ -64,17 +50,6 @@ export class GridRenderer {
     }
   }
 
-  _setupPlayerGrid(grid, id) {
-    grid.addEventListener(EVENT.click, (event) => {
-      if (this.isPlayerTurn) {
-        this.isPlayerTurn = false
-        this.battleAI.handleGlobalAtack(event, id, this.gridItems, () =>
-          this.enableClick()
-        )
-      }
-    })
-  }
-
   _setupAIGrid(id) {
     const board = document.getElementById(id)
     this.onVisibilityChange(board, () => {
@@ -82,8 +57,32 @@ export class GridRenderer {
         this.battleAI.aiMove(),
         id,
         this.gridItems,
-        () => this.enableClick()
+        () => this._enableClick()
       )
+    })
+  }
+
+  onVisibilityChange(element, callback) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) callback()
+      })
+    })
+
+    observer.observe(element)
+  }
+
+  _setupPlayerGrid(grid, id) {
+    grid.addEventListener(EVENT.click, (event) => {
+      if (this.isPlayerTurn) {
+        this.isPlayerTurn = false
+        this.battleAI.handleGlobalAtack(
+          event,
+          id,
+          this.gridItems,
+          () => (this.isPlayerTurn = true)
+        )
+      }
     })
   }
 }
