@@ -122,3 +122,14 @@ export async function showComponent({
     console.error(...format.error(errorMessage, error))
   }
 }
+
+export function observeVisibilityChange(element, callback) {
+  const observer = new IntersectionObserver((entries) => {
+    const entry = entries[0]
+    if (entry.isIntersecting) {
+      callback()
+    }
+  })
+
+  observer.observe(element)
+}

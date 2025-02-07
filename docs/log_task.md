@@ -277,6 +277,7 @@
 3. 11:55 - 12:29, refactor(GridRenderer): replace grid element retrieval with selectElementOrThrow utility
 4. 12:30 - 13:35, refactor(GridRenderer): introduce setEventForElement utility for event handling
 5. 14:19 - 14:31, refactor(GridRenderer): enhance AI click handling and restore player turn logic
+6. 14:32 - 15:05, refactor(GridRenderer): replace onVisibilityChange method with observeVisibilityChange utility
 
 ### Plan
 

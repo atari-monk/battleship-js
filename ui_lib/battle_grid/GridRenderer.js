@@ -1,6 +1,7 @@
 import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT } from '../config.js'
 import {
   selectElementOrThrow,
+  observeVisibilityChange,
   setEventForElement,
 } from './../../shared_lib/ui.js'
 
@@ -44,7 +45,7 @@ export class GridRenderer {
     )
 
     isAI
-      ? this.onVisibilityChange(document.getElementById(id), () =>
+      ? observeVisibilityChange(document.getElementById(id), () =>
           this.handleAIClick()
         )
       : setEventForElement({
@@ -60,16 +61,6 @@ export class GridRenderer {
       gridItem.classList.add(BATTLE_GRID_CONFIG.battleGridCell)
       grid.appendChild(gridItem)
     }
-  }
-
-  onVisibilityChange(element, callback) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) callback()
-      })
-    })
-
-    observer.observe(element)
   }
 
   handleAIClick() {
