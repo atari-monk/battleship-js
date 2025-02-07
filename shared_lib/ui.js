@@ -133,3 +133,22 @@ export function observeVisibilityChange(element, callback) {
 
   observer.observe(element)
 }
+
+export function generateElements({
+  parentElement,
+  numElements = 100,
+  elementType = 'div',
+  className = '',
+}) {
+  if (!parentElement) {
+    throw new Error('A valid parent element must be provided.')
+  }
+
+  for (let i = 1; i <= numElements; i++) {
+    const element = document.createElement(elementType)
+    if (className) {
+      element.classList.add(className)
+    }
+    parentElement.appendChild(element)
+  }
+}

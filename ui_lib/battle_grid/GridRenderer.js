@@ -1,8 +1,9 @@
-import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT } from '../config.js'
+import { BATTLE_GRID_CONFIG, EVENT } from '../config.js'
 import {
   selectElementOrThrow,
   observeVisibilityChange,
   setEventForElement,
+  generateElements,
 } from './../../shared_lib/ui.js'
 
 export class GridRenderer {
@@ -38,7 +39,10 @@ export class GridRenderer {
 
     grid.innerHTML = ''
 
-    this._createGridCells(grid)
+    generateElements({
+      parentElement: grid,
+      className: BATTLE_GRID_CONFIG.battleGridCell,
+    })
 
     this.gridItems = document.querySelectorAll(
       BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
@@ -46,7 +50,7 @@ export class GridRenderer {
 
     isAI
       ? observeVisibilityChange(document.getElementById(id), () =>
-          this.handleAIClick()
+          this.handleAIClick(id)
         )
       : setEventForElement({
           element: grid,
@@ -55,15 +59,7 @@ export class GridRenderer {
         })
   }
 
-  _createGridCells(grid) {
-    for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(HTML_CONFIG.div)
-      gridItem.classList.add(BATTLE_GRID_CONFIG.battleGridCell)
-      grid.appendChild(gridItem)
-    }
-  }
-
-  handleAIClick() {
+  handleAIClick(id) {
     this.battleAI.handleGlobalAtack(
       this.battleAI.aiMove(),
       id,
