@@ -18,7 +18,7 @@ export class GridRenderer {
   resetGrid() {
     if (!this.gridItems) throw new Error(BATTLE_GRID_CONFIG.itemsError)
     this.gridItems.forEach((cell) => cell.removeAttribute('style'))
-    this._enableClick()
+    this.isPlayerTurn = true
   }
 
   getGridItems() {
@@ -34,26 +34,24 @@ export class GridRenderer {
       ),
       isId: false,
     })
+
     grid.innerHTML = ''
+
     this._createGridCells(grid)
+
     this.gridItems = document.querySelectorAll(
       BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
     )
+
     isAI
-      ? this._setupAIGrid(id)
+      ? this.onVisibilityChange(document.getElementById(id), () =>
+          this.handleAIClick()
+        )
       : setEventForElement({
           element: grid,
           eventType: EVENT.click,
           handler: (event) => this.handleClick(event, id),
         })
-  }
-
-  handleClick(event, id) {
-    if (!this.isPlayerTurn) return
-    this.isPlayerTurn = false
-    this.battleAI.handleGlobalAtack(event, id, this.gridItems, () => {
-      this.isPlayerTurn = true
-    })
   }
 
   _createGridCells(grid) {
@@ -64,18 +62,6 @@ export class GridRenderer {
     }
   }
 
-  _setupAIGrid(id) {
-    const board = document.getElementById(id)
-    this.onVisibilityChange(board, () => {
-      this.battleAI.handleGlobalAtack(
-        this.battleAI.aiMove(),
-        id,
-        this.gridItems,
-        () => (this.isPlayerTurn = true)
-      )
-    })
-  }
-
   onVisibilityChange(element, callback) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -84,5 +70,22 @@ export class GridRenderer {
     })
 
     observer.observe(element)
+  }
+
+  handleAIClick() {
+    this.battleAI.handleGlobalAtack(
+      this.battleAI.aiMove(),
+      id,
+      this.gridItems,
+      () => (this.isPlayerTurn = true)
+    )
+  }
+
+  handleClick(event, id) {
+    if (!this.isPlayerTurn) return
+    this.isPlayerTurn = false
+    this.battleAI.handleGlobalAtack(event, id, this.gridItems, () => {
+      this.isPlayerTurn = true
+    })
   }
 }
