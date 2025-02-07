@@ -75,6 +75,22 @@ export function setEvent({
   }
 }
 
+export function setEventForElement({
+  element,
+  eventType = 'click',
+  handler,
+  isPassive = false,
+  notFoundMsg = (el) => defaultNotFoundMsg('element', el),
+} = {}) {
+  if (element) {
+    isPassive
+      ? element.addEventListener(eventType, handler, { passive: true })
+      : element.addEventListener(eventType, handler)
+  } else {
+    console.warn(...format.warn(notFoundMsg(element)))
+  }
+}
+
 export function requestFullscreen({
   element = document.documentElement,
   warningMessage = 'Fullscreen API not supported',

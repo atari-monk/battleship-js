@@ -1,5 +1,8 @@
 import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT } from '../config.js'
-import { selectElementOrThrow } from './../../shared_lib/ui.js'
+import {
+  selectElementOrThrow,
+  setEventForElement,
+} from './../../shared_lib/ui.js'
 
 export class GridRenderer {
   set dataService(dataService) {
@@ -36,7 +39,21 @@ export class GridRenderer {
     this.gridItems = document.querySelectorAll(
       BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
     )
-    isAI ? this._setupAIGrid(id) : this._setupPlayerGrid(grid, id)
+    isAI
+      ? this._setupAIGrid(id)
+      : setEventForElement({
+          element: grid,
+          eventType: EVENT.click,
+          handler: (event) => this.handleClick(event, id),
+        })
+  }
+
+  handleClick(event, id) {
+    if (!this.isPlayerTurn) return
+    this.isPlayerTurn = false
+    this.battleAI.handleGlobalAtack(event, id, this.gridItems, () => {
+      this.isPlayerTurn = true
+    })
   }
 
   _createGridCells(grid) {
@@ -67,19 +84,5 @@ export class GridRenderer {
     })
 
     observer.observe(element)
-  }
-
-  _setupPlayerGrid(grid, id) {
-    grid.addEventListener(EVENT.click, (event) => {
-      if (this.isPlayerTurn) {
-        this.isPlayerTurn = false
-        this.battleAI.handleGlobalAtack(
-          event,
-          id,
-          this.gridItems,
-          () => (this.isPlayerTurn = true)
-        )
-      }
-    })
   }
 }
