@@ -1,16 +1,12 @@
-import { BATTLE_GRID_CONFIG, EVENT } from '../config.js'
+import { EVENT, BATTLE_GRID_CONFIG } from '../config.js'
 import {
   selectElementOrThrow,
+  generateElements,
   observeVisibilityChange,
   setEventForElement,
-  generateElements,
 } from './../../shared_lib/ui.js'
 
 export class GridRenderer {
-  set dataService(dataService) {
-    this.battleAI.dataService = dataService
-  }
-
   constructor(battleAI) {
     this.battleAI = battleAI
     this.gridItems = null
@@ -60,7 +56,7 @@ export class GridRenderer {
   }
 
   handleAIClick(id) {
-    this.battleAI.handleGlobalAtack(
+    this.battleAI.handleGlobalAttack(
       this.battleAI.aiMove(),
       id,
       this.gridItems,
@@ -71,7 +67,7 @@ export class GridRenderer {
   handleClick(event, id) {
     if (!this.isPlayerTurn) return
     this.isPlayerTurn = false
-    this.battleAI.handleGlobalAtack(event, id, this.gridItems, () => {
+    this.battleAI.handleGlobalAttack(event, id, this.gridItems, () => {
       this.isPlayerTurn = true
     })
   }
