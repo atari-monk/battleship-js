@@ -281,6 +281,8 @@
 7. 15:06 - 15:35, refactor(GridRenderer): replace grid cell creation with generateElements utility
 8. 17:19 - 19:21, refactor(BattleAI, GridRenderer): restructure classes for improved attack handling and turn management
 
+- Total 336 minutes = 5 hour 36 minutes
+
 ### Plan
 
 1. Game end condition.
