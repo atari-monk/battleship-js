@@ -3,6 +3,24 @@ import { format } from './LogFormatter.js'
 const defaultNotFoundMsg = (identifierType, identifier) =>
   `Element with ${identifierType} "${identifier}" not found`
 
+export function selectElementOrThrow({
+  selector,
+  isId = false,
+  notFoundMsg = defaultNotFoundMsg,
+} = {}) {
+  const element = isId
+    ? document.getElementById(selector)
+    : document.querySelector(selector)
+
+  if (!element) {
+    const errorMsg = notFoundMsg(isId ? 'id' : 'selector', selector)
+    console.error(...format.error(errorMsg))
+    throw new Error(errorMsg)
+  }
+
+  return element
+}
+
 export function selectById({ id } = {}) {
   const element = document.getElementById(id)
   if (!element) {

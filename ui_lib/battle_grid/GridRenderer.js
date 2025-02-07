@@ -1,4 +1,5 @@
 import { BATTLE_GRID_CONFIG, HTML_CONFIG, EVENT } from '../config.js'
+import { selectElementOrThrow } from './../../shared_lib/ui.js'
 
 export class GridRenderer {
   set dataService(dataService) {
@@ -23,23 +24,19 @@ export class GridRenderer {
   }
 
   generateGridItems(id, isAI = false) {
-    const grid = this._getGridElement(id)
+    const grid = selectElementOrThrow({
+      selector: BATTLE_GRID_CONFIG.getSelector(
+        id,
+        BATTLE_GRID_CONFIG.battleGridGrid
+      ),
+      isId: false,
+    })
+    grid.innerHTML = ''
     this._createGridCells(grid)
     this.gridItems = document.querySelectorAll(
       BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
     )
     isAI ? this._setupAIGrid(id) : this._setupPlayerGrid(grid, id)
-  }
-
-  _getGridElement(id) {
-    const gridId = BATTLE_GRID_CONFIG.getSelector(
-      id,
-      BATTLE_GRID_CONFIG.battleGridGrid
-    )
-    const grid = document.querySelector(gridId)
-    if (!grid) throw new Error(BATTLE_GRID_CONFIG.notFoundError(gridId))
-    grid.innerHTML = ''
-    return grid
   }
 
   _createGridCells(grid) {
@@ -57,7 +54,7 @@ export class GridRenderer {
         this.battleAI.aiMove(),
         id,
         this.gridItems,
-        () => this._enableClick()
+        () => (this.isPlayerTurn = true)
       )
     })
   }
