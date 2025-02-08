@@ -287,6 +287,7 @@
 
 1. 16:25 - 17:11, refactor(BattleAI, GridRenderer, AttackHandler, BattleTurnManager, ScreenCoordinates): modularize code by extracting classes and improving attack handling
 2. 17:12 - 17:45, refactor: centralize grid configuration by replacing BATTLE_GRID_CONFIG with BATTLE_GRID
+3. 18:25 - 19:20, refactor(BattleAI, ScreenCoordinates, BattleLogic): improve class structure and modularity for better attack handling and screen coordinate management
 
 ### Plan
 

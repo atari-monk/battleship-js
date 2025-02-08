@@ -1,18 +1,41 @@
 import { BATTLE_GRID } from './../config.js'
 
 export class ScreenCoordinates {
-  static matrixToScreenCoords(row, col) {
-    const { battleGridCell, battleGrid1, getSelector } = BATTLE_GRID
-    const cell = document.querySelector(
+  constructor() {
+    this.isSet = false
+  }
+
+  setElements() {
+    if (this.isSet) {
+      return
+    } else {
+      this.isSet = true
+    }
+    const { battleGrid1, battleGridCell, getSelector } = BATTLE_GRID
+    const gridElement = document.getElementById(battleGrid1)
+    if (!gridElement) {
+      throw new Error('Battle grid element not found!')
+    }
+    const cellElement = document.querySelector(
       getSelector(battleGrid1, battleGridCell)
     )
-    const cellSize = cell.getBoundingClientRect()
-    const container = document.getElementById(battleGrid1)
-    const containerRect = container.getBoundingClientRect()
+    if (!cellElement) {
+      throw new Error('Cell element not found!')
+    }
+    this.cellSize = cellElement.getBoundingClientRect()
+    this.gridRect = gridElement.getBoundingClientRect()
+  }
 
-    const x = containerRect.left + col * cellSize.width + cellSize.width / 2
-    const y = containerRect.top + row * cellSize.height + cellSize.height / 2
-
-    return { x, y }
+  matrixToScreen(row, col) {
+    return {
+      x:
+        this.gridRect.left +
+        col * this.cellSize.width +
+        this.cellSize.width / 2,
+      y:
+        this.gridRect.top +
+        row * this.cellSize.height +
+        this.cellSize.height / 2,
+    }
   }
 }
