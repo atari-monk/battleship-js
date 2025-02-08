@@ -283,6 +283,10 @@
 
 - Total 336 minutes = 5 hour 36 minutes
 
+### 8
+
+1. 16:25 - 17:11, refactor(BattleAI, GridRenderer, AttackHandler, BattleTurnManager, ScreenCoordinates): modularize code by extracting classes and improving attack handling
+
 ### Plan
 
 1. Game end condition.

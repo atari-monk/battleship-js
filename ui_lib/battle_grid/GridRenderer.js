@@ -56,8 +56,7 @@ export class GridRenderer {
   }
 
   handleAIClick(id) {
-    this.battleAI.handleGlobalAttack(
-      this.battleAI.aiMove(),
+    this.battleAI.handleAIHit(
       id,
       this.gridItems,
       () => (this.isPlayerTurn = true)
@@ -67,7 +66,7 @@ export class GridRenderer {
   handleClick(event, id) {
     if (!this.isPlayerTurn) return
     this.isPlayerTurn = false
-    this.battleAI.handleGlobalAttack(event, id, this.gridItems, () => {
+    this.battleAI.handlePlayerHit(event, id, this.gridItems, () => {
       this.isPlayerTurn = true
     })
   }
