@@ -1,4 +1,4 @@
-import { BATTLE_GRID_CONFIG, COLOR } from './../config.js'
+import { BATTLE_GRID, COLOR } from './../config.js'
 
 export class AttackHandler {
   constructor(dataService) {
@@ -18,12 +18,12 @@ export class AttackHandler {
     if (cell) {
       this._handleAttack(cell, cellIndex)
     } else {
-      throw new Error(BATTLE_GRID_CONFIG.cellError)
+      throw new Error(BATTLE_GRID.cellError)
     }
   }
 
   _getCellIndex(x, y, id) {
-    const { battleGridCell } = BATTLE_GRID_CONFIG
+    const { battleGridCell } = BATTLE_GRID
     const cellSize = document
       .querySelector(`#${id} .${battleGridCell}`)
       .getBoundingClientRect()

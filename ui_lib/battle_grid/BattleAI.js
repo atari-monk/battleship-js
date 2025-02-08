@@ -1,4 +1,4 @@
-import { BATTLE_GRID_CONFIG } from '../config.js'
+import { BATTLE_GRID } from '../config.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 import { AttackHandler } from './AttackHandler.js'
 import { BattleTurnManager } from './BattleTurnManager.js'
@@ -37,31 +37,29 @@ export class BattleAI {
   }
 
   _handleWin() {
-    console.debug(
-      ...format.debug(`Player ${this.dataService.turn.currentPlayer} WON!`)
-    )
-    console.debug(...format.debug('Waiting 3s'))
+    const { winMsg, waitOnReset, waitMsg } = BATTLE_GRID
+    console.debug(...format.debug(winMsg(this.dataService.turn.currentPlayer)))
+    console.debug(...format.debug(waitMsg(waitOnReset)))
     setTimeout(() => {
       this._resetGame()
-    }, 3000)
+    }, waitOnReset)
   }
 
   _resetGame() {
     this.dataService.reset()
-    this._resetBattleGrid(BATTLE_GRID_CONFIG.battleGridId1)
-    this._resetBattleGrid(BATTLE_GRID_CONFIG.battleGridId2)
+    const { battleGridId1: id1, battleGridId2: id2 } = BATTLE_GRID
+    ;[id1, id2].forEach((id) =>
+      this.guiContainer.getInstanceById(id).jsInstance.resetGrid()
+    )
     this.dataService.initializeTurn()
   }
 
-  _resetBattleGrid(id) {
-    this.guiContainer.getInstanceById(id).jsInstance.resetGrid()
-  }
-
   _handleEndTurn(enableClick) {
-    console.debug(...format.debug('Waiting 2s'))
+    const { waitOnTurn, waitMsg } = BATTLE_GRID
+    console.debug(...format.debug(waitMsg(waitOnTurn)))
     setTimeout(() => {
       this.turnManager.endTurn()
       enableClick()
-    }, 2000)
+    }, waitOnTurn)
   }
 }

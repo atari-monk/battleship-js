@@ -1,4 +1,4 @@
-import { EVENT, BATTLE_GRID_CONFIG } from '../config.js'
+import { EVENT, BATTLE_GRID } from '../config.js'
 import {
   selectElementOrThrow,
   generateElements,
@@ -14,22 +14,19 @@ export class GridRenderer {
   }
 
   resetGrid() {
-    if (!this.gridItems) throw new Error(BATTLE_GRID_CONFIG.itemsError)
+    if (!this.gridItems) throw new Error(BATTLE_GRID.itemsError)
     this.gridItems.forEach((cell) => cell.removeAttribute('style'))
     this.isPlayerTurn = true
   }
 
   getGridItems() {
-    if (!this.gridItems) throw new Error(BATTLE_GRID_CONFIG.itemsError)
+    if (!this.gridItems) throw new Error(BATTLE_GRID.itemsError)
     return this.gridItems
   }
 
   generateGridItems(id, isAI = false) {
     const grid = selectElementOrThrow({
-      selector: BATTLE_GRID_CONFIG.getSelector(
-        id,
-        BATTLE_GRID_CONFIG.battleGridGrid
-      ),
+      selector: BATTLE_GRID.getSelector(id, BATTLE_GRID.battleGridGrid),
       isId: false,
     })
 
@@ -37,11 +34,11 @@ export class GridRenderer {
 
     generateElements({
       parentElement: grid,
-      className: BATTLE_GRID_CONFIG.battleGridCell,
+      className: BATTLE_GRID.battleGridCell,
     })
 
     this.gridItems = document.querySelectorAll(
-      BATTLE_GRID_CONFIG.getSelector(id, BATTLE_GRID_CONFIG.battleGridCell)
+      BATTLE_GRID.getSelector(id, BATTLE_GRID.battleGridCell)
     )
 
     isAI

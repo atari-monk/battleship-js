@@ -1,10 +1,10 @@
 import { guiContainer } from './../../client/script.js'
 import { format } from './../../shared_lib/LogFormatter.js'
-import { BATTLE_GRID_CONFIG } from './../config.js'
+import { BATTLE_GRID } from './../config.js'
 
 export class BattleGridLoader {
   async load(dataService) {
-    const { name, cssClass, id1, id2, loadBattleGridError } = BATTLE_GRID_CONFIG
+    const { name, cssClass, id1, id2, loadBattleGridError } = BATTLE_GRID
     try {
       await guiContainer.loadComponentResources(name)
       const battleGrid1 = guiContainer.createInstance(
@@ -31,7 +31,7 @@ export class BattleGridLoader {
   }
 
   setVisability(dataService) {
-    const { id1, id2, hiddenStyle } = BATTLE_GRID_CONFIG
+    const { id1, id2, hiddenStyle } = BATTLE_GRID
     if (dataService.turn.currentPlayer === dataService.player1.name) {
       document.getElementById(id1).classList.add(hiddenStyle)
     }

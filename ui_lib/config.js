@@ -123,7 +123,7 @@ export const TOGGLE_TOUCH = {
   eventType: EVENT.touchstart,
 }
 
-export const BATTLE_GRID_CONFIG = {
+export const BATTLE_GRID = {
   name: 'battle_grid',
   cssClass: 'battle-grid',
   id1: 'battle-grid-1',
@@ -135,6 +135,11 @@ export const BATTLE_GRID_CONFIG = {
   battleGridId2: 'battle-grid-2',
   hiddenStyle: 'battle-grid--hidden',
   loadBattleGridError: 'Error in loadBattleGrid:',
+  winMsg: (name) => `Player ${name} WON!`,
+  waitOnReset: 3000,
+  waitMsg: (s) => `Waiting ${s / 1000}s`,
+  waitOnTurn: 2000,
+  waitOnTurnMsg: 'Waiting 2s',
 
   battleGrid: 'battle-grid',
   battleGridGrid: 'battle-grid__grid',

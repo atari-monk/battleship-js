@@ -1,4 +1,4 @@
-import { BATTLE_GRID_CONFIG } from './../config.js'
+import { BATTLE_GRID } from './../config.js'
 
 export class BattleTurnManager {
   constructor(dataService) {
@@ -6,7 +6,7 @@ export class BattleTurnManager {
   }
 
   endTurn() {
-    const { battleGrid1, battleGrid2, hiddenStyle } = BATTLE_GRID_CONFIG
+    const { battleGrid1, battleGrid2, hiddenStyle } = BATTLE_GRID
     this.dataService.turn.incrementTurn()
     this.dataService.turn.printTurnInfo()
 

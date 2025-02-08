@@ -197,9 +197,9 @@
 
 1. 08:52 - 09:20, refactor: centralize grid configuration in FLEET_GRID_CONFIG and simplify GridRenderer
 2. 09:21 - 10:09, refactor: remove config dependency from FleetGrid and PlacementHandler, centralize configuration usage
-3. 12:48 - 13:43, refactor: remove FleetGridConfig dependency, centralize grid configuration in BATTLE_GRID_CONFIG and HTML_CONFIG
+3. 12:48 - 13:43, refactor: remove FleetGridConfig dependency, centralize grid configuration in BATTLE_GRID and HTML_CONFIG
 4. 13:44 - 14:19, refactor: enhance GridRenderer and config for improved selector handling and error messages
-5. 14:20 - 14:31, refactor: remove BattleGridConfig, centralize configuration in BATTLE_GRID_CONFIG and simplify BattleGrid initialization
+5. 14:20 - 14:31, refactor: remove BattleGridConfig, centralize configuration in BATTLE_GRID and simplify BattleGrid initialization
 6. 14:32 - 15:53, refactor: update import paths to centralize configuration usage and remove obsolete config files
 7. 17:15 - 18:53, refactor: update FULL_SCREEN configuration structure and improve logging for fullscreen functionality
 
@@ -286,6 +286,7 @@
 ### 8
 
 1. 16:25 - 17:11, refactor(BattleAI, GridRenderer, AttackHandler, BattleTurnManager, ScreenCoordinates): modularize code by extracting classes and improving attack handling
+2. 17:12 - 17:45, refactor: centralize grid configuration by replacing BATTLE_GRID_CONFIG with BATTLE_GRID
 
 ### Plan
 

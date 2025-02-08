@@ -1,8 +1,8 @@
-import { BATTLE_GRID_CONFIG } from './../config.js'
+import { BATTLE_GRID } from './../config.js'
 
 export class ScreenCoordinates {
   static matrixToScreenCoords(row, col) {
-    const { battleGridCell, battleGrid1, getSelector } = BATTLE_GRID_CONFIG
+    const { battleGridCell, battleGrid1, getSelector } = BATTLE_GRID
     const cell = document.querySelector(
       getSelector(battleGrid1, battleGridCell)
     )
