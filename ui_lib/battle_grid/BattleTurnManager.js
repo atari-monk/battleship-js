@@ -1,23 +1,24 @@
 import { BATTLE_GRID } from './../config.js'
+import { toggleGrid } from './utils.js'
 
 export class BattleTurnManager {
   constructor(dataService) {
-    this.dataService = dataService
+    this._turn = dataService.turn
+    this.player1Name = dataService.player1.name
   }
 
   endTurn() {
-    const { battleGrid1, battleGrid2, hiddenStyle } = BATTLE_GRID
-    this.dataService.turn.incrementTurn()
-    this.dataService.turn.printTurnInfo()
+    this._turn.incrementTurn()
 
-    const currentPlayer = this.dataService.turn.currentPlayer
-    const isPlayer1 = currentPlayer === this.dataService.player1.name
+    const isPlayer1 = this._turn.currentPlayer === this.player1Name
+    const { battleGrid1, battleGrid2 } = BATTLE_GRID
 
-    document
-      .getElementById(battleGrid1)
-      .classList.toggle(hiddenStyle, isPlayer1)
-    document
-      .getElementById(battleGrid2)
-      .classList.toggle(hiddenStyle, !isPlayer1)
+    const activeGrid = isPlayer1 ? battleGrid1 : battleGrid2
+    const inactiveGrid = isPlayer1 ? battleGrid2 : battleGrid1
+
+    toggleGrid(activeGrid, true)
+    toggleGrid(inactiveGrid, false)
+
+    this._turn.printTurnInfo()
   }
 }

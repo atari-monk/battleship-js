@@ -133,6 +133,7 @@ export const BATTLE_GRID = {
   battleGridClass: 'battle-grid',
   battleGridId1: 'battle-grid-1',
   battleGridId2: 'battle-grid-2',
+  gridIds: ['battle-grid-1', 'battle-grid-2'],
   hiddenStyle: 'battle-grid--hidden',
   loadBattleGridError: 'Error in loadBattleGrid:',
   winMsg: (name) => `Player ${name} WON!`,

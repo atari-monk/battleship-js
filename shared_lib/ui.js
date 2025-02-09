@@ -37,6 +37,14 @@ export function toggle({ element, cssClass, forceState } = {}) {
   }
 }
 
+export function toggleGrid(gridId, state, hiddenStyle = 'hidden') {
+  toggle({
+    element: selectById({ id: gridId }),
+    cssClass: hiddenStyle,
+    forceState: state,
+  })
+}
+
 export function selectAndToggle({
   selector,
   cssClass,
