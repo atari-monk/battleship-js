@@ -294,6 +294,7 @@
 1. 15:02 - 16:09, refactor(ScreenCoordinates): use util functions
 2. 16:28 - 18:13, refactor(AttackHandler, BattleAI): improve attack handling by modularizing element setup and coordinate calculations
 3. 20:17 - 21:06, refactor(BattleTurnManager, ui): modularize grid toggling logic and improve turn management
+4. 21:06 - 22:11, refactor(BattleTurnManager): update turn management to utilize hidden styles in grid toggling (fix bug)
 
 ### Plan
 
