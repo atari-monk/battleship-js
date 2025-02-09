@@ -292,6 +292,7 @@
 ### 9
 
 1. 15:02 - 16:09, refactor(ScreenCoordinates): use util functions
+2. 16:28 - 18:13, refactor(AttackHandler, BattleAI): improve attack handling by modularizing element setup and coordinate calculations
 
 ### Plan
 

@@ -23,7 +23,7 @@ export class BattleAI {
   }
 
   _handleHit(event, id, gridItems, enableClick) {
-    this._battle.attack.executeAttack(id, event, gridItems)
+    this._battle.attack.attack(id, event, gridItems)
 
     if (this._dataService.getBoard().isWin()) {
       this._handleWin()

@@ -1,18 +1,31 @@
 import { BATTLE_GRID, COLOR } from './../config.js'
+import { selectElementOrThrow } from './../../shared_lib/ui.js'
 
 export class AttackHandler {
   constructor(dataService) {
     this.dataService = dataService
+    this.isSet = false
   }
 
-  executeAttack(id, event, gridItems) {
-    const container = document.getElementById(id)
-    const rect = container.getBoundingClientRect()
+  _setElements(id) {
+    if (this.isSet) return
 
-    const x = event.x - rect.left
-    const y = event.y - rect.top
+    this.rect = selectElementOrThrow({
+      selector: id,
+      isId: true,
+    }).getBoundingClientRect()
 
-    const cellIndex = this._getCellIndex(x, y, id)
+    this.cellSize = selectElementOrThrow({
+      selector: `#${id} .${BATTLE_GRID.battleGridCell}`,
+    }).getBoundingClientRect()
+
+    this.isSet = true
+  }
+
+  attack(id, event, gridItems) {
+    this._setElements(id)
+    const { x, y } = this._getRelativeCoordinates(event)
+    const cellIndex = this._getCellIndex(x, y)
     const cell = gridItems[cellIndex]
 
     if (cell) {
@@ -22,24 +35,29 @@ export class AttackHandler {
     }
   }
 
-  _getCellIndex(x, y, id) {
-    const { battleGridCell } = BATTLE_GRID
-    const cellSize = document
-      .querySelector(`#${id} .${battleGridCell}`)
-      .getBoundingClientRect()
-    const col = Math.floor(x / cellSize.width)
-    const row = Math.floor(y / cellSize.height)
+  _getRelativeCoordinates(event) {
+    return {
+      x: event.x - this.rect.left,
+      y: event.y - this.rect.top,
+    }
+  }
+
+  _getCellIndex(x, y) {
+    const col = Math.floor(x / this.cellSize.width)
+    const row = Math.floor(y / this.cellSize.height)
     return row * 10 + col
   }
 
   _handleAttack(cell, cellIndex) {
-    const { red, grey } = COLOR
+    const isHit = this._checkHit(cellIndex)
+    cell.style.backgroundColor = isHit ? COLOR.red : COLOR.grey
+  }
+
+  _checkHit(cellIndex) {
     const row = Math.floor(cellIndex / 10)
     const col = cellIndex % 10
-    const board = this.dataService.getBoard()
-    const fleet = this.dataService.getEnemyFleet()
-
-    const isHit = board.hit(row, col, fleet)
-    cell.style.backgroundColor = isHit ? red : grey
+    return this.dataService
+      .getBoard()
+      .hit(row, col, this.dataService.getEnemyFleet())
   }
 }
