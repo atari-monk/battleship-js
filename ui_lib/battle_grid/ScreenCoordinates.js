@@ -1,4 +1,5 @@
 import { BATTLE_GRID } from './../config.js'
+import { selectElementOrThrow } from './../../shared_lib/ui.js'
 
 export class ScreenCoordinates {
   constructor() {
@@ -6,24 +7,23 @@ export class ScreenCoordinates {
   }
 
   setElements() {
-    if (this.isSet) {
-      return
-    } else {
-      this.isSet = true
-    }
+    if (this.isSet) return
+
     const { battleGrid1, battleGridCell, getSelector } = BATTLE_GRID
-    const gridElement = document.getElementById(battleGrid1)
-    if (!gridElement) {
-      throw new Error('Battle grid element not found!')
-    }
-    const cellElement = document.querySelector(
-      getSelector(battleGrid1, battleGridCell)
-    )
-    if (!cellElement) {
-      throw new Error('Cell element not found!')
-    }
+
+    const gridElement = selectElementOrThrow({
+      selector: battleGrid1,
+      isId: true,
+    })
+
+    const cellElement = selectElementOrThrow({
+      selector: getSelector(battleGrid1, battleGridCell),
+    })
+
     this.cellSize = cellElement.getBoundingClientRect()
     this.gridRect = gridElement.getBoundingClientRect()
+
+    this.isSet = true
   }
 
   matrixToScreen(row, col) {

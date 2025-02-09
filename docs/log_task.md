@@ -289,6 +289,10 @@
 2. 17:12 - 17:45, refactor: centralize grid configuration by replacing BATTLE_GRID_CONFIG with BATTLE_GRID
 3. 18:25 - 19:20, refactor(BattleAI, ScreenCoordinates, BattleLogic): improve class structure and modularity for better attack handling and screen coordinate management
 
+### 9
+
+1. 15:02 - 16:09, refactor(ScreenCoordinates): use util functions
+
 ### Plan
 
 1. Game end condition.
