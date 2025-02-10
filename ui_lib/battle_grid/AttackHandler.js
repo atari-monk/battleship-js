@@ -7,7 +7,7 @@ export class AttackHandler {
     this.isSet = false
   }
 
-  _setElements(id) {
+  setElements(id) {
     if (this.isSet) return
 
     this.rect = selectElementOrThrow({
@@ -22,8 +22,7 @@ export class AttackHandler {
     this.isSet = true
   }
 
-  attack(id, event, gridItems) {
-    this._setElements(id)
+  attack(event, gridItems) {
     const { x, y } = this._getRelativeCoordinates(event)
     const cellIndex = this._getCellIndex(x, y)
     const cell = gridItems[cellIndex]
@@ -54,10 +53,16 @@ export class AttackHandler {
   }
 
   _checkHit(cellIndex) {
-    const row = Math.floor(cellIndex / 10)
-    const col = cellIndex % 10
+    const { row, col } = this._getRowColFromCellIndex(cellIndex)
     return this.dataService
       .getBoard()
       .hit(row, col, this.dataService.getEnemyFleet())
+  }
+
+  _getRowColFromCellIndex(cellIndex) {
+    return {
+      row: Math.floor(cellIndex / 10),
+      col: cellIndex % 10,
+    }
   }
 }

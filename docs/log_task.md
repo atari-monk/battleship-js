@@ -296,6 +296,10 @@
 3. 20:17 - 21:06, refactor(BattleTurnManager, ui): modularize grid toggling logic and improve turn management
 4. 21:06 - 22:11, refactor(BattleTurnManager): update turn management to utilize hidden styles in grid toggling (fix bug)
 
+### 10
+
+1. 11:38 - 12:11, refactor(AttackHandler, BattleAI, GridRenderer): modularize element setup and improve hit handling logic
+
 ### Plan
 
 1. Game end condition.

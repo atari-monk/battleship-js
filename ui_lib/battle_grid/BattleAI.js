@@ -8,12 +8,16 @@ export class BattleAI {
     this._battle = battleLogic
   }
 
-  handlePlayerHit(event, id, gridItems, enableClick) {
-    this._handleHit(event, id, gridItems, enableClick)
+  setElements(id){
+    this._battle.attack.setElements(id)
   }
 
-  handleAIHit(id, gridItems, enableClick) {
-    this._handleHit(this._aiMove(), id, gridItems, enableClick)
+  handlePlayerHit(event, gridItems, enableClick) {
+    this._handleHit(event, gridItems, enableClick)
+  }
+
+  handleAIHit(gridItems, enableClick) {
+    this._handleHit(this._aiMove(), gridItems, enableClick)
   }
 
   _aiMove() {
@@ -22,8 +26,8 @@ export class BattleAI {
     return this._battle.screen.matrixToScreen(xy[0], xy[1])
   }
 
-  _handleHit(event, id, gridItems, enableClick) {
-    this._battle.attack.attack(id, event, gridItems)
+  _handleHit(event, gridItems, enableClick) {
+    this._battle.attack.attack(event, gridItems)
 
     if (this._dataService.getBoard().isWin()) {
       this._handleWin()

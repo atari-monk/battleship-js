@@ -42,9 +42,13 @@ export class GridRenderer {
     )
 
     isAI
-      ? observeVisibilityChange(document.getElementById(id), () =>
-          this.handleAIClick(id)
-        )
+      ? observeVisibilityChange(document.getElementById(id), () => {
+          this.battleAI.setElements(id)
+          this.battleAI.handleAIHit(
+            this.gridItems,
+            () => (this.isPlayerTurn = true)
+          )
+        })
       : setEventForElement({
           element: grid,
           eventType: EVENT.click,
@@ -52,18 +56,11 @@ export class GridRenderer {
         })
   }
 
-  handleAIClick(id) {
-    this.battleAI.handleAIHit(
-      id,
-      this.gridItems,
-      () => (this.isPlayerTurn = true)
-    )
-  }
-
   handleClick(event, id) {
+    this.battleAI.setElements(id)
     if (!this.isPlayerTurn) return
     this.isPlayerTurn = false
-    this.battleAI.handlePlayerHit(event, id, this.gridItems, () => {
+    this.battleAI.handlePlayerHit(event, this.gridItems, () => {
       this.isPlayerTurn = true
     })
   }
