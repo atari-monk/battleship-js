@@ -6,13 +6,13 @@ import {
   setEventForElement,
 } from './../../shared_lib/ui.js'
 
-export class GridRenderer {
+export class GridGenerator {
   constructor(battleAI) {
     this.battleAI = battleAI
     this.isPlayerTurn = true
   }
 
-  generateGridItems(id, isAI = false) {
+  generate(id, isAI = false) {
     const { getSelector, battleGridGrid, battleGridCell } = BATTLE_GRID
 
     const grid = selectElementOrThrow({
@@ -31,7 +31,7 @@ export class GridRenderer {
     this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
   }
 
-  resetGrid() {
+  reset() {
     if (!this.gridItems) throw new Error(BATTLE_GRID.itemsError)
     this.gridItems.forEach((cell) => cell.removeAttribute('style'))
     this.isPlayerTurn = true

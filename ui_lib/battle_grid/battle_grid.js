@@ -1,5 +1,5 @@
 import { BattleGrid } from './BattleGrid.js'
-import { GridRenderer } from './GridRenderer.js'
+import { GridGenerator } from './GridRenderer.js'
 import { BattleAI } from './BattleAI.js'
 import { BattleLogic } from './BattleLogic.js'
 import { AttackHandler } from './AttackHandler.js'
@@ -11,7 +11,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   const es = new ElementService()
 
   return new BattleGrid(
-    new GridRenderer(
+    new GridGenerator(
       new BattleAI(
         guiContainer,
         ds,

@@ -27,8 +27,8 @@ export class BattleGridLoader {
       battleGrid2.init(id2)
 
       if (dataService && battleGrid1 && battleGrid2) {
-        battleGrid1.gridRenderer.dataService = dataService
-        battleGrid2.gridRenderer.dataService = dataService
+        battleGrid1.generator.dataService = dataService
+        battleGrid2.generator.dataService = dataService
       }
     } catch (error) {
       console.error(...format.error(loadBattleGridError, error))
