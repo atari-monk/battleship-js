@@ -56,7 +56,9 @@ export class BattleAI {
 
   _resetGame() {
     this._dataService.reset()
-    const { battleGridId1: id1, battleGridId2: id2 } = BATTLE_GRID
+    const {
+      gridIds: [id1, id2],
+    } = BATTLE_GRID
     ;[id1, id2].forEach((id) =>
       this._guiContainer.getInstanceById(id).jsInstance.resetGrid()
     )

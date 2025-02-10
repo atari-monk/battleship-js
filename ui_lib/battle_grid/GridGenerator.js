@@ -4,7 +4,7 @@ import {
   generateElements,
   observeVisibilityChange,
   setEventForElement,
-} from './../../shared_lib/ui.js'
+} from '../../shared_lib/ui.js'
 
 export class GridGenerator {
   constructor(battleAI) {

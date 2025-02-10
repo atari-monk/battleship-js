@@ -13,6 +13,6 @@ export class BattleGrid {
   }
 
   resetGrid() {
-    this.generator.resetGrid()
+    this.generator.reset()
   }
 }

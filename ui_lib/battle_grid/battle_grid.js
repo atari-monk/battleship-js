@@ -1,5 +1,5 @@
 import { BattleGrid } from './BattleGrid.js'
-import { GridGenerator } from './GridRenderer.js'
+import { GridGenerator } from './GridGenerator.js'
 import { BattleAI } from './BattleAI.js'
 import { BattleLogic } from './BattleLogic.js'
 import { AttackHandler } from './AttackHandler.js'
