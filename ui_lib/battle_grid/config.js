@@ -4,7 +4,7 @@ export const BATTLE_GRID = {
   battleGridGrid: 'battle-grid__grid',
   battleGridCell: 'battle-grid__item',
   getSelector: (id, cssClass) => `#${id} .${cssClass}`,
-  gridIds: ['battle-grid-1', 'battle-grid-2'],
+  elementIds: ['battle-grid-1', 'battle-grid-2'],
   hiddenStyle: 'battle-grid--hidden',
   initMsg: (id) => `Load component: ${id}`,
   winMsg: (name) => `Player ${name} WON!`,

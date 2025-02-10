@@ -307,6 +307,7 @@
 7. 17:37 - 17:47, refactor(BattleGridLoader, FleetGrid): pass guiContainer to constructors and update references
 8. 17:48 - 17:55, refactor(BattleGridLoader): update grid visibility logic to use toggleGrid function
 9. 17:56 - 18:09, refactor(BattleGridLoader, BattleTurnManager): replace toggleGrid calls with toggleGrids function for improved grid visibility management
+10. 20:00 - 20:39, refactor(BattleGridLoader, BattleTurnManager, BattleAI): update grid handling to use elementIds and refactor component loading logic
 
 ### Plan
 

@@ -9,7 +9,7 @@ import {
   selectAndToggle,
   setEvent,
   requestFullscreen,
-  showComponent,
+  loadComponents,
 } from './../../shared_lib/ui.js'
 
 export class FullScreen {
@@ -31,7 +31,7 @@ export class FullScreen {
 
       requestFullscreen()
 
-      await showComponent({
+      await loadComponents({
         uiContainer: this.guiContainer,
         ...MENU_COMPONENT,
       })

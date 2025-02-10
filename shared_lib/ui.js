@@ -127,16 +127,31 @@ export function requestFullscreen({
   }
 }
 
-export async function showComponent({
+export async function loadComponents({
   uiContainer,
   componentName,
   cssClass,
-  elementId,
-  errorMessage = `Failed to load component: ${componentName} with class: ${cssClass} and ID: ${elementId}.`,
+  elementIds = [],
+  errorMessage = `Failed to load component: ${componentName} with class: ${cssClass} and ID: `,
 } = {}) {
   try {
     await uiContainer.loadComponentResources(componentName)
-    uiContainer.createInstance(componentName, cssClass, elementId)
+
+    const instances = elementIds.map((elementId) => {
+      try {
+        const { jsInstance } = uiContainer.createInstance(
+          componentName,
+          cssClass,
+          elementId
+        )
+        return jsInstance
+      } catch (error) {
+        console.error(...format.error(errorMessage + elementId, error))
+        return null
+      }
+    })
+
+    return instances.filter((instance) => instance !== null)
   } catch (error) {
     console.error(...format.error(errorMessage, error))
   }

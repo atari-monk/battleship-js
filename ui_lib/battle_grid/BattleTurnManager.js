@@ -10,11 +10,11 @@ export class BattleTurnManager {
   endTurn() {
     this._turn = this._dataService.turn
     this._turn.incrementTurn()
-    const { gridIds, hiddenStyle } = BATTLE_GRID
+    const { elementIds, hiddenStyle } = BATTLE_GRID
     toggleGrids(
       this._turn.currentPlayer,
       this.player1Name,
-      gridIds,
+      elementIds,
       hiddenStyle
     )
     this._turn.printTurnInfo()

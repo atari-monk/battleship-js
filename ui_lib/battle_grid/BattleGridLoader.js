@@ -1,6 +1,7 @@
 import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID } from './config.js'
 import { toggleGrids } from './../../shared_lib/ui.js'
+import { loadComponents } from './../../shared_lib/ui.js'
 
 export class BattleGridLoader {
   constructor(guiContainer) {
@@ -8,45 +9,34 @@ export class BattleGridLoader {
   }
 
   async load(dataService) {
-    const {
-      name,
-      cssClass,
-      gridIds: [id1, id2],
-      loadBattleGridError,
-    } = BATTLE_GRID
+    const { name, cssClass, elementIds, loadBattleGridError } = BATTLE_GRID
 
     try {
-      await this._container.loadComponentResources(name)
-
-      const battleGrid1 = this._container.createInstance(
-        name,
+      const grids = await loadComponents({
+        uiContainer: this._container,
+        componentName: name,
         cssClass,
-        id1
-      ).jsInstance
-      const battleGrid2 = this._container.createInstance(
-        name,
-        cssClass,
-        id2
-      ).jsInstance
+        elementIds,
+      })
 
-      battleGrid1.init(id1, true)
-      battleGrid2.init(id2)
+      grids.forEach((grid, index) => {
+        const gridId = elementIds[index]
+        const isAI = index === 0
 
-      if (dataService && battleGrid1 && battleGrid2) {
-        battleGrid1.generator.dataService = dataService
-        battleGrid2.generator.dataService = dataService
-      }
+        grid.init(gridId, isAI)
+        grid.generator.dataService = dataService
+      })
     } catch (error) {
       console.error(...format.error(loadBattleGridError, error))
     }
   }
 
   setVisability(dataService) {
-    const { gridIds, hiddenStyle } = BATTLE_GRID
+    const { elementIds, hiddenStyle } = BATTLE_GRID
     toggleGrids(
       dataService.turn.currentPlayer,
       dataService.player1.name,
-      gridIds,
+      elementIds,
       hiddenStyle
     )
   }
