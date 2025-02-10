@@ -1,7 +1,7 @@
 export class BattleLogic {
-  constructor(attackHandler, turnManager, screenCoordinates) {
+  constructor(elementService, attackHandler, turnManager) {
+    this.elements = elementService
     this.attack = attackHandler
     this.turn = turnManager
-    this.screen = screenCoordinates
   }
 }

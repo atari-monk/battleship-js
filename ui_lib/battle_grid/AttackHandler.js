@@ -1,25 +1,9 @@
 import { BATTLE_GRID, COLOR } from './../config.js'
-import { selectElementOrThrow } from './../../shared_lib/ui.js'
 
 export class AttackHandler {
-  constructor(dataService) {
-    this.dataService = dataService
-    this.isSet = false
-  }
-
-  setElements(id) {
-    if (this.isSet) return
-
-    this.rect = selectElementOrThrow({
-      selector: id,
-      isId: true,
-    }).getBoundingClientRect()
-
-    this.cellSize = selectElementOrThrow({
-      selector: `#${id} .${BATTLE_GRID.battleGridCell}`,
-    }).getBoundingClientRect()
-
-    this.isSet = true
+  constructor(elementService, dataService) {
+    this._elements = elementService
+    this._dataService = dataService
   }
 
   attack(event, gridItems) {
@@ -35,15 +19,17 @@ export class AttackHandler {
   }
 
   _getRelativeCoordinates(event) {
+    const rect = this._elements.gridRect
     return {
-      x: event.x - this.rect.left,
-      y: event.y - this.rect.top,
+      x: event.x - rect.left,
+      y: event.y - rect.top,
     }
   }
 
   _getCellIndex(x, y) {
-    const col = Math.floor(x / this.cellSize.width)
-    const row = Math.floor(y / this.cellSize.height)
+    const cellSize = this._elements.cellSize
+    const col = Math.floor(x / cellSize.width)
+    const row = Math.floor(y / cellSize.height)
     return row * 10 + col
   }
 
@@ -54,9 +40,9 @@ export class AttackHandler {
 
   _checkHit(cellIndex) {
     const { row, col } = this._getRowColFromCellIndex(cellIndex)
-    return this.dataService
+    return this._dataService
       .getBoard()
-      .hit(row, col, this.dataService.getEnemyFleet())
+      .hit(row, col, this._dataService.getEnemyFleet())
   }
 
   _getRowColFromCellIndex(cellIndex) {

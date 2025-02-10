@@ -4,10 +4,11 @@ import { BattleAI } from './BattleAI.js'
 import { BattleLogic } from './BattleLogic.js'
 import { AttackHandler } from './AttackHandler.js'
 import { BattleTurnManager } from './BattleTurnManager.js'
-import { ScreenCoordinates } from './ScreenCoordinates.js'
+import { ElementService } from './ElementService.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
   const ds = serviceContainer.getServiceByName('data_service')
+  const es = new ElementService()
 
   return new BattleGrid(
     new GridRenderer(
@@ -15,9 +16,9 @@ export default function init({ serviceContainer, guiContainer } = {}) {
         guiContainer,
         ds,
         new BattleLogic(
-          new AttackHandler(ds),
-          new BattleTurnManager(ds),
-          new ScreenCoordinates()
+          es,
+          new AttackHandler(es, ds),
+          new BattleTurnManager(ds)
         )
       )
     )

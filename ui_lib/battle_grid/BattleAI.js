@@ -8,8 +8,8 @@ export class BattleAI {
     this._battle = battleLogic
   }
 
-  setElements(id){
-    this._battle.attack.setElements(id)
+  setElements(id) {
+    this._battle.elements.setElements(id)
   }
 
   handlePlayerHit(event, gridItems, enableClick) {
@@ -21,9 +21,17 @@ export class BattleAI {
   }
 
   _aiMove() {
-    this._battle.screen.setElements()
     const xy = this._dataService.playerAI.attack()
-    return this._battle.screen.matrixToScreen(xy[0], xy[1])
+    return this._matrixToScreen(xy[0], xy[1])
+  }
+
+  _matrixToScreen(row, col) {
+    const gridRect = this._battle.elements.gridRect
+    const cellSize = this._battle.elements.cellSize
+    return {
+      x: gridRect.left + col * cellSize.width + cellSize.width / 2,
+      y: gridRect.top + row * cellSize.height + cellSize.height / 2,
+    }
   }
 
   _handleHit(event, gridItems, enableClick) {
