@@ -305,6 +305,8 @@
 5. 15:15 - 15:38, refactor(BattleGrid, GridRenderer): rename GridRenderer to GridGenerator and update references
 6. 16:48 - 17:26, read battle_grid component code
 7. 17:37 - 17:47, refactor(BattleGridLoader, FleetGrid): pass guiContainer to constructors and update references
+8. 17:48 - 17:55, refactor(BattleGridLoader): update grid visibility logic to use toggleGrid function
+9. 17:56 - ,
 
 ### Plan
 

@@ -45,11 +45,12 @@ export class BattleGridLoader {
       gridIds: [id1, id2],
       hiddenStyle,
     } = BATTLE_GRID
+
     if (dataService.turn.currentPlayer === dataService.player1.name) {
-      document.getElementById(id1).classList.add(hiddenStyle)
+      toggleGrid(id1, true, hiddenStyle)
     }
     if (dataService.turn.currentPlayer === dataService.player2.name) {
-      document.getElementById(id2).classList.add(hiddenStyle)
+      toggleGrid(id2, true, hiddenStyle)
     }
   }
 }
