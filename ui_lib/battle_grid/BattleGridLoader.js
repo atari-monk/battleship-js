@@ -1,8 +1,11 @@
-import { guiContainer } from './../../client/script.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID } from './config.js'
 
 export class BattleGridLoader {
+  constructor(guiContainer) {
+    this._container = guiContainer
+  }
+
   async load(dataService) {
     const {
       name,
@@ -10,14 +13,16 @@ export class BattleGridLoader {
       gridIds: [id1, id2],
       loadBattleGridError,
     } = BATTLE_GRID
+
     try {
-      await guiContainer.loadComponentResources(name)
-      const battleGrid1 = guiContainer.createInstance(
+      await this._container.loadComponentResources(name)
+
+      const battleGrid1 = this._container.createInstance(
         name,
         cssClass,
         id1
       ).jsInstance
-      const battleGrid2 = guiContainer.createInstance(
+      const battleGrid2 = this._container.createInstance(
         name,
         cssClass,
         id2

@@ -14,14 +14,14 @@ export class FleetGrid {
     this.placementHandler.dataService = dataService
   }
 
-  constructor() {
+  constructor(guiContainer) {
     this.gridItems = null
 
     this.placementValidator = new PlacementValidator()
     this.shipPreview = new ShipPreview()
     this.gridRenderer = new GridRenderer()
     this.eventHandler = new EventHandler(this)
-    this.fleetService = new FleetService(new BattleGridLoader())
+    this.fleetService = new FleetService(new BattleGridLoader(guiContainer))
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,

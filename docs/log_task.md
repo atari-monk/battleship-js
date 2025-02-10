@@ -303,7 +303,8 @@
 3. 12:30 - 13:13, refactor(AttackHandler, BattleAI, BattleLogic): modularize element management and remove ScreenCoordinates class
 4. 14:15 - 14:44, refactor(BATTLE_GRID): move configuration to separate file and update references
 5. 15:15 - 15:38, refactor(BattleGrid, GridRenderer): rename GridRenderer to GridGenerator and update references
-6. 16:48 - 17:26, read battle_grid component code 
+6. 16:48 - 17:26, read battle_grid component code
+7. 17:37 - 17:47, refactor(BattleGridLoader, FleetGrid): pass guiContainer to constructors and update references
 
 ### Plan
 

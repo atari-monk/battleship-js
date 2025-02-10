@@ -59,6 +59,6 @@ export default function init({ serviceContainer, guiContainer } = {}) {
     serviceContainer,
     new FleetGridLoader(guiContainer),
     new ToggleLoader(guiContainer),
-    new BattleGridLoader()
+    new BattleGridLoader(guiContainer)
   ).init()
 }
