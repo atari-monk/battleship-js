@@ -301,6 +301,7 @@
 1. 11:38 - 12:11, refactor(AttackHandler, BattleAI, GridRenderer): modularize element setup and improve hit handling logic
 2. 12:16 - 12:29, refactor(BattleGrid, GridRenderer): streamline grid item management and enhance event handling
 3. 12:30 - 13:13, refactor(AttackHandler, BattleAI, BattleLogic): modularize element management and remove ScreenCoordinates class
+4. 14:15 - 14:44, refactor(BATTLE_GRID): move configuration to separate file and update references
 
 ### Plan
 

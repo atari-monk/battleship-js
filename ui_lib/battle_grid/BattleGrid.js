@@ -1,5 +1,5 @@
 import { format } from './../../shared_lib/LogFormatter.js'
-import { BATTLE_GRID } from './../config.js'
+import { BATTLE_GRID } from './config.js'
 
 export class BattleGrid {
   constructor(gridRenderer) {

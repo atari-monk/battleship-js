@@ -1,4 +1,4 @@
-import { EVENT, BATTLE_GRID } from '../config.js'
+import { BATTLE_GRID } from './config.js'
 import {
   selectElementOrThrow,
   generateElements,
@@ -13,22 +13,22 @@ export class GridRenderer {
   }
 
   generateGridItems(id, isAI = false) {
+    const { getSelector, battleGridGrid, battleGridCell } = BATTLE_GRID
+
     const grid = selectElementOrThrow({
-      selector: BATTLE_GRID.getSelector(id, BATTLE_GRID.battleGridGrid),
+      selector: getSelector(id, battleGridGrid),
       isId: false,
     })
     grid.innerHTML = ''
 
     generateElements({
       parentElement: grid,
-      className: BATTLE_GRID.battleGridCell,
+      className: battleGridCell,
     })
 
     this._setEventHandlers(isAI, id, grid)
 
-    this.gridItems = document.querySelectorAll(
-      BATTLE_GRID.getSelector(id, BATTLE_GRID.battleGridCell)
-    )
+    this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
   }
 
   resetGrid() {
@@ -49,7 +49,7 @@ export class GridRenderer {
         })
       : setEventForElement({
           element: grid,
-          eventType: EVENT.click,
+          eventType: BATTLE_GRID.event.click,
           handler: (event) => this._handleClick(event, id),
         })
   }

@@ -123,38 +123,6 @@ export const TOGGLE_TOUCH = {
   eventType: EVENT.touchstart,
 }
 
-export const BATTLE_GRID = {
-  name: 'battle_grid',
-  cssClass: 'battle-grid',
-  id1: 'battle-grid-1',
-  id2: 'battle-grid-2',
-  hiddenStyle: 'battle-grid--hidden',
-  battleGrid: 'battle_grid',
-  battleGridClass: 'battle-grid',
-  battleGridId1: 'battle-grid-1',
-  battleGridId2: 'battle-grid-2',
-  gridIds: ['battle-grid-1', 'battle-grid-2'],
-  hiddenStyle: 'battle-grid--hidden',
-  loadBattleGridError: 'Error in loadBattleGrid:',
-  winMsg: (name) => `Player ${name} WON!`,
-  waitOnReset: 3000,
-  waitMsg: (s) => `Waiting ${s / 1000}s`,
-  waitOnTurn: 2000,
-  waitOnTurnMsg: 'Waiting 2s',
-
-  battleGrid: 'battle-grid',
-  battleGridGrid: 'battle-grid__grid',
-  battleGridCell: 'battle-grid__item',
-  battleGrid1: 'battle-grid-1',
-  battleGrid2: 'battle-grid-2',
-  hiddenStyle: 'battle-grid--hidden',
-  initMsg: (id) => `Load component: ${id}`,
-  getSelector: (id, cssClass) => `#${id} .${cssClass}`,
-  notFoundError: (id) => `Container with selector ${id} not found.`,
-  itemsError: 'Grid items have not been generated yet.',
-  cellError: 'No cell found!',
-}
-
 export const HTML_CONFIG = {
   div: 'div',
 }

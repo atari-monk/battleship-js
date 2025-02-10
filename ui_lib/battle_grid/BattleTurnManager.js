@@ -1,4 +1,4 @@
-import { BATTLE_GRID } from './../config.js'
+import { BATTLE_GRID } from './config.js'
 import { toggleGrid } from './../../shared_lib/ui.js'
 
 export class BattleTurnManager {
@@ -12,10 +12,10 @@ export class BattleTurnManager {
     this._turn.incrementTurn()
 
     const isPlayer1 = this._turn.currentPlayer === this.player1Name
-    const { battleGrid1, battleGrid2, hiddenStyle } = BATTLE_GRID
+    const {  gridIds: [id1, id2], hiddenStyle } = BATTLE_GRID
 
-    const activeGrid = isPlayer1 ? battleGrid1 : battleGrid2
-    const inactiveGrid = isPlayer1 ? battleGrid2 : battleGrid1
+    const activeGrid = isPlayer1 ? id1 : id2
+    const inactiveGrid = isPlayer1 ? id2 : id1
 
     toggleGrid(activeGrid, true, hiddenStyle)
     toggleGrid(inactiveGrid, false, hiddenStyle)

@@ -1,4 +1,4 @@
-import { BATTLE_GRID } from './../config.js'
+import { BATTLE_GRID } from './config.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 
 export class BattleAI {

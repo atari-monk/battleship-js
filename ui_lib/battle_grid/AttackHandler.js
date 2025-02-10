@@ -1,4 +1,4 @@
-import { BATTLE_GRID, COLOR } from './../config.js'
+import { BATTLE_GRID } from './config.js'
 
 export class AttackHandler {
   constructor(elementService, dataService) {
@@ -35,7 +35,9 @@ export class AttackHandler {
 
   _handleAttack(cell, cellIndex) {
     const isHit = this._checkHit(cellIndex)
-    cell.style.backgroundColor = isHit ? COLOR.red : COLOR.grey
+    cell.style.backgroundColor = isHit
+      ? BATTLE_GRID.color.red
+      : BATTLE_GRID.color.grey
   }
 
   _checkHit(cellIndex) {
