@@ -1,5 +1,6 @@
 import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID } from './config.js'
+import { toggleGrids } from './../../shared_lib/ui.js'
 
 export class BattleGridLoader {
   constructor(guiContainer) {
@@ -41,16 +42,12 @@ export class BattleGridLoader {
   }
 
   setVisability(dataService) {
-    const {
-      gridIds: [id1, id2],
-      hiddenStyle,
-    } = BATTLE_GRID
-
-    if (dataService.turn.currentPlayer === dataService.player1.name) {
-      toggleGrid(id1, true, hiddenStyle)
-    }
-    if (dataService.turn.currentPlayer === dataService.player2.name) {
-      toggleGrid(id2, true, hiddenStyle)
-    }
+    const { gridIds, hiddenStyle } = BATTLE_GRID
+    toggleGrids(
+      dataService.turn.currentPlayer,
+      dataService.player1.name,
+      gridIds,
+      hiddenStyle
+    )
   }
 }

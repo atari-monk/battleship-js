@@ -45,6 +45,17 @@ export function toggleGrid(gridId, state, hiddenStyle = 'hidden') {
   })
 }
 
+export function toggleGrids(currentPlayer, player1Name, gridIds, hiddenStyle) {
+  const [id1, id2] = gridIds
+  const isPlayer1 = currentPlayer === player1Name
+
+  const activeGrid = isPlayer1 ? id1 : id2
+  const inactiveGrid = isPlayer1 ? id2 : id1
+
+  toggleGrid(activeGrid, true, hiddenStyle)
+  toggleGrid(inactiveGrid, false, hiddenStyle)
+}
+
 export function selectAndToggle({
   selector,
   cssClass,
