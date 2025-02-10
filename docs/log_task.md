@@ -289,12 +289,16 @@
 2. 17:12 - 17:45, refactor: centralize grid configuration by replacing BATTLE_GRID_CONFIG with BATTLE_GRID
 3. 18:25 - 19:20, refactor(BattleAI, ScreenCoordinates, BattleLogic): improve class structure and modularity for better attack handling and screen coordinate management
 
+- Total 134 minutes = 2 hour 14 minutes
+
 ### 9
 
 1. 15:02 - 16:09, refactor(ScreenCoordinates): use util functions
 2. 16:28 - 18:13, refactor(AttackHandler, BattleAI): improve attack handling by modularizing element setup and coordinate calculations
 3. 20:17 - 21:06, refactor(BattleTurnManager, ui): modularize grid toggling logic and improve turn management
 4. 21:06 - 22:11, refactor(BattleTurnManager): update turn management to utilize hidden styles in grid toggling (fix bug)
+
+- Total 286 minutes = 4 hour 46 minutes
 
 ### 10
 
@@ -308,6 +312,10 @@
 8. 17:48 - 17:55, refactor(BattleGridLoader): update grid visibility logic to use toggleGrid function
 9. 17:56 - 18:09, refactor(BattleGridLoader, BattleTurnManager): replace toggleGrid calls with toggleGrids function for improved grid visibility management
 10. 20:00 - 20:39, refactor(BattleGridLoader, BattleTurnManager, BattleAI): update grid handling to use elementIds and refactor component loading logic
+
+- Total 236 minutes = 3 hour 56 minutes
+- More commits in same time is key, also improving code quality is big (start from quality also)  
+  Make util functions to abstract common tasks from the start.
 
 ### Plan
 
