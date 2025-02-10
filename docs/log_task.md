@@ -299,6 +299,8 @@
 ### 10
 
 1. 11:38 - 12:11, refactor(AttackHandler, BattleAI, GridRenderer): modularize element setup and improve hit handling logic
+2. 12:16 - 12:29, refactor(BattleGrid, GridRenderer): streamline grid item management and enhance event handling
+3. 12:30 - ,
 
 ### Plan
 
