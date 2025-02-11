@@ -317,6 +317,14 @@
 - More commits in same time is key, also improving code quality is big (start from quality also)  
   Make util functions to abstract common tasks from the start.
 
+### 11
+
+1. 20:59 - 22:30, refactor(AttackHandler): improve cell position handling and update attack logic  
+   feat(script): add merge.py for merging project files and solid.py for SOLID principles prompt generation
+
+- Total 91 minutes = 1 hour 31 minutes
+- One optimization on chore day
+
 ### Plan
 
 1. Game end condition.
