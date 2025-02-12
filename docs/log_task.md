@@ -333,6 +333,7 @@
 4. 12:43 - 12:57, reflection on BattleAI, list what it does, state concern
 5. 15:22 - 16:06, refactor(AttackHandler): simplify attack logic by utilizing shared utility functions for coordinate calculations
 6. 16:56 - 17:30, refactor(AttackHandler, GameStateService): replace data service dependency with game state service for hit logic
+7. 17:31 - 17:46, refactor(BattleTurnManager, GameStateService, AttackHandler): replace data service dependency with game state service and streamline turn management
 
 ### Plan
 

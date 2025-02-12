@@ -20,7 +20,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
         new BattleLogic(
           es,
           new AttackHandler(es, gss),
-          new BattleTurnManager(ds)
+          new BattleTurnManager(gss)
         )
       )
     )

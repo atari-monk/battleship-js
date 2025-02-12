@@ -22,9 +22,6 @@ export class AttackHandler {
     const { row, col, index } = getCellPosition(x, y, this._elements.cellSize)
     const cell = gridItems[index]
     if (!cell) throw new Error(BATTLE_GRID.cellError)
-    // const isHit = this._dataService
-    //   .getBoard()
-    //   .hit(row, col, this._dataService.getEnemyFleet())
     cell.style.backgroundColor = this._gameStateService.hit(row, col)
       ? BATTLE_GRID.color.red
       : BATTLE_GRID.color.grey
