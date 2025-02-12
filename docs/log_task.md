@@ -325,6 +325,10 @@
 - Total 91 minutes = 1 hour 31 minutes
 - One optimization on chore day
 
+### 12
+
+1. 10:27 - 10:40, refactor(BattleAI): streamline AI hit handling and improve matrix to screen conversion
+
 ### Plan
 
 1. Game end condition.

@@ -17,17 +17,15 @@ export class BattleAI {
   }
 
   handleAIHit(gridItems, enableClick) {
-    this._handleHit(this._aiMove(), gridItems, enableClick)
-  }
-
-  _aiMove() {
-    const xy = this._dataService.playerAI.attack()
-    return this._matrixToScreen(xy[0], xy[1])
+    this._handleHit(
+      this._matrixToScreen(...this._dataService.playerAI.attack()),
+      gridItems,
+      enableClick
+    )
   }
 
   _matrixToScreen(row, col) {
-    const gridRect = this._battle.elements.gridRect
-    const cellSize = this._battle.elements.cellSize
+    const { gridRect, cellSize } = this._battle.elements
     return {
       x: gridRect.left + col * cellSize.width + cellSize.width / 2,
       y: gridRect.top + row * cellSize.height + cellSize.height / 2,
@@ -39,10 +37,9 @@ export class BattleAI {
 
     if (this._dataService.getBoard().isWin()) {
       this._handleWin()
-      return
+    } else {
+      this._handleEndTurn(enableClick)
     }
-
-    this._handleEndTurn(enableClick)
   }
 
   _handleWin() {
