@@ -335,6 +335,7 @@
 6. 16:56 - 17:30, refactor(AttackHandler, GameStateService): replace data service dependency with game state service for hit logic
 7. 17:31 - 17:46, refactor(BattleTurnManager, GameStateService, AttackHandler): replace data service dependency with game state service and streamline turn management
 8. 21:55 - 22:39, refactor(BattleAI, GameStateService): remove AttackHandler and BattleLogic, streamline attack and turn management logic
+9. 22:40 - 23:10, refactor(BattleAI): simplify hit handling and reset logic, remove redundant methods
 
 ### Plan
 
