@@ -1,7 +1,16 @@
 import { BATTLE_GRID } from './config.js'
-import { format } from './../../shared_lib/LogFormatter.js'
 import { matrixToScreen, handleAction } from './../../shared_lib/ui.js'
 
+/*
+This class 
+1. Sets Ui elements
+2. Handles player move 
+3. Handles AI move
+4. Handles win
+5. Handles next turn
+6. Handles reset
+Seems like it breaks SRP, 
+*/
 export class BattleAI {
   constructor(guiContainer, dataService, battleLogic) {
     this._guiContainer = guiContainer
@@ -54,7 +63,7 @@ export class BattleAI {
   _resetGame() {
     this._dataService.reset()
     BATTLE_GRID.elementIds.forEach((id) =>
-      this._guiContainer.getInstanceById(id).jsInstance.resetGrid()
+      this._guiContainer.getInstanceById(id).jsInstance.reset()
     )
     this._dataService.initializeTurn()
   }

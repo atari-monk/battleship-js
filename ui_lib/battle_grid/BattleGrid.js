@@ -12,7 +12,7 @@ export class BattleGrid {
     this.generator.generate(id, isAI)
   }
 
-  resetGrid() {
+  reset() {
     this.generator.reset()
   }
 }
