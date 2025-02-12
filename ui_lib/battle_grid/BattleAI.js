@@ -1,5 +1,11 @@
 import { BATTLE_GRID } from './config.js'
-import { matrixToScreen, handleAction } from './../../shared_lib/ui.js'
+import {
+  getRelativeCoordinates,
+  getCellPosition,
+  matrixToScreen,
+  handleAction,
+  toggleGrids,
+} from './../../shared_lib/ui.js'
 
 /*
 This class 
@@ -12,10 +18,10 @@ This class
 Seems like it breaks SRP, 
 */
 export class BattleAI {
-  constructor(guiContainer, dataService, battleLogic) {
+  constructor(guiContainer, elementService, gameStateService) {
     this._guiContainer = guiContainer
-    this._dataService = dataService
-    this._battle = battleLogic
+    this._elements = elementService
+    this._gameState = gameStateService
     this._actions = {
       win: () => this._handleWin(),
       endTurn: (enableClick) => this._handleEndTurn(enableClick),
@@ -23,7 +29,7 @@ export class BattleAI {
   }
 
   setElements(id) {
-    this._battle.elements.setElements(id)
+    this._elements.setElements(id)
   }
 
   handlePlayerHit(event, gridItems, enableClick) {
@@ -31,8 +37,8 @@ export class BattleAI {
   }
 
   handleAIHit(gridItems, enableClick) {
-    const { gridRect, cellSize } = this._battle.elements
-    const [x, y] = this._dataService.playerAI.attack()
+    const { gridRect, cellSize } = this._elements
+    const [x, y] = this._gameState.aiAttack()
     this._handleHit(
       matrixToScreen({ gridRect, cellSize, row: x, col: y }),
       gridItems,
@@ -41,18 +47,25 @@ export class BattleAI {
   }
 
   _handleHit(event, gridItems, enableClick) {
-    this._battle.attack.attack(event, gridItems)
-    const action = this._dataService.getBoard().isWin()
-      ? BATTLE_GRID.actions.win
-      : BATTLE_GRID.actions.endTurn
-    this._actions[action](enableClick)
+    this._attack(event, gridItems)
+    this._actions[this._gameState.nextAction()](enableClick)
+  }
+
+  _attack(event, gridItems) {
+    const { x, y } = getRelativeCoordinates(event, this._elements.gridRect)
+    const { row, col, index } = getCellPosition(x, y, this._elements.cellSize)
+    const cell = gridItems[index]
+    if (!cell) throw new Error(BATTLE_GRID.cellError)
+    cell.style.backgroundColor = this._gameState.playerAttack(row, col)
+      ? BATTLE_GRID.color.red
+      : BATTLE_GRID.color.grey
   }
 
   _handleWin() {
     const { winMsg, waitOnReset, waitMsg } = BATTLE_GRID
     handleAction({
       logMessages: [
-        winMsg(this._dataService.turn.currentPlayer),
+        winMsg(this._gameState.getcurrentPlayer()),
         waitMsg(waitOnReset),
       ],
       waitTime: waitOnReset,
@@ -61,11 +74,10 @@ export class BattleAI {
   }
 
   _resetGame() {
-    this._dataService.reset()
     BATTLE_GRID.elementIds.forEach((id) =>
       this._guiContainer.getInstanceById(id).jsInstance.reset()
     )
-    this._dataService.initializeTurn()
+    this._gameState.reset()
   }
 
   _handleEndTurn(enableClick) {
@@ -74,9 +86,15 @@ export class BattleAI {
       logMessages: [waitMsg(waitOnTurn)],
       waitTime: waitOnTurn,
       callback: () => {
-        this._battle.turn.endTurn()
+        this._endTurn()
         enableClick()
       },
     })
+  }
+
+  _endTurn() {
+    const { currentPlayer, player1Name } = this._gameState.nextTurn()
+    const { elementIds, hiddenStyle } = BATTLE_GRID
+    toggleGrids(currentPlayer, player1Name, elementIds, hiddenStyle)
   }
 }
