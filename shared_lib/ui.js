@@ -193,3 +193,13 @@ export function matrixToScreen({ gridRect, cellSize, row, col }) {
     y: gridRect.top + row * cellSize.height + cellSize.height / 2,
   }
 }
+
+export function handleAction({ logMessages, waitTime, callback }) {
+  logMessages.forEach((message) => {
+    console.debug(...format.debug(message))
+  })
+
+  setTimeout(() => {
+    callback()
+  }, waitTime)
+}

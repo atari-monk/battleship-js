@@ -1,6 +1,6 @@
 import { BATTLE_GRID } from './config.js'
 import { format } from './../../shared_lib/LogFormatter.js'
-import { matrixToScreen } from './../../shared_lib/ui.js'
+import { matrixToScreen, handleAction } from './../../shared_lib/ui.js'
 
 export class BattleAI {
   constructor(guiContainer, dataService, battleLogic) {
@@ -41,11 +41,14 @@ export class BattleAI {
 
   _handleWin() {
     const { winMsg, waitOnReset, waitMsg } = BATTLE_GRID
-    console.debug(...format.debug(winMsg(this._dataService.turn.currentPlayer)))
-    console.debug(...format.debug(waitMsg(waitOnReset)))
-    setTimeout(() => {
-      this._resetGame()
-    }, waitOnReset)
+    handleAction({
+      logMessages: [
+        winMsg(this._dataService.turn.currentPlayer),
+        waitMsg(waitOnReset),
+      ],
+      waitTime: waitOnReset,
+      callback: () => this._resetGame(),
+    })
   }
 
   _resetGame() {
@@ -58,10 +61,13 @@ export class BattleAI {
 
   _handleEndTurn(enableClick) {
     const { waitOnTurn, waitMsg } = BATTLE_GRID
-    console.debug(...format.debug(waitMsg(waitOnTurn)))
-    setTimeout(() => {
-      this._battle.turn.endTurn()
-      enableClick()
-    }, waitOnTurn)
+    handleAction({
+      logMessages: [waitMsg(waitOnTurn)],
+      waitTime: waitOnTurn,
+      callback: () => {
+        this._battle.turn.endTurn()
+        enableClick()
+      },
+    })
   }
 }

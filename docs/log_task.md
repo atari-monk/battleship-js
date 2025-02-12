@@ -329,6 +329,7 @@
 
 1. 10:27 - 10:40, refactor(BattleAI): streamline AI hit handling and improve matrix to screen conversion
 2. 10:41 - 11:58, refactor(BattleAI): replace internal matrixToScreen method with shared utility function and streamline hit handling logic
+3. 11:59 - 12:42, refactor(BattleAI): replace direct logging and timeout handling with handleAction utility function 
 
 ### Plan
 
