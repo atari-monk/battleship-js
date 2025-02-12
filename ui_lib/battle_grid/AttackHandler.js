@@ -1,5 +1,16 @@
 import { BATTLE_GRID } from './config.js'
+import {
+  getRelativeCoordinates,
+  getCellPosition,
+} from './../../shared_lib/ui.js'
 
+/*
+This class 
+1. Handles attack 
+I would say this is ui function but mixed with game state,
+therefore it breaks SRP.
+Conversions, game state, ui update
+*/
 export class AttackHandler {
   constructor(elementService, dataService) {
     this._elements = elementService
@@ -7,42 +18,15 @@ export class AttackHandler {
   }
 
   attack(event, gridItems) {
-    const { x, y } = this._getRelativeCoordinates(event)
-    const { row, col, index } = this._getCellPosition(x, y)
+    const { x, y } = getRelativeCoordinates(event, this._elements.gridRect)
+    const { row, col, index } = getCellPosition(x, y, this._elements.cellSize)
     const cell = gridItems[index]
-
-    if (cell) {
-      this._handleAttack(cell, row, col)
-    } else {
-      throw new Error(BATTLE_GRID.cellError)
-    }
-  }
-
-  _getRelativeCoordinates(event) {
-    const rect = this._elements.gridRect
-    return {
-      x: event.x - rect.left,
-      y: event.y - rect.top,
-    }
-  }
-
-  _getCellPosition(x, y) {
-    const cellSize = this._elements.cellSize
-    const col = Math.floor(x / cellSize.width)
-    const row = Math.floor(y / cellSize.height)
-    return { row, col, index: row * 10 + col }
-  }
-
-  _handleAttack(cell, row, col) {
-    const isHit = this._checkHit(row, col)
+    if (!cell) throw new Error(BATTLE_GRID.cellError)
+    const isHit = this._dataService
+      .getBoard()
+      .hit(row, col, this._dataService.getEnemyFleet())
     cell.style.backgroundColor = isHit
       ? BATTLE_GRID.color.red
       : BATTLE_GRID.color.grey
-  }
-
-  _checkHit(row, col) {
-    return this._dataService
-      .getBoard()
-      .hit(row, col, this._dataService.getEnemyFleet())
   }
 }

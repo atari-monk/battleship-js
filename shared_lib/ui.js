@@ -203,3 +203,16 @@ export function handleAction({ logMessages, waitTime, callback }) {
     callback()
   }, waitTime)
 }
+
+export function getRelativeCoordinates(event, rect) {
+  return {
+    x: event.x - rect.left,
+    y: event.y - rect.top,
+  }
+}
+
+export function getCellPosition(x, y, cellSize) {
+  const col = Math.floor(x / cellSize.width)
+  const row = Math.floor(y / cellSize.height)
+  return { row, col, index: row * 10 + col }
+}
