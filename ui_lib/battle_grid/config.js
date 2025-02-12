@@ -13,6 +13,10 @@ export const BATTLE_GRID = {
   waitOnTurn: 2000,
   color: { red: 'red', grey: 'rgba(128, 128, 128, 0.7)' },
   event: { click: 'click' },
+  actions: {
+    win: 'win',
+    endTurn: 'endTurn',
+  },
   loadBattleGridError: 'Error in loadBattleGrid:',
   itemsError: 'Grid items have not been generated yet.',
   cellError: 'No cell found!',

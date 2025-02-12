@@ -1,11 +1,16 @@
 import { BATTLE_GRID } from './config.js'
 import { format } from './../../shared_lib/LogFormatter.js'
+import { matrixToScreen } from './../../shared_lib/ui.js'
 
 export class BattleAI {
   constructor(guiContainer, dataService, battleLogic) {
     this._guiContainer = guiContainer
     this._dataService = dataService
     this._battle = battleLogic
+    this._actions = {
+      win: () => this._handleWin(),
+      endTurn: (enableClick) => this._handleEndTurn(enableClick),
+    }
   }
 
   setElements(id) {
@@ -17,29 +22,21 @@ export class BattleAI {
   }
 
   handleAIHit(gridItems, enableClick) {
+    const { gridRect, cellSize } = this._battle.elements
+    const [x, y] = this._dataService.playerAI.attack()
     this._handleHit(
-      this._matrixToScreen(...this._dataService.playerAI.attack()),
+      matrixToScreen({ gridRect, cellSize, row: x, col: y }),
       gridItems,
       enableClick
     )
   }
 
-  _matrixToScreen(row, col) {
-    const { gridRect, cellSize } = this._battle.elements
-    return {
-      x: gridRect.left + col * cellSize.width + cellSize.width / 2,
-      y: gridRect.top + row * cellSize.height + cellSize.height / 2,
-    }
-  }
-
   _handleHit(event, gridItems, enableClick) {
     this._battle.attack.attack(event, gridItems)
-
-    if (this._dataService.getBoard().isWin()) {
-      this._handleWin()
-    } else {
-      this._handleEndTurn(enableClick)
-    }
+    const action = this._dataService.getBoard().isWin()
+      ? BATTLE_GRID.actions.win
+      : BATTLE_GRID.actions.endTurn
+    this._actions[action](enableClick)
   }
 
   _handleWin() {
@@ -53,11 +50,9 @@ export class BattleAI {
 
   _resetGame() {
     this._dataService.reset()
-
     BATTLE_GRID.elementIds.forEach((id) =>
       this._guiContainer.getInstanceById(id).jsInstance.resetGrid()
     )
-
     this._dataService.initializeTurn()
   }
 

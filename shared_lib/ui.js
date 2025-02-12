@@ -186,3 +186,10 @@ export function generateElements({
     parentElement.appendChild(element)
   }
 }
+
+export function matrixToScreen({ gridRect, cellSize, row, col }) {
+  return {
+    x: gridRect.left + col * cellSize.width + cellSize.width / 2,
+    y: gridRect.top + row * cellSize.height + cellSize.height / 2,
+  }
+}
