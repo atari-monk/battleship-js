@@ -337,6 +337,10 @@
 8. 21:55 - 22:39, refactor(BattleAI, GameStateService): remove AttackHandler and BattleLogic, streamline attack and turn management logic
 9. 22:40 - 23:10, refactor(BattleAI): simplify hit handling and reset logic, remove redundant methods
 
+### 13
+
+1. 20:14 - 20:58, refactor(BattleAI, ui): integrate updateColor function for improved hit indication
+
 ### Plan
 
 1. Game end condition.

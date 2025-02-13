@@ -5,6 +5,7 @@ import {
   matrixToScreen,
   handleAction,
   toggleGrids,
+  updateColor,
 } from './../../shared_lib/ui.js'
 
 export class BattleAI {
@@ -39,11 +40,15 @@ export class BattleAI {
   _handleHit(event, gridItems, enableClick) {
     const { x, y } = getRelativeCoordinates(event, this._elements.gridRect)
     const { row, col, index } = getCellPosition(x, y, this._elements.cellSize)
+    const isHit = this._gameState.playerAttack(row, col)
     const cell = gridItems[index]
     if (!cell) throw new Error(BATTLE_GRID.cellError)
-    cell.style.backgroundColor = this._gameState.playerAttack(row, col)
-      ? BATTLE_GRID.color.red
-      : BATTLE_GRID.color.grey
+    updateColor({
+      element: cell,
+      isOn: isHit,
+      isOnColor: BATTLE_GRID.color.red,
+      isOffColor: BATTLE_GRID.color.grey,
+    })
     this._actions[this._gameState.nextAction()](enableClick)
   }
 

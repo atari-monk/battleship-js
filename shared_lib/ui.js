@@ -216,3 +216,7 @@ export function getCellPosition(x, y, cellSize) {
   const row = Math.floor(y / cellSize.height)
   return { row, col, index: row * 10 + col }
 }
+
+export function updateColor({ element, isOn, isOnColor, isOffColor }) {
+  element.style.backgroundColor = isOn ? isOnColor : isOffColor
+}
