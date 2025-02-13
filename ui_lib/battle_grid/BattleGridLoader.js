@@ -24,7 +24,7 @@ export class BattleGridLoader {
         const isAI = index === 0
 
         grid.init(gridId, isAI)
-        grid.generator.dataService = dataService
+        grid.dataService = dataService
       })
     } catch (error) {
       console.error(...format.error(loadBattleGridError, error))
