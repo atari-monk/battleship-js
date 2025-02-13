@@ -9,12 +9,14 @@ export class GameStateService {
     return this._dataService.turn.currentPlayer
   }
 
-  playerAttack(row, col) {
+  //this is to attack cell, no matter witch player
+  attackCell(row, col) {
     return this._dataService
       .getBoard()
       .hit(row, col, this._dataService.getEnemyFleet())
   }
 
+  //this is ai target
   aiAttack() {
     return this._dataService.playerAI.attack()
   }

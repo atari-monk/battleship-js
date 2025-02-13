@@ -341,6 +341,8 @@
 
 1. 20:14 - 20:58, refactor(BattleAI, ui): integrate updateColor function for improved hit indication
 2. 20:59 - 21:14, refactor(BattleGrid, BattleGridLoader): streamline grid initialization and event handling, remove GridGenerator
+3. 21:15 - 21:48, document drivinf battle_grid 
+4. 21:48 - 22:20, refactor(BattleAI, GameStateService, CellHitService): rename playerAttack to attackCell, add CellHitService for handling cell hits 
 
 ### Plan
 

@@ -40,7 +40,7 @@ export class BattleAI {
   _handleHit(event, gridItems, enableClick) {
     const { x, y } = getRelativeCoordinates(event, this._elements.gridRect)
     const { row, col, index } = getCellPosition(x, y, this._elements.cellSize)
-    const isHit = this._gameState.playerAttack(row, col)
+    const isHit = this._gameState.attackCell(row, col)
     const cell = gridItems[index]
     if (!cell) throw new Error(BATTLE_GRID.cellError)
     updateColor({
