@@ -8,13 +8,13 @@ It produces a grid of squares visualizet by white net.
 Each square can be clicked and its color is filled red or grey.  
 It is used in clasic game of 'battleship'.  
 Player makes his move.  
-Ai makes its move.  
+AI makes its move.  
 Turn change till one of player wins.  
 Game resets and starts over.
 
 ## Parent structure
 
-Comoponent is used in client.  
+Component is used in client.  
 It is a parent app.  
 Client uses component_loade_lib.  
 This is used to load app services and gui components.  

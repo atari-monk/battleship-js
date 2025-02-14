@@ -8,5 +8,5 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   const es = new ElementService()
   const gss = new GameStateService(ds)
 
-  return new BattleGrid(new BattleAI(guiContainer, es, gss))
+  return new BattleGrid(es, new BattleAI(guiContainer, es, gss))
 }

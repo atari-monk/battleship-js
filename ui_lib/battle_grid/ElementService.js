@@ -1,5 +1,5 @@
-import { selectElementOrThrow } from './../../shared_lib/ui.js'
 import { BATTLE_GRID } from './config.js'
+import { selectElementOrThrow } from './../../shared_lib/ui.js'
 
 export class ElementService {
   constructor() {
@@ -9,20 +9,29 @@ export class ElementService {
   setElements(id) {
     if (this.isSet) return
 
-    const { battleGridCell, getSelector } = BATTLE_GRID
+    this.setBattleGrid(id)
 
+    this.setGridCell(id)
+
+    this.isSet = true
+  }
+
+  setBattleGrid(id) {
     const gridElement = selectElementOrThrow({
       selector: id,
       isId: true,
     })
+
+    this.gridRect = gridElement.getBoundingClientRect()
+  }
+
+  setGridCell(id) {
+    const { getSelector, battleGridCell } = BATTLE_GRID
 
     const cellElement = selectElementOrThrow({
       selector: getSelector(id, battleGridCell),
     })
 
     this.cellSize = cellElement.getBoundingClientRect()
-    this.gridRect = gridElement.getBoundingClientRect()
-
-    this.isSet = true
   }
 }

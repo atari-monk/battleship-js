@@ -8,7 +8,8 @@ import {
 } from '../../shared_lib/ui.js'
 
 export class BattleGrid {
-  constructor(battleAI) {
+  constructor(elementService, battleAI) {
+    this._elementService = elementService
     this.battleAI = battleAI
     this.isPlayerTurn = true
   }
@@ -43,7 +44,7 @@ export class BattleGrid {
   _setEventHandlers(isAI, id, grid) {
     isAI
       ? observeVisibilityChange(document.getElementById(id), () => {
-          this.battleAI.setElements(id)
+          this._elementService.setElements(id)
 
           this.battleAI.handleAIHit(
             this.gridItems,
@@ -58,7 +59,7 @@ export class BattleGrid {
   }
 
   _handleClick(event, id) {
-    this.battleAI.setElements(id)
+    this._elementService.setElements(id)
 
     if (!this.isPlayerTurn) return
     this.isPlayerTurn = false
