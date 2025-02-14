@@ -13,6 +13,10 @@ export class ElementService {
 
     this.setGridCell(id)
 
+    if (!this.gridRect || !this.cellSize) {
+      throw new Error('Grid layout is not properly initialized.')
+    }
+
     this.isSet = true
   }
 

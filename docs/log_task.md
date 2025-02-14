@@ -346,7 +346,8 @@
 
 ### 14
 
-1. 12:48 - , refactor(BattleGrid, ElementService): update constructor to accept ElementService, streamline element handling logic
+1. 12:48 - 13:13, refactor(BattleGrid, ElementService): update constructor to accept ElementService, streamline element handling logic
+2. 14:32 - 17:48, refactor(BattleGrid, PlayerHitService, ActionService): introduce PlayerHitService and ActionService, streamline event handling and player actions
 
 ### Plan
 

@@ -6,19 +6,11 @@ import {
 } from './../../shared_lib/ui.js'
 
 export class CellHitService {
-  constructor(elementsService, gameStateService) {
-    this._elementsService = elementsService
+  constructor(gameStateService) {
     this._gameStateService = gameStateService
   }
 
-  hitCell(event, cells) {
-    const { gridRect, cellSize } = this._elementsService
-    const { attackCell } = this._gameStateService
-
-    if (!gridRect || !cellSize) {
-      throw new Error('Grid layout is not properly initialized.')
-    }
-
+  hitCell(event, cells, gridRect, cellSize) {
     const { x, y } = getRelativeCoordinates(event, gridRect)
     const { row, col, index } = getCellPosition(x, y, cellSize)
 
@@ -29,7 +21,7 @@ export class CellHitService {
     const cell = cells[index]
     if (!cell) throw new Error(BATTLE_GRID.cellError)
 
-    const isHit = attackCell(row, col)
+    const isHit = this._gameStateService.attackCell(row, col)
 
     updateColor({
       element: cell,

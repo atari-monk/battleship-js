@@ -1,17 +1,11 @@
 import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID } from './config.js'
-import {
-  selectElementOrThrow,
-  generateElements,
-  observeVisibilityChange,
-  setEventForElement,
-} from '../../shared_lib/ui.js'
+import { selectElementOrThrow, generateElements } from '../../shared_lib/ui.js'
 
 export class BattleGrid {
-  constructor(elementService, battleAI) {
-    this._elementService = elementService
-    this.battleAI = battleAI
-    this.isPlayerTurn = true
+  constructor(playerEventService, aiEventService) {
+    this._playerEventService = playerEventService
+    this._aiEventService = aiEventService
   }
 
   init(id, isAI = false) {
@@ -30,41 +24,22 @@ export class BattleGrid {
       className: battleGridCell,
     })
 
-    this._setEventHandlers(isAI, id, grid)
+    const cells = document.querySelectorAll(getSelector(id, battleGridCell))
 
-    this.gridItems = document.querySelectorAll(getSelector(id, battleGridCell))
+    this._setEventHandlers(isAI, id, grid, cells)
   }
 
   reset() {
-    if (!this.gridItems) throw new Error(BATTLE_GRID.itemsError)
-    this.gridItems.forEach((cell) => cell.removeAttribute('style'))
+    if (!this.cells) throw new Error(BATTLE_GRID.itemsError)
+
+    this.cells.forEach((cell) => cell.removeAttribute('style'))
+
     this.isPlayerTurn = true
   }
 
-  _setEventHandlers(isAI, id, grid) {
+  _setEventHandlers(isAI, id, grid, cells) {
     isAI
-      ? observeVisibilityChange(document.getElementById(id), () => {
-          this._elementService.setElements(id)
-
-          this.battleAI.handleAIHit(
-            this.gridItems,
-            () => (this.isPlayerTurn = true)
-          )
-        })
-      : setEventForElement({
-          element: grid,
-          eventType: BATTLE_GRID.event.click,
-          handler: (event) => this._handleClick(event, id),
-        })
-  }
-
-  _handleClick(event, id) {
-    this._elementService.setElements(id)
-
-    if (!this.isPlayerTurn) return
-    this.isPlayerTurn = false
-    this.battleAI.handlePlayerHit(event, this.gridItems, () => {
-      this.isPlayerTurn = true
-    })
+      ? this._aiEventService.setEvent(id, grid, cells)
+      : this._playerEventService.setEvent(id, grid, cells)
   }
 }

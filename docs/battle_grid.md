@@ -57,3 +57,18 @@ This gets gridRect, cellSize data.
 
 Service is dependent on GameStateService.  
 This gets method that checks what is the effect on cell atack in battleship game.
+
+### PlayerHitService
+
+This class adheres to SRP:
+Single Respondibility is to provide ability for player to hit battle grid cell.  
+
+Dependency:
+CellHitService
+ElementsService
+
+### EndTurnAction
+
+### WinAction
+
+### 
