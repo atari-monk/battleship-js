@@ -347,7 +347,8 @@
 ### 14
 
 1. 12:48 - 13:13, refactor(BattleGrid, ElementService): update constructor to accept ElementService, streamline element handling logic
-2. 14:32 - 17:48, refactor(BattleGrid, PlayerHitService, ActionService): introduce PlayerHitService and ActionService, streamline event handling and player actions
+2. 14:32 - 17:52, refactor(BattleGrid, PlayerHitService, ActionService): introduce PlayerHitService and ActionService, streamline event handling and player actions
+3. 20:55 - 23:00, refactor(BattleGrid, BattleGridLoader, EndTurnAction, WinAction): update to use elements array for improved component handling and event management
 
 ### Plan
 

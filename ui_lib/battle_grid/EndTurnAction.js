@@ -7,7 +7,7 @@ export class EndTurnAction {
   }
 
   endTurn() {
-    const { waitOnTurn, waitMsg, elementIds, hiddenStyle } = BATTLE_GRID
+    const { waitOnTurn, waitMsg, elements, hiddenStyle } = BATTLE_GRID
 
     handleAction({
       logMessages: [waitMsg(waitOnTurn)],
@@ -15,7 +15,12 @@ export class EndTurnAction {
       callback: () => {
         const { currentPlayer, player1Name } = this._gameStateService.nextTurn()
 
-        toggleGrids(currentPlayer, player1Name, elementIds, hiddenStyle)
+        toggleGrids(
+          currentPlayer,
+          player1Name,
+          elements.map((element) => element.elementId),
+          hiddenStyle
+        )
       },
     })
   }

@@ -48,7 +48,7 @@ export class GUIComponentContainer {
     }
   }
 
-  createInstance(componentName, rootDivClassName, uniqueDivId) {
+  createInstance(componentName, rootDivClassName, uniqueDivId, type) {
     const component = this.componentStorage.getComponentByName(componentName)
     if (!component) {
       console.error(`Component not loaded: ${componentName}`)
@@ -69,6 +69,7 @@ export class GUIComponentContainer {
       jsInstance = component.jsModule.default({
         serviceContainer: this.serviceContainer,
         guiContainer: this,
+        type,
       })
     }
 

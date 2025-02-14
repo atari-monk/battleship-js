@@ -9,21 +9,18 @@ export class BattleGridLoader {
   }
 
   async load(dataService) {
-    const { name, cssClass, elementIds, loadBattleGridError } = BATTLE_GRID
+    const { name, cssClass, elements, loadBattleGridError } = BATTLE_GRID
 
     try {
       const grids = await loadComponents({
         uiContainer: this._container,
         componentName: name,
         cssClass,
-        elementIds,
+        elements,
       })
 
       grids.forEach((grid, index) => {
-        const gridId = elementIds[index]
-        const isAI = index === 0
-
-        grid.init(gridId, isAI)
+        grid.init(elements[index].elementId)
         grid.dataService = dataService
       })
     } catch (error) {
@@ -32,11 +29,11 @@ export class BattleGridLoader {
   }
 
   setVisability(dataService) {
-    const { elementIds, hiddenStyle } = BATTLE_GRID
+    const { elements, hiddenStyle } = BATTLE_GRID
     toggleGrids(
       dataService.turn.currentPlayer,
       dataService.player1.name,
-      elementIds,
+      elements.map((element) => element.elementId),
       hiddenStyle
     )
   }

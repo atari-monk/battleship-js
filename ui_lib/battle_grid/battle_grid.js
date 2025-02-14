@@ -10,7 +10,7 @@ import { ActionService } from './ActionService.js'
 import { EndTurnAction } from './EndTurnAction.js'
 import { WinAction } from './WinAction.js'
 
-export default function init({ serviceContainer, guiContainer } = {}) {
+export default function init({ serviceContainer, guiContainer, type } = {}) {
   const ds = serviceContainer.getServiceByName('data_service')
   const es = new ElementService()
   const gss = new GameStateService(ds)
@@ -23,6 +23,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   const chs = new CellHitService(gss)
   const pes = new PlayerEventService(es, new PlayerHitService(chs), as)
   const aies = new AIEventService(es, new AIHitService(gss, chs), as)
+  const eventService = { player: pes, ai: aies }
 
-  return new BattleGrid(pes, aies)
+  return new BattleGrid(eventService[type])
 }

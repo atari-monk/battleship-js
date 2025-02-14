@@ -31,7 +31,7 @@ export const FULL_SCREEN_HIDE = {
 export const MENU_COMPONENT = {
   componentName: 'menu',
   cssClass: 'game-menu',
-  elementIds: ['game-menu-1'],
+  elements: [{ elementId: 'game-menu-1' }],
 }
 
 export const MENU_CONFIG = {

@@ -17,8 +17,10 @@ export class WinAction {
       ],
       waitTime: waitOnReset,
       callback: () => {
-        BATTLE_GRID.elementIds.forEach((id) =>
-          this._guiContainer.getInstanceById(id).jsInstance.reset()
+        BATTLE_GRID.elements.forEach((element) =>
+          this._guiContainer
+            .getInstanceById(element.elementId)
+            .jsInstance.reset()
         )
 
         this._gameStateService.reset()

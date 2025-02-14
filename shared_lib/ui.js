@@ -131,18 +131,20 @@ export async function loadComponents({
   uiContainer,
   componentName,
   cssClass,
-  elementIds = [],
+  elements = [],
   errorMessage = `Failed to load component: ${componentName} with class: ${cssClass} and ID: `,
 } = {}) {
   try {
     await uiContainer.loadComponentResources(componentName)
 
-    const instances = elementIds.map((elementId) => {
+    const instances = elements.map((element) => {
       try {
+        const { elementId, type } = element
         const { jsInstance } = uiContainer.createInstance(
           componentName,
           cssClass,
-          elementId
+          elementId,
+          type
         )
         return jsInstance
       } catch (error) {

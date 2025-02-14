@@ -3,12 +3,11 @@ import { BATTLE_GRID } from './config.js'
 import { selectElementOrThrow, generateElements } from '../../shared_lib/ui.js'
 
 export class BattleGrid {
-  constructor(playerEventService, aiEventService) {
-    this._playerEventService = playerEventService
-    this._aiEventService = aiEventService
+  constructor(eventService) {
+    this._eventService = eventService
   }
 
-  init(id, isAI = false) {
+  init(id) {
     console.debug(...format.debug(BATTLE_GRID.initMsg(id)))
 
     const { getSelector, battleGridGrid, battleGridCell } = BATTLE_GRID
@@ -24,22 +23,14 @@ export class BattleGrid {
       className: battleGridCell,
     })
 
-    const cells = document.querySelectorAll(getSelector(id, battleGridCell))
+    this.cells = document.querySelectorAll(getSelector(id, battleGridCell))
 
-    this._setEventHandlers(isAI, id, grid, cells)
+    this._eventService.setEvent(id, grid, this.cells)
   }
 
   reset() {
     if (!this.cells) throw new Error(BATTLE_GRID.itemsError)
 
     this.cells.forEach((cell) => cell.removeAttribute('style'))
-
-    this.isPlayerTurn = true
-  }
-
-  _setEventHandlers(isAI, id, grid, cells) {
-    isAI
-      ? this._aiEventService.setEvent(id, grid, cells)
-      : this._playerEventService.setEvent(id, grid, cells)
   }
 }
