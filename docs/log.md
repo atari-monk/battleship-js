@@ -353,6 +353,7 @@
 ### 15
 
 1. 12:39 - 14:18, refactor(scripts SOLID principles): restructure scripts into classes for better organization and maintainability
+2. 15:15 - 15:26, refactor(battle_grid): Extract GridCells class
 
 ### Plan
 

@@ -9,6 +9,7 @@ import { AIHitService } from './AIHitService.js'
 import { ActionService } from './ActionService.js'
 import { EndTurnAction } from './EndTurnAction.js'
 import { WinAction } from './WinAction.js'
+import { GridCells } from './GridCells.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
   const ds = serviceContainer.getServiceByName('data_service')
@@ -25,5 +26,5 @@ export default function init({ serviceContainer, guiContainer, type } = {}) {
   const aies = new AIEventService(es, new AIHitService(gss, chs), as)
   const eventService = { player: pes, ai: aies }
 
-  return new BattleGrid(eventService[type])
+  return new BattleGrid(new GridCells(), eventService[type])
 }
