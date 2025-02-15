@@ -350,6 +350,10 @@
 2. 14:32 - 17:52, refactor(BattleGrid, PlayerHitService, ActionService): introduce PlayerHitService and ActionService, streamline event handling and player actions
 3. 20:55 - 23:00, refactor(BattleGrid, BattleGridLoader, EndTurnAction, WinAction): update to use elements array for improved component handling and event management
 
+### 15
+
+1. 12:39 - 14:18, refactor(scripts SOLID principles): restructure scripts into classes for better organization and maintainability
+
 ### Plan
 
 1. Game end condition.
