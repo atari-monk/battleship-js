@@ -12,7 +12,8 @@ export class BattleGrid {
 
     this._girdCells.generate(id)
 
-    this._eventService.setEvent(id, grid, this.cells)
+    const { grid, cells } = this._girdCells
+    this._eventService.setEvent(id, grid, cells)
   }
 
   reset() {

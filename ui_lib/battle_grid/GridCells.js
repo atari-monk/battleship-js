@@ -3,6 +3,7 @@ import { selectElementOrThrow, generateElements } from '../../shared_lib/ui.js'
 
 export class GridCells {
   constructor() {
+    this.grid = {}
     this.cells = []
   }
 
@@ -21,11 +22,16 @@ export class GridCells {
     })
 
     this.cells = document.querySelectorAll(getSelector(id, battleGridCell))
+    this.grid = grid
   }
 
   reset() {
-    if (!this.cells.length) throw new Error(BATTLE_GRID.itemsError)
+    this._reset(this.cells)
+  }
 
-    this.cells.forEach((cell) => cell.removeAttribute('style'))
+  _reset(cells) {
+    if (!cells.length) throw new Error(BATTLE_GRID.itemsError)
+
+    cells.forEach((cell) => cell.removeAttribute('style'))
   }
 }
