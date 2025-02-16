@@ -1,4 +1,5 @@
 from typing import Dict
+import pyperclip
 
 class SOLIDPrinciples:
     def __init__(self):
@@ -13,7 +14,6 @@ class SOLIDPrinciples:
     def get_principles(self) -> Dict[int, str]:
         return self.principles
 
-
 class UserInput:
     def get_choice(self, principles: Dict[int, str]) -> int:
         try:
@@ -25,14 +25,14 @@ class UserInput:
             print(e)
             return -1
 
-
 class PromptGenerator:
     def generate_prompt(self, principle_description: str) -> str:
-        return f"Analyze the following code based on the '{principle_description}' principle:\n\n" \
-               "```python\n" \
-               "# paste code here\n" \
-               "```"
-
+        return (
+            f"Analyze the following code based on the '{principle_description}' principle:\n\n"
+            "```javascript\n"
+            "# paste code here\n"
+            "```"
+        )
 
 class Display:
     def show_principles(self, principles: Dict[int, str]) -> None:
@@ -43,7 +43,8 @@ class Display:
     def show_generated_prompt(self, prompt: str) -> None:
         print("\nGenerated Prompt:")
         print(prompt)
-
+        pyperclip.copy(prompt)
+        print("\nThe prompt has been copied to your clipboard.")
 
 class SOLIDPromptApp:
     def __init__(self):
@@ -54,20 +55,13 @@ class SOLIDPromptApp:
 
     def run(self):
         principles = self.solid_principles.get_principles()
-
-        # Display the principles
         self.display.show_principles(principles)
-
-        # Get user choice
         choice = self.user_input.get_choice(principles)
         if choice == -1:
             return
-
-        # Generate and display the prompt
         principle_description = principles[choice]
         prompt = self.prompt_generator.generate_prompt(principle_description)
         self.display.show_generated_prompt(prompt)
-
 
 if __name__ == "__main__":
     app = SOLIDPromptApp()
