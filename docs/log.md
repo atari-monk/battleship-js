@@ -337,6 +337,8 @@
 8. 21:55 - 22:39, refactor(BattleAI, GameStateService): remove AttackHandler and BattleLogic, streamline attack and turn management logic
 9. 22:40 - 23:10, refactor(BattleAI): simplify hit handling and reset logic, remove redundant methods
 
+- Total 4 hours 23 minutes (263 minutes)
+
 ### 13
 
 1. 20:14 - 20:58, refactor(BattleAI, ui): integrate updateColor function for improved hit indication
@@ -344,21 +346,28 @@
 3. 21:15 - 21:48, document drivinf battle_grid 
 4. 21:48 - 22:20, refactor(BattleAI, GameStateService, CellHitService): rename playerAttack to attackCell, add CellHitService for handling cell hits 
 
+- Total 1 hour 44 minutes (104 minutes)
+
 ### 14
 
 1. 12:48 - 13:13, refactor(BattleGrid, ElementService): update constructor to accept ElementService, streamline element handling logic
 2. 14:32 - 17:52, refactor(BattleGrid, PlayerHitService, ActionService): introduce PlayerHitService and ActionService, streamline event handling and player actions
 3. 20:55 - 23:00, refactor(BattleGrid, BattleGridLoader, EndTurnAction, WinAction): update to use elements array for improved component handling and event management
 
+- Total 5 hours 50 minutes (350 minutes)
+
 ### 15
 
 1. 12:39 - 14:18, refactor(scripts SOLID principles): restructure scripts into classes for better organization and maintainability
 2. 15:15 - 16:30, refactor(battle_grid): Extract GridCells class (planned for 20 min)
 
+- Total 2 hours 54 minutes (174 minutes)
+
 ### 16
 
 1. 21:00 - 00:00, refactor(docs): update log and todo documentation, remove pomodoro file
 
+- Total 3 hours (180 minutes)
 - Lost entire day on ai agents. I am not able to move this since openai api is closed. Browser automation is to cumbersome.  
   Only thing i can do is generating specialized prompts using py and maybe stack them in chain for some production chain/line like factory line. 
 
@@ -370,4 +379,7 @@
 4. 13:59 - 14:15, 1 pomodoro, refactor(battle_grid): remove WinAction, introduce GameWinManager and WinUIController for improved win handling
 5. 14:30 - 14:53, 1 pomodoro, refactor(docs): SRP doc, list of SPR classes
 6. 14:54 - 15:51, 2 pomodoro, refactor(battle_grid): CellHitManager and CellHitUIController for SRP
-7. 15:53 - 15:22, 1 pomodoro, refactor(battle_grid): introduce ToggleGridsUIController for improved grid visibility management
+7. 15:53 - 16:22, 1 pomodoro, refactor(battle_grid): introduce ToggleGridsUIController for improved grid visibility management
+8. 16:24 - 17:23, 2 pomodoro, refactor(battle_grid): ensured battle_grid is SOLID
+
+- Total 4 hours 31 minutes (271 minutes)

@@ -7,7 +7,7 @@ export class AIHitService {
   }
 
   hitCell(cells, gridRect, cellSize) {
-    const [x, y] = this._gameStateService.aiAttack()
+    const [x, y] = this._gameStateService.aiTarget()
 
     const event = matrixToScreen({ gridRect, cellSize, row: x, col: y })
 

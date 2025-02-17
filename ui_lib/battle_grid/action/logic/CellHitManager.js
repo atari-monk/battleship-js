@@ -14,7 +14,7 @@ export class CellHitManager extends EventEmitter {
     const { x, y } = getRelativeCoordinates(event, gridRect)
     const { row, col, index } = getCellPosition(x, y, cellSize)
 
-    const isHit = this._gameStateService.attackCell(row, col)
+    const isHit = this._gameStateService.hitCell(row, col)
 
     this.emit('cellHit', { cells, isHit, index })
   }

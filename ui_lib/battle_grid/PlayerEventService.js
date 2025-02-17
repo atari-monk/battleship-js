@@ -20,6 +20,7 @@ export class PlayerEventService {
 
   _move(id, event, cells) {
     this._elementService.setElements(id)
+    
     const { gridRect, cellSize } = this._elementService
 
     this._playerHitService.hitCell(event, cells, gridRect, cellSize)

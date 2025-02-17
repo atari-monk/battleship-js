@@ -15,7 +15,7 @@ import { GameWinManager } from './action/logic/GameWinManager.js'
 import { WinUIController } from './action/ui/WinUIController.js'
 import { CellHitManager } from './action/logic/CellHitManager.js'
 import { CellHitUIController } from './action/ui/CellHitUIController.js'
-import { ToggleGridsUIController } from './action/ui/ZToggleGridsUIController.js'
+import { ToggleGridsUIController } from './action/ui/ToggleGridsUIController.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
   const dataService = serviceContainer.getServiceByName('data_service')
@@ -26,28 +26,58 @@ export default function init({ serviceContainer, guiContainer, type } = {}) {
   const turnManager = new GameTurnManager(gameStateService)
   const winManager = new GameWinManager(gameStateService)
 
+  setupUIControllers(cellHitManager, turnManager, winManager, guiContainer)
+
+  const actionExecutor = setupActions(turnManager, winManager, gameStateService)
+
+  const eventService = setupEventServices(
+    elementService,
+    cellHitManager,
+    actionExecutor,
+    gameStateService
+  )
+
+  return new BattleGrid(new GridCells(), eventService[type])
+}
+
+function setupUIControllers(
+  cellHitManager,
+  turnManager,
+  winManager,
+  guiContainer
+) {
   const toggleGridsUIController = new ToggleGridsUIController()
   new CellHitUIController(cellHitManager)
   new TurnUIController(turnManager, toggleGridsUIController)
   new WinUIController(winManager, guiContainer)
+}
 
+function setupActions(turnManager, winManager, gameStateService) {
   const actionRegistry = new ActionRegistry()
   actionRegistry.register('endTurn', () => turnManager.endTurn())
-  actionRegistry.register('win', () => winManager.win())
-  const actionResolver = new ActionResolver(gameStateService)
-  const actionExecutor = new ActionExecutor(actionRegistry, actionResolver)
+  actionRegistry.register('win', () => winManager.declareWin())
 
+  const actionResolver = new ActionResolver(gameStateService)
+  return new ActionExecutor(actionRegistry, actionResolver)
+}
+
+function setupEventServices(
+  elementService,
+  cellHitManager,
+  actionExecutor,
+  gameStateService
+) {
   const playerEventService = new PlayerEventService(
     elementService,
     new PlayerHitService(cellHitManager),
     actionExecutor
   )
+
   const aiEventService = new AIEventService(
     elementService,
     new AIHitService(gameStateService, cellHitManager),
     actionExecutor
   )
-  const eventService = { player: playerEventService, ai: aiEventService }
 
-  return new BattleGrid(new GridCells(), eventService[type])
+  return { player: playerEventService, ai: aiEventService }
 }

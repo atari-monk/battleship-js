@@ -1,5 +1,5 @@
-import { BATTLE_GRID } from './../../config.js'
-import { toggleGrids } from './../../../../shared_lib/ui.js'
+import { BATTLE_GRID } from '../../config.js'
+import { toggleGrids } from '../../../../shared_lib/ui.js'
 
 export class ToggleGridsUIController {
   toggleGrids(turnInfo) {

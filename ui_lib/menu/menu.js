@@ -4,7 +4,7 @@ import { MENU_CONFIG, MENU_BUTTON, MENU_HIDE } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
-import { ToggleGridsUIController } from './../battle_grid/action/ui/ZToggleGridsUIController.js'
+import { ToggleGridsUIController } from './../battle_grid/action/ui/ToggleGridsUIController.js'
 
 export class Menu {
   constructor(
