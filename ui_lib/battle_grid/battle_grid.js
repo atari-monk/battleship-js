@@ -6,22 +6,25 @@ import { PlayerEventService } from './PlayerEventService.js'
 import { PlayerHitService } from './PlayerHitService.js'
 import { AIEventService } from './AIEventService.js'
 import { AIHitService } from './AIHitService.js'
-import { EndTurnAction } from './EndTurnAction.js'
 import { WinAction } from './WinAction.js'
 import { GridCells } from './GridCells.js'
-import { ActionRegistry } from './action_service/ActionRegistry.js'
-import { ActionResolver } from './action_service/ActionResolver.js'
-import { ActionExecutor } from './action_service/ActionExecutor.js'
+import { ActionRegistry } from './action/ActionRegistry.js'
+import { ActionResolver } from './action/ActionResolver.js'
+import { ActionExecutor } from './action/ActionExecutor.js'
+import { GameTurnManager } from './action/GameTurnManager.js'
+import { TurnUIController } from './action/TurnUIController.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
   const dataService = serviceContainer.getServiceByName('data_service')
   const elementService = new ElementService()
   const gameStateService = new GameStateService(dataService)
 
+  const turnManager = new GameTurnManager(gameStateService)
+  new TurnUIController(turnManager)
+
   const actionRegistry = new ActionRegistry()
-  const endTurnAction = new EndTurnAction(gameStateService)
   const winAction = new WinAction(guiContainer, gameStateService)
-  actionRegistry.register('endTurn', () => endTurnAction.endTurn())
+  actionRegistry.register('endTurn', () => turnManager.endTurn())
   actionRegistry.register('win', () => winAction.win())
   const actionResolver = new ActionResolver(gameStateService)
   const actionExecutor = new ActionExecutor(actionRegistry, actionResolver)

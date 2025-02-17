@@ -366,3 +366,4 @@
 
 1. 11:34 - 12:16, 2 pomodoro, refactor(battle_grid): replace ActionService with ActionRegistry, ActionResolver, and ActionExecutor for improved action handling
 2. 12:17 - 12:41, refactor(docs): prepare next SRP refactor doc
+3. 13:37 - 13:58, refactor(battle_grid): remove EndTurnAction and related services, introduce GameTurnManager and TurnUIController for improved turn management
