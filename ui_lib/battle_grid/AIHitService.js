@@ -1,9 +1,9 @@
 import { matrixToScreen } from './../../shared_lib/ui.js'
 
 export class AIHitService {
-  constructor(gameStateService, cellHitService) {
+  constructor(gameStateService, cellHitManager) {
     this._gameStateService = gameStateService
-    this._cellHitService = cellHitService
+    this._cellHitManager = cellHitManager
   }
 
   hitCell(cells, gridRect, cellSize) {
@@ -11,6 +11,6 @@ export class AIHitService {
 
     const event = matrixToScreen({ gridRect, cellSize, row: x, col: y })
 
-    this._cellHitService.hitCell(event, cells, gridRect, cellSize)
+    this._cellHitManager.processCellHit(event, cells, gridRect, cellSize)
   }
 }

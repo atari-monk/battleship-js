@@ -369,3 +369,4 @@
 3. 13:37 - 13:58, refactor(battle_grid): remove EndTurnAction and related services, introduce GameTurnManager and TurnUIController for improved turn management
 4. 13:59 - 14:15, 1 pomodoro, refactor(battle_grid): remove WinAction, introduce GameWinManager and WinUIController for improved win handling
 5. 14:30 - 14:53, 1 pomodoro, refactor(docs): SRP doc, list of SPR classes
+6. 14:54 - 15:51, 2 pomodoro, refactor(battle_grid): CellHitManager and CellHitUIController for SRP

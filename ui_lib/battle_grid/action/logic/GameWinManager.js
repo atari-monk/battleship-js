@@ -1,4 +1,4 @@
-import { EventEmitter } from './EventEmitter.js'
+import { EventEmitter } from './../EventEmitter.js'
 
 export class GameWinManager extends EventEmitter {
   constructor(gameStateService) {

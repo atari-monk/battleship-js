@@ -1,9 +1,9 @@
 export class PlayerHitService {
-  constructor(cellHitService) {
-    this._cellHitService = cellHitService
+  constructor(cellHitManager) {
+    this._cellHitManager = cellHitManager
   }
 
   hitCell(event, cells, gridRect, cellSize) {
-    this._cellHitService.hitCell(event, cells, gridRect, cellSize)
+    this._cellHitManager.processCellHit(event, cells, gridRect, cellSize)
   }
 }

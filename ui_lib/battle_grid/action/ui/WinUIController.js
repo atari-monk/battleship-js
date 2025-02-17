@@ -1,5 +1,5 @@
-import { BATTLE_GRID } from './../config.js'
-import { handleAction } from './../../../shared_lib/ui.js'
+import { BATTLE_GRID } from './../../config.js'
+import { handleAction } from './../../../../shared_lib/ui.js'
 
 export class WinUIController {
   constructor(winManager, guiContainer) {
