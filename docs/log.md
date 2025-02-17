@@ -370,3 +370,4 @@
 4. 13:59 - 14:15, 1 pomodoro, refactor(battle_grid): remove WinAction, introduce GameWinManager and WinUIController for improved win handling
 5. 14:30 - 14:53, 1 pomodoro, refactor(docs): SRP doc, list of SPR classes
 6. 14:54 - 15:51, 2 pomodoro, refactor(battle_grid): CellHitManager and CellHitUIController for SRP
+7. 15:53 - 15:22, 1 pomodoro, refactor(battle_grid): introduce ToggleGridsUIController for improved grid visibility management

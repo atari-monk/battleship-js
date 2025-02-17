@@ -1,26 +1,21 @@
 import { BATTLE_GRID } from './../../config.js'
-import { handleAction, toggleGrids } from './../../../../shared_lib/ui.js'
+import { handleAction } from './../../../../shared_lib/ui.js'
 
 export class TurnUIController {
-  constructor(turnManager) {
+  constructor(turnManager, toggleGridsUIController) {
     this.turnManager = turnManager
+    this.toggleGridsUIController = toggleGridsUIController
     this.turnManager.on('turnChanged', this.handleTurnChange.bind(this))
   }
 
   handleTurnChange(turnInfo) {
-    const { waitOnTurn, waitMsg, elements, hiddenStyle } = BATTLE_GRID
+    const { waitOnTurn, waitMsg } = BATTLE_GRID
 
     handleAction({
       logMessages: [waitMsg(waitOnTurn)],
       waitTime: waitOnTurn,
       callback: () => {
-        const { currentPlayer, player1Name } = turnInfo
-        toggleGrids(
-          currentPlayer,
-          player1Name,
-          elements.map((element) => element.elementId),
-          hiddenStyle
-        )
+        this.toggleGridsUIController.toggleGrids(turnInfo)
       },
     })
   }

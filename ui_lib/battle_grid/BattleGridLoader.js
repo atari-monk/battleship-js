@@ -1,6 +1,5 @@
 import { format } from './../../shared_lib/LogFormatter.js'
 import { BATTLE_GRID } from './config.js'
-import { toggleGrids } from './../../shared_lib/ui.js'
 import { loadComponents } from './../../shared_lib/ui.js'
 
 export class BattleGridLoader {
@@ -26,15 +25,5 @@ export class BattleGridLoader {
     } catch (error) {
       console.error(...format.error(loadBattleGridError, error))
     }
-  }
-
-  setVisability(dataService) {
-    const { elements, hiddenStyle } = BATTLE_GRID
-    toggleGrids(
-      dataService.turn.currentPlayer,
-      dataService.player1.name,
-      elements.map((element) => element.elementId),
-      hiddenStyle
-    )
   }
 }

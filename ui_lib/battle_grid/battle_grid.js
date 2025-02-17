@@ -15,6 +15,7 @@ import { GameWinManager } from './action/logic/GameWinManager.js'
 import { WinUIController } from './action/ui/WinUIController.js'
 import { CellHitManager } from './action/logic/CellHitManager.js'
 import { CellHitUIController } from './action/ui/CellHitUIController.js'
+import { ToggleGridsUIController } from './action/ui/ZToggleGridsUIController.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
   const dataService = serviceContainer.getServiceByName('data_service')
@@ -24,8 +25,10 @@ export default function init({ serviceContainer, guiContainer, type } = {}) {
   const cellHitManager = new CellHitManager(gameStateService)
   const turnManager = new GameTurnManager(gameStateService)
   const winManager = new GameWinManager(gameStateService)
+
+  const toggleGridsUIController = new ToggleGridsUIController()
   new CellHitUIController(cellHitManager)
-  new TurnUIController(turnManager)
+  new TurnUIController(turnManager, toggleGridsUIController)
   new WinUIController(winManager, guiContainer)
 
   const actionRegistry = new ActionRegistry()

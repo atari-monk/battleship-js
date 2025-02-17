@@ -4,13 +4,15 @@ import { MENU_CONFIG, MENU_BUTTON, MENU_HIDE } from './../config.js'
 import { FleetGridLoader } from './../fleet_grid/FleetGridLoader.js'
 import { ToggleLoader } from './../toggle/ToggleLoader.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
+import { ToggleGridsUIController } from './../battle_grid/action/ui/ZToggleGridsUIController.js'
 
 export class Menu {
   constructor(
     serviceContainer,
     fleetGridLoader,
     toggleLoader,
-    battleGridLoader
+    battleGridLoader,
+    toggleGridsUIController
   ) {
     this.dataService = serviceContainer.getServiceByName(
       MENU_CONFIG.dataServiceName
@@ -18,6 +20,7 @@ export class Menu {
     this.fleetGridLoader = fleetGridLoader
     this.toggleLoader = toggleLoader
     this.battleGridLoader = battleGridLoader
+    this.toggleGridsUIController = toggleGridsUIController
   }
 
   init() {
@@ -50,7 +53,10 @@ export class Menu {
     if (this.dataService.config.enableFleetGrid) return
     await this.battleGridLoader.load(this.dataService)
     this.dataService.initializeTurn()
-    this.battleGridLoader.setVisability(this.dataService)
+    this.toggleGridsUIController.toggleGrids({
+      currentPlayer: this.dataService.turn.currentPlayer,
+      player1Name: this.dataService.player1.name,
+    })
   }
 }
 
@@ -59,6 +65,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
     serviceContainer,
     new FleetGridLoader(guiContainer),
     new ToggleLoader(guiContainer),
-    new BattleGridLoader(guiContainer)
+    new BattleGridLoader(guiContainer),
+    new ToggleGridsUIController()
   ).init()
 }
