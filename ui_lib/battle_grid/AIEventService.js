@@ -15,6 +15,7 @@ export class AIEventService {
 
   _aiMove(id, cells) {
     this._elementService.setElements(id)
+    
     const { gridRect, cellSize } = this._elementService
 
     this._aiHitService.hitCell(cells, gridRect, cellSize)
