@@ -6,25 +6,39 @@ import { PlayerEventService } from './PlayerEventService.js'
 import { PlayerHitService } from './PlayerHitService.js'
 import { AIEventService } from './AIEventService.js'
 import { AIHitService } from './AIHitService.js'
-import { ActionService } from './ActionService.js'
 import { EndTurnAction } from './EndTurnAction.js'
 import { WinAction } from './WinAction.js'
 import { GridCells } from './GridCells.js'
+import { ActionRegistry } from './action_service/ActionRegistry.js'
+import { ActionResolver } from './action_service/ActionResolver.js'
+import { ActionExecutor } from './action_service/ActionExecutor.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
-  const ds = serviceContainer.getServiceByName('data_service')
-  const es = new ElementService()
-  const gss = new GameStateService(ds)
+  const dataService = serviceContainer.getServiceByName('data_service')
+  const elementService = new ElementService()
+  const gameStateService = new GameStateService(dataService)
 
-  const as = new ActionService(gss, {
-    endTurn: new EndTurnAction(gss),
-    win: new WinAction(guiContainer, gss),
-  })
+  const actionRegistry = new ActionRegistry()
+  const endTurnAction = new EndTurnAction(gameStateService)
+  const winAction = new WinAction(guiContainer, gameStateService)
+  actionRegistry.register('endTurn', () => endTurnAction.endTurn())
+  actionRegistry.register('win', () => winAction.win())
+  const actionResolver = new ActionResolver(gameStateService)
+  const actionExecutor = new ActionExecutor(actionRegistry, actionResolver)
 
-  const chs = new CellHitService(gss)
-  const pes = new PlayerEventService(es, new PlayerHitService(chs), as)
-  const aies = new AIEventService(es, new AIHitService(gss, chs), as)
-  const eventService = { player: pes, ai: aies }
+  const cellHitService = new CellHitService(gameStateService)
+
+  const playerEventService = new PlayerEventService(
+    elementService,
+    new PlayerHitService(cellHitService),
+    actionExecutor
+  )
+  const aiEventService = new AIEventService(
+    elementService,
+    new AIHitService(gameStateService, cellHitService),
+    actionExecutor
+  )
+  const eventService = { player: playerEventService, ai: aiEventService }
 
   return new BattleGrid(new GridCells(), eventService[type])
 }

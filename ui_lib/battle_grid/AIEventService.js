@@ -1,10 +1,10 @@
 import { observeVisibilityChange } from '../../shared_lib/ui.js'
 
 export class AIEventService {
-  constructor(elementService, aiHitService, actionService) {
+  constructor(elementService, aiHitService, actionExecutor) {
     this._elementService = elementService
     this._aiHitService = aiHitService
-    this._actionService = actionService
+    this._actionExecutor = actionExecutor
   }
 
   setEvent(id, grid, cells) {
@@ -19,6 +19,6 @@ export class AIEventService {
 
     this._aiHitService.hitCell(cells, gridRect, cellSize)
 
-    this._actionService.action()
+    this._actionExecutor.execute()
   }
 }

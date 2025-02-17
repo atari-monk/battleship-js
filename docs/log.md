@@ -359,5 +359,9 @@
 
 1. 21:00 - 00:00, refactor(docs): update log and todo documentation, remove pomodoro file
 
-- Lost entire day ai agents. I am not able to move this since openai api is closed. Browser automation is to cumbersome.  
+- Lost entire day on ai agents. I am not able to move this since openai api is closed. Browser automation is to cumbersome.  
   Only thing i can do is generating specialized prompts using py and maybe stack them in chain for some production chain/line like factory line. 
+
+### 17
+
+1. 11:34 - 12:16, 2 pomodoro, refactor(battle_grid): replace ActionService with ActionRegistry, ActionResolver, and ActionExecutor for improved action handling

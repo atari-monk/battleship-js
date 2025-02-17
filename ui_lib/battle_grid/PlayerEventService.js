@@ -2,10 +2,10 @@ import { BATTLE_GRID } from './config.js'
 import { setEventForElement } from '../../shared_lib/ui.js'
 
 export class PlayerEventService {
-  constructor(elementService, playerHitService, actionService) {
+  constructor(elementService, playerHitService, actionExecutor) {
     this._elementService = elementService
     this._playerHitService = playerHitService
-    this._actionService = actionService
+    this._actionExecutor = actionExecutor
   }
 
   setEvent(id, grid, cells) {
@@ -24,6 +24,6 @@ export class PlayerEventService {
 
     this._playerHitService.hitCell(event, cells, gridRect, cellSize)
 
-    this._actionService.action()
+    this._actionExecutor.execute()
   }
 }
