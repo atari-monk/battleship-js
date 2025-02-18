@@ -1,6 +1,5 @@
 import { EventHandler } from './EventHandler.js'
 import { FleetService } from './FleetService.js'
-import { GridRenderer } from './GridRenderer.js'
 import { PlacementHandler } from './PlacementHandler.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
@@ -10,6 +9,7 @@ import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
 import { ToggleGridsUIController } from './../battle_grid/action/ui/ToggleGridsUIController.js'
 import { GridMetrics } from './../../ui_lib/grid/GridMetrics.js'
 import { FLEET_GRID_CONFIG as Config2 } from './config.js'
+import { GridCells } from './../grid/GridCells.js'
 
 export class FleetGrid {
   set dataService(dataService) {
@@ -18,20 +18,18 @@ export class FleetGrid {
   }
 
   constructor(guiContainer) {
-    this.gridItems = null
-
     this.placementValidator = new PlacementValidator()
     this.shipPreview = new ShipPreview()
-    this.gridMetric = new GridMetrics(Config2)
-    this.gridRenderer = new GridRenderer(this.gridMetric)
+    this._gridMetric = new GridMetrics(Config2)
+    this._gridCells = new GridCells(Config2)
     this.eventHandler = new EventHandler(this)
     this.fleetService = new FleetService(
       new BattleGridLoader(guiContainer),
       new ToggleGridsUIController()
     )
     this.placementHandler = new PlacementHandler(
-      this.gridRenderer,
-      this.gridMetric,
+      this._gridCells,
+      this._gridMetric,
       this.placementValidator,
       this.shipPreview,
       this.fleetService
@@ -39,27 +37,25 @@ export class FleetGrid {
   }
 
   paintOnHover(event) {
-    this.placementHandler.paintOnHover(event, this.gridItems)
+    this.placementHandler.paintOnHover(event, this.cells)
   }
 
   handleClick(event) {
-    this.placementHandler.handleClick(event, this.gridItems)
+    this.placementHandler.handleClick(event, this.cells)
   }
 
   handleWheel(event) {
     this.fleetService.isHorizontal =
       event.deltaY > 0 || event.deltaX > 0 ? false : true
-    this.placementHandler.paintOnHover(event, this.gridItems)
+    this.placementHandler.paintOnHover(event, this.cells)
   }
 
   init() {
-    const { initMsg } = FLEET_GRID_CONFIG
-    this.gridRenderer.generateGridItems()
-    this.gridItems = this.gridRenderer.getGridItems()
-
-    this.gridMetric.setGridMetrics('fleet-grid-1')
-
-    this.eventHandler.attachEvents()
     console.debug(...format.debug(initMsg))
+    const { initMsg } = FLEET_GRID_CONFIG
+    this._gridCells.generate('fleet-grid-1')
+    this.cells = this._gridCells.cells
+    this._gridMetric.setGridMetrics('fleet-grid-1')
+    this.eventHandler.attachEvents()
   }
 }
