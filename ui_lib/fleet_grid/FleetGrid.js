@@ -7,6 +7,7 @@ import { ShipPreview } from './ShipPreview.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 import { FLEET_GRID_CONFIG } from './../config.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
+import { ToggleGridsUIController } from './../battle_grid/action/ui/ToggleGridsUIController.js'
 
 export class FleetGrid {
   set dataService(dataService) {
@@ -21,7 +22,10 @@ export class FleetGrid {
     this.shipPreview = new ShipPreview()
     this.gridRenderer = new GridRenderer()
     this.eventHandler = new EventHandler(this)
-    this.fleetService = new FleetService(new BattleGridLoader(guiContainer))
+    this.fleetService = new FleetService(
+      new BattleGridLoader(guiContainer),
+      new ToggleGridsUIController()
+    )
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,

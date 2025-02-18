@@ -5,8 +5,9 @@ export class FleetService {
     this._dataService = dataService
   }
 
-  constructor(battleGridLoader) {
+  constructor(battleGridLoader, toggleGridsUIController) {
     this.battleGridLoader = battleGridLoader
+    this._toggleGridsUIController = toggleGridsUIController
     this.shipSizes = [5, 4, 3, 3, 2]
     this.currentShipIndex = 0
     this.isHorizontal = true
@@ -86,6 +87,11 @@ export class FleetService {
     await this.battleGridLoader.load(this._dataService)
 
     this._dataService.initializeTurn()
+
+    this._toggleGridsUIController.toggleGrids({
+      currentPlayer: this._dataService.turn.currentPlayer,
+      player1Name: this._dataService.player1.name,
+    })
   }
 
   hideFleetGrid() {

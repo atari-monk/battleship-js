@@ -387,3 +387,6 @@
 ### 18
 
 1. 13:04 - 14:04, 3 pomodoro, refactor(battle_grid): restructure GridCells to make it more general
+2. 14:05 - 14:19, refactor(fleet_grid): enable fleet grid and integrate ToggleGridsUIController for improved grid management  
+   This was fix to battle grid showed after fllet grid, to start refactoring component
+3. 
