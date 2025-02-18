@@ -51,8 +51,8 @@ export class FleetGrid {
   }
 
   init() {
-    console.debug(...format.debug(initMsg))
     const { initMsg } = FLEET_GRID_CONFIG
+    console.debug(...format.debug(initMsg))
     this._gridCells.generate('fleet-grid-1')
     this.cells = this._gridCells.cells
     this._gridMetric.setGridMetrics('fleet-grid-1')

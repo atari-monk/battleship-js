@@ -69,7 +69,6 @@ export const FLEET_GRID_CONFIG = {
     './../config.js',
     'EventHandler.js',
     'FleetService.js',
-    'GridRenderer.js',
     'PlacementValidator.js',
     'ShipPreview.js',
     'PlacementHandler.js',
