@@ -31,5 +31,8 @@ export const BATTLE_GRID = {
       cellCssClass: 'battle-grid__item',
     },
     attribute: { style: 'style' },
+    error: {
+      emptyGridMetrics: 'GridMetrics is not properly initialized',
+    },
   },
 }

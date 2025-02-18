@@ -1,8 +1,8 @@
 import { observeVisibilityChange } from '../../shared_lib/ui.js'
 
 export class AIEventService {
-  constructor(elementService, aiHitService, actionExecutor) {
-    this._elementService = elementService
+  constructor(gridMetrics, aiHitService, actionExecutor) {
+    this._gridMetrics = gridMetrics
     this._aiHitService = aiHitService
     this._actionExecutor = actionExecutor
   }
@@ -14,9 +14,7 @@ export class AIEventService {
   }
 
   _aiMove(id, cells) {
-    this._elementService.setElements(id)
-    
-    const { gridRect, cellSize } = this._elementService
+    const { gridRect, cellSize } = this._gridMetrics.setGridMetrics(id)
 
     this._aiHitService.hitCell(cells, gridRect, cellSize)
 

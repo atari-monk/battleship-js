@@ -1,6 +1,6 @@
 import { BATTLE_GRID } from './config.js'
 import { BattleGrid } from './BattleGrid.js'
-import { ElementService } from './ElementService.js'
+import { GridMetrics } from './../grid/GridMetrics.js'
 import { GameStateService } from './GameStateService.js'
 import { PlayerEventService } from './PlayerEventService.js'
 import { PlayerHitService } from './PlayerHitService.js'
@@ -20,7 +20,7 @@ import { ToggleGridsUIController } from './action/ui/ToggleGridsUIController.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
   const dataService = serviceContainer.getServiceByName('data_service')
-  const elementService = new ElementService()
+  const gridMetrics = new GridMetrics(BATTLE_GRID)
   const gameStateService = new GameStateService(dataService)
 
   const cellHitManager = new CellHitManager(gameStateService)
@@ -32,7 +32,7 @@ export default function init({ serviceContainer, guiContainer, type } = {}) {
   const actionExecutor = setupActions(turnManager, winManager, gameStateService)
 
   const eventService = setupEventServices(
-    elementService,
+    gridMetrics,
     cellHitManager,
     actionExecutor,
     gameStateService
@@ -63,19 +63,19 @@ function setupActions(turnManager, winManager, gameStateService) {
 }
 
 function setupEventServices(
-  elementService,
+  gridMetrics,
   cellHitManager,
   actionExecutor,
   gameStateService
 ) {
   const playerEventService = new PlayerEventService(
-    elementService,
+    gridMetrics,
     new PlayerHitService(cellHitManager),
     actionExecutor
   )
 
   const aiEventService = new AIEventService(
-    elementService,
+    gridMetrics,
     new AIHitService(gameStateService, cellHitManager),
     actionExecutor
   )

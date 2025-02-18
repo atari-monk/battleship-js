@@ -2,8 +2,8 @@ import { BATTLE_GRID } from './config.js'
 import { setEventForElement } from '../../shared_lib/ui.js'
 
 export class PlayerEventService {
-  constructor(elementService, playerHitService, actionExecutor) {
-    this._elementService = elementService
+  constructor(gridMetrics, playerHitService, actionExecutor) {
+    this._gridMetrics = gridMetrics
     this._playerHitService = playerHitService
     this._actionExecutor = actionExecutor
   }
@@ -19,9 +19,7 @@ export class PlayerEventService {
   }
 
   _move(id, event, cells) {
-    this._elementService.setElements(id)
-    
-    const { gridRect, cellSize } = this._elementService
+    const { gridRect, cellSize } = this._gridMetrics.setGridMetrics(id)
 
     this._playerHitService.hitCell(event, cells, gridRect, cellSize)
 
