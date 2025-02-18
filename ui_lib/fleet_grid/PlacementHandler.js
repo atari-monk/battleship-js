@@ -1,13 +1,21 @@
 import { format } from './../../shared_lib/LogFormatter.js'
 import { FLEET_GRID_CONFIG, COLOR, EVENT } from './../config.js'
+import { getCellPosition2 } from './../../shared_lib/ui.js'
 
 export class PlacementHandler {
   set dataService(dataService) {
     this._dataService = dataService
   }
 
-  constructor(gridRenderer, placementValidator, shipPreview, fleetService) {
+  constructor(
+    gridRenderer,
+    gridMetric,
+    placementValidator,
+    shipPreview,
+    fleetService
+  ) {
     this.gridRenderer = gridRenderer
+    this._gridMetric = gridMetric
     this.placementValidator = placementValidator
     this.shipPreview = shipPreview
     this.fleetService = fleetService
@@ -16,7 +24,7 @@ export class PlacementHandler {
 
   paintOnHover(event, gridItems) {
     const touch = event.touches ? event.touches[0] : event
-    const index = this.getCellIndex(touch.clientX, touch.clientY)
+    const { row, col, index } = this.getCellIndex(touch.clientX, touch.clientY)
     const shipSize =
       this.fleetService.shipSizes[this.fleetService.currentShipIndex]
 
@@ -59,7 +67,7 @@ export class PlacementHandler {
   handleClick(event, gridItems) {
     const { fleetGridGrid, player1Data } = FLEET_GRID_CONFIG
     const touch = event.touches ? event.touches[0] : event
-    const index = this.getCellIndex(touch.clientX, touch.clientY)
+    const { row, col, index } = this.getCellIndex(touch.clientX, touch.clientY)
 
     if (
       this.fleetService.validateAndPlaceShip(
@@ -87,6 +95,7 @@ export class PlacementHandler {
   }
 
   getCellIndex(clientX, clientY) {
-    return this.gridRenderer.getCellIndex(clientX, clientY)
+    const { cellSize } = this._gridMetric
+    return getCellPosition2(clientX, clientY, cellSize)
   }
 }

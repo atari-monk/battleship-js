@@ -1,7 +1,8 @@
 import { FLEET_GRID_CONFIG, HTML_CONFIG } from './../config.js'
 
 export class GridRenderer {
-  constructor() {
+  constructor(gridMetric) {
+    this.gridMetric = gridMetric
     this.gridItems = null
   }
 
@@ -27,13 +28,15 @@ export class GridRenderer {
     return this.gridItems
   }
 
-  getCellIndex(x, y) {
-    const { fleetGridCell } = FLEET_GRID_CONFIG
-    const cellSize = document
-      .querySelector(`.${fleetGridCell}`)
-      .getBoundingClientRect()
-    const col = Math.floor(x / cellSize.width)
-    const row = Math.floor(y / cellSize.height)
-    return row * 10 + col + 1
-  }
+  //   getCellIndex(x, y) {
+  //     // const { fleetGridCell } = FLEET_GRID_CONFIG
+  //     // const cellSize2 = document
+  //     //   .querySelector(`.${fleetGridCell}`)
+  //     //   .getBoundingClientRect()
+
+  //     const { cellSize } = this.gridMetric
+  //     const col = Math.floor(x / cellSize.width)
+  //     const row = Math.floor(y / cellSize.height)
+  //     return row * 10 + col + 1
+  //   }
 }

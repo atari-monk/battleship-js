@@ -8,6 +8,8 @@ import { format } from './../../shared_lib/LogFormatter.js'
 import { FLEET_GRID_CONFIG } from './../config.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
 import { ToggleGridsUIController } from './../battle_grid/action/ui/ToggleGridsUIController.js'
+import { GridMetrics } from './../../ui_lib/grid/GridMetrics.js'
+import { FLEET_GRID_CONFIG as Config2 } from './config.js'
 
 export class FleetGrid {
   set dataService(dataService) {
@@ -20,7 +22,8 @@ export class FleetGrid {
 
     this.placementValidator = new PlacementValidator()
     this.shipPreview = new ShipPreview()
-    this.gridRenderer = new GridRenderer()
+    this.gridMetric = new GridMetrics(Config2)
+    this.gridRenderer = new GridRenderer(this.gridMetric)
     this.eventHandler = new EventHandler(this)
     this.fleetService = new FleetService(
       new BattleGridLoader(guiContainer),
@@ -28,6 +31,7 @@ export class FleetGrid {
     )
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
+      this.gridMetric,
       this.placementValidator,
       this.shipPreview,
       this.fleetService
@@ -52,6 +56,9 @@ export class FleetGrid {
     const { initMsg } = FLEET_GRID_CONFIG
     this.gridRenderer.generateGridItems()
     this.gridItems = this.gridRenderer.getGridItems()
+
+    this.gridMetric.setGridMetrics('fleet-grid-1')
+
     this.eventHandler.attachEvents()
     console.debug(...format.debug(initMsg))
   }
