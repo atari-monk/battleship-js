@@ -29,6 +29,14 @@ export function selectById({ id } = {}) {
   return element
 }
 
+export function selectAll(selector) {
+  const elements = document.querySelectorAll(selector)
+  if (!elements) {
+    console.warn(...format.warn(defaultNotFoundMsg('selector', selector)))
+  }
+  return elements
+}
+
 export function toggle({ element, cssClass, forceState } = {}) {
   if (typeof forceState === 'boolean') {
     return element.classList.toggle(cssClass, forceState)
@@ -174,7 +182,7 @@ export function generateElements({
   parentElement,
   numElements = 100,
   elementType = 'div',
-  className = '',
+  childCssClassName = '',
 }) {
   if (!parentElement) {
     throw new Error('A valid parent element must be provided.')
@@ -182,8 +190,8 @@ export function generateElements({
 
   for (let i = 1; i <= numElements; i++) {
     const element = document.createElement(elementType)
-    if (className) {
-      element.classList.add(className)
+    if (childCssClassName) {
+      element.classList.add(childCssClassName)
     }
     parentElement.appendChild(element)
   }

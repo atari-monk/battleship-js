@@ -383,3 +383,7 @@
 8. 16:24 - 17:23, 2 pomodoro, refactor(battle_grid): ensured battle_grid is SOLID
 
 - Total 4 hours 31 minutes (271 minutes)
+
+### 18
+
+1. 13:04 - 14:04, 3 pomodoro, refactor(battle_grid): restructure GridCells to make it more general

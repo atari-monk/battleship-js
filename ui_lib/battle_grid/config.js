@@ -23,4 +23,13 @@ export const BATTLE_GRID = {
   loadBattleGridError: 'Error in loadBattleGrid:',
   itemsError: 'Grid items have not been generated yet.',
   cellError: 'No cell found!',
+
+  gridCells: {
+    selector: (id, cssClass) => `#${id} .${cssClass}`,
+    cssClass: {
+      gridCssClass: 'battle-grid__grid',
+      cellCssClass: 'battle-grid__item',
+    },
+    attribute: { style: 'style' },
+  },
 }

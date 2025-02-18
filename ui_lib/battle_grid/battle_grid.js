@@ -1,3 +1,4 @@
+import { BATTLE_GRID } from './config.js'
 import { BattleGrid } from './BattleGrid.js'
 import { ElementService } from './ElementService.js'
 import { GameStateService } from './GameStateService.js'
@@ -5,7 +6,7 @@ import { PlayerEventService } from './PlayerEventService.js'
 import { PlayerHitService } from './PlayerHitService.js'
 import { AIEventService } from './AIEventService.js'
 import { AIHitService } from './AIHitService.js'
-import { GridCells } from './GridCells.js'
+import { GridCells } from './../grid/GridCells.js'
 import { ActionRegistry } from './action/ActionRegistry.js'
 import { ActionResolver } from './action/ActionResolver.js'
 import { ActionExecutor } from './action/ActionExecutor.js'
@@ -37,7 +38,7 @@ export default function init({ serviceContainer, guiContainer, type } = {}) {
     gameStateService
   )
 
-  return new BattleGrid(new GridCells(), eventService[type])
+  return new BattleGrid(new GridCells(BATTLE_GRID), eventService[type])
 }
 
 function setupUIControllers(
