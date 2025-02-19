@@ -401,3 +401,11 @@
 1. 13:10 - 13:32, 1 pomodoro, refactor(fleet_grid): restructure FleetGrid initialization and enhance event handling
 2. 12:33 - 14:15, what next ?
 3. 14:15 - 16:09, refactor(full_screen): restructure FullScreen component and enhance configuration management
+4. 18:00 - 20:43, refactor(full_screen): update FullScreen component to use new select and toggle functions
+   refactor(constants): standardize log levels and console colors to uppercase
+   refactor(select): implement new select function with improved error handling
+   refactor(style): create toggle function for managing CSS class states
+   refactor(translation): add language support for error messages and selectors
+   refactor(content): enhance content structure for better localization
+
+- Total 6 hours 41 minutes (401 minutes)

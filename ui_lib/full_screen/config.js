@@ -9,8 +9,9 @@ export const FULL_SCREEN = {
     eventType: EVENT.click,
   },
   hide: {
-    selector: '.fs-overlay',
+    elementSelector: '.fs-overlay',
     cssClass: 'fs-overlay--hidden',
+    forceState: true,
   },
   menu: {
     componentName: 'menu',

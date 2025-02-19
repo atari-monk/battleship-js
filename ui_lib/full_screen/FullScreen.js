@@ -1,11 +1,11 @@
-import { LEVEL } from './../../shared_lib_2/constants.js'
 import format from './../../shared_lib_2/format.js'
 import {
   setEvent,
-  selectAndToggle,
   requestFullscreen,
   loadComponents,
 } from './../../shared_lib/ui.js'
+import { select } from './../../shared_lib_2/select.js'
+import { toggle } from './../../shared_lib_2/style.js'
 
 export class FullScreen {
   constructor(config, guiContainer) {
@@ -15,7 +15,7 @@ export class FullScreen {
   }
 
   _init() {
-    console.debug(format(LEVEL.debug, this._config.message.init))
+    console.debug(format(this._config.message.init))
 
     setEvent({
       ...this._config.button,
@@ -24,7 +24,9 @@ export class FullScreen {
   }
 
   async _requestFullscreen() {
-    selectAndToggle({ ...this._config.hide })
+    const { hide } = this._config
+    const element = select(hide)
+    toggle({ element, ...hide })
 
     requestFullscreen()
 

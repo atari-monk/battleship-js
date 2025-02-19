@@ -1,15 +1,15 @@
-import { LEVEL, CONSOLE_COLOR } from './constants.js'
+import { TYPE, LEVEL, CONSOLE_COLOR } from './constants.js'
 
 export class ConsoleFormatter {
   constructor() {
     this._counters = {}
-    this._minLogLevel = LEVEL.debug
-    const { cyan, yellow, red, reset } = CONSOLE_COLOR
+    this._minLogLevel = LEVEL.DEBUG
+    const { CYAN, YELLOW, RED, RESET } = CONSOLE_COLOR
     this._colorMap = {
-      [LEVEL.debug]: cyan,
-      [LEVEL.warn]: yellow,
-      [LEVEL.error]: red,
-      reset: reset,
+      [LEVEL.DEBUG]: CYAN,
+      [LEVEL.WARN]: YELLOW,
+      [LEVEL.ERROR]: RED,
+      reset: RESET,
     }
   }
 
@@ -29,12 +29,19 @@ export class ConsoleFormatter {
     return logLevels.indexOf(level) >= logLevels.indexOf(this._minLogLevel)
   }
 
-  log(level = this._minLogLevel, ...args) {
+  log(levelOrMessage, ...args) {
+    let level = this._minLogLevel
+    if (Object.values(LEVEL).includes(levelOrMessage)) {
+      level = levelOrMessage
+    } else {
+      args.unshift(levelOrMessage)
+    }
+
     if (!Object.values(LEVEL).includes(level)) {
       console.warn(
-        `⚠️ Invalid log level: "${level}". Defaulting to LEVEL.debug.`
+        `⚠️ Invalid log level: "${level}". Defaulting to LEVEL.DEBUG.`
       )
-      level = LEVEL.debug
+      level = LEVEL.DEBUG
     }
 
     if (!this.shouldLog(level)) return
@@ -42,8 +49,8 @@ export class ConsoleFormatter {
     this._counters[level] = (this._counters[level] ?? 0) + 1
 
     const formattedArgs = args.map((arg) => {
-      if (arg === null) return 'null'
-      if (typeof arg === 'object') return JSON.stringify(arg, null, 2)
+      if (arg === null) return TYPE.NULL
+      if (typeof arg === TYPE.OBJECT) return JSON.stringify(arg, null, 2)
       return String(arg)
     })
 
