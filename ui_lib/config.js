@@ -7,33 +7,6 @@ export const EVENT = {
   wheel: 'wheel',
 }
 
-export const FULL_SCREEN = {
-  initMsg: 'Loading component: full_screen',
-  buttonId: 'fsOverlayButton',
-  selector: 'fs-overlay',
-  get classSelector() {
-    return `.${this.selector}`
-  },
-  hidden: 'fs-overlay--hidden',
-  fullScreenError: 'Error switching to full screen mode:',
-}
-
-export const FULL_SCREEN_BUTTON = {
-  id: FULL_SCREEN.buttonId,
-  eventType: EVENT.click,
-}
-
-export const FULL_SCREEN_HIDE = {
-  selector: FULL_SCREEN.classSelector,
-  cssClass: FULL_SCREEN.hidden,
-}
-
-export const MENU_COMPONENT = {
-  componentName: 'menu',
-  cssClass: 'game-menu',
-  elements: [{ elementId: 'game-menu-1' }],
-}
-
 export const MENU_CONFIG = {
   startButtonId: 'gameMenuStartButton',
   clickEvent: 'click',
