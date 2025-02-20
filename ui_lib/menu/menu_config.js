@@ -1,6 +1,9 @@
 import { EVENT } from '../../shared_lib_2/constants.js'
 
 export const MENU_COMPONENT_CONFIG = {
+  dependency: {
+    dataService: 'data_service',
+  },
   message: {
     init: 'Loading component: menu',
   },
@@ -9,8 +12,8 @@ export const MENU_COMPONENT_CONFIG = {
     eventType: EVENT.CLICK,
   },
   hide: {
-    selector: '.fs-overlay',
-    cssClass: 'fs-overlay--hidden',
+    selector: '.game-menu',
+    cssClass: 'game-menu--hidden',
     forceState: true,
   },
   menu: {
@@ -18,5 +21,7 @@ export const MENU_COMPONENT_CONFIG = {
     cssClass: 'game-menu',
     elements: [{ elementId: 'game-menu-1' }],
   },
-  error: {},
+  error: {
+    gameLoadingFailed: 'Error in loading game',
+  },
 }

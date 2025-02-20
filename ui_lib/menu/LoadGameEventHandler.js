@@ -1,5 +1,5 @@
-import { MENU_CONFIG, MENU_HIDE } from './../config.js'
 import { selectAndToggle } from './../../shared_lib/ui.js'
+import { LEVEL, format } from './../../shared_lib_2/index.js'
 
 export class LoadGameEventHandler {
   constructor(
@@ -12,7 +12,7 @@ export class LoadGameEventHandler {
   ) {
     this._config = config
     this._dataService = serviceContainer.getServiceByName(
-      MENU_CONFIG.dataServiceName
+      config.dependency.dataService
     )
     this._fleetGridLoader = fleetGridLoader
     this._toggleLoader = toggleLoader
@@ -21,13 +21,17 @@ export class LoadGameEventHandler {
   }
 
   async handleLoadGameRequest() {
+    const {
+      hide,
+      error: { gameLoadingFailed },
+    } = this._config
     try {
-      selectAndToggle({ ...MENU_HIDE })
+      selectAndToggle({ ...hide })
 
       await this._loadFleetGrid()
       await this._loadBattleGrid()
     } catch (error) {
-      console.error(...format.error(MENU_CONFIG.handleClickError, error))
+      console.error(format(LEVEL.ERROR, gameLoadingFailed, error))
     }
   }
 
