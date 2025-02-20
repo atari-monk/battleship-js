@@ -1,11 +1,8 @@
 import format from './../../shared_lib_2/format.js'
-import {
-  setEvent,
-  requestFullscreen,
-  loadComponents,
-} from './../../shared_lib/ui.js'
-import { queryObj } from './../../shared_lib_2/select.js'
+import { requestFullscreen, loadComponents } from './../../shared_lib/ui.js'
+import { getByIdObj, queryObj } from './../../shared_lib_2/select.js'
 import { toggleObj } from './../../shared_lib_2/style.js'
+import { EVENT } from '../../shared_lib_2/constants.js'
 
 export class FullScreen {
   constructor(config, guiContainer) {
@@ -15,24 +12,28 @@ export class FullScreen {
   }
 
   _init() {
-    console.debug(format(this._config.message.init))
+    const {
+      button,
+      message: { init },
+    } = this._config
 
-    setEvent({
-      ...this._config.button,
-      handler: async () => this._requestFullscreen(),
-    })
+    console.debug(format(init))
+
+    getByIdObj(button).addEventListener(EVENT.CLICK, async () =>
+      this._requestFullscreen()
+    )
   }
 
   async _requestFullscreen() {
-    const { hide } = this._config
-    const element = queryObj(hide)
-    toggleObj({ element, ...hide })
+    const { hide, menu } = this._config
+
+    toggleObj({ element: queryObj(hide), ...hide })
 
     requestFullscreen()
 
     await loadComponents({
       uiContainer: this._guiContainer,
-      ...this._config.menu,
+      ...menu,
     })
   }
 }
