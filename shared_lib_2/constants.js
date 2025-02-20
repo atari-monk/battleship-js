@@ -1,22 +1,22 @@
-export const TYPE = Object.freeze({
+export const TYPE = {
   STRING: 'string',
   BOOL: 'boolean',
   NULL: 'null',
   OBJECT: 'object',
-})
+}
 
-export const LEVEL = Object.freeze({
+export const LEVEL = {
   DEBUG: 'debug',
   WARN: 'warn',
   ERROR: 'error',
-})
+}
 
-export const CONSOLE_COLOR = Object.freeze({
+export const CONSOLE_COLOR = {
   CYAN: '\x1b[36m',
   YELLOW: '\x1b[33m',
   RED: '\x1b[31m',
   RESET: '\x1b[0m',
-})
+}
 
 export const EVENT = {
   MOUSE_MOVE: 'mousemove',
@@ -27,7 +27,7 @@ export const EVENT = {
   WHEEL: 'wheel',
 }
 
-export const LANGUAGE = Object.freeze({
+export const LANGUAGE = {
   EN: 'en',
   PL: 'pl',
-})
+}
