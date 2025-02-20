@@ -4,8 +4,8 @@ import {
   requestFullscreen,
   loadComponents,
 } from './../../shared_lib/ui.js'
-import { select } from './../../shared_lib_2/select.js'
-import { toggle } from './../../shared_lib_2/style.js'
+import { queryObj } from './../../shared_lib_2/select.js'
+import { toggleObj } from './../../shared_lib_2/style.js'
 
 export class FullScreen {
   constructor(config, guiContainer) {
@@ -19,14 +19,14 @@ export class FullScreen {
 
     setEvent({
       ...this._config.button,
-      handler: async (event) => this._requestFullscreen(event),
+      handler: async () => this._requestFullscreen(),
     })
   }
 
   async _requestFullscreen() {
     const { hide } = this._config
-    const element = select(hide)
-    toggle({ element, ...hide })
+    const element = queryObj(hide)
+    toggleObj({ element, ...hide })
 
     requestFullscreen()
 

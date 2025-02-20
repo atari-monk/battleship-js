@@ -6,10 +6,10 @@ export const FULL_SCREEN = {
   },
   button: {
     id: 'fsOverlayButton',
-    eventType: EVENT.click,
+    eventType: EVENT.CLICK,
   },
   hide: {
-    elementSelector: '.fs-overlay',
+    selector: '.fs-overlay',
     cssClass: 'fs-overlay--hidden',
     forceState: true,
   },
