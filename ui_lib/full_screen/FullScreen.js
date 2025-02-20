@@ -1,14 +1,10 @@
-import { EVENT } from '../../shared_lib_2/constants.js'
-import format from './../../shared_lib_2/format.js'
-import { getByIdObj, queryObj } from './../../shared_lib_2/select.js'
-import { toggleObj } from './../../shared_lib_2/style.js'
-import { requestFullscreen } from './../../shared_lib_2/fullscreen.js'
-import { loadComponentsObj } from './../../shared_lib_2/component.js'
+import { format, EVENT, getByIdObj } from './../../shared_lib_2/index.js'
 
-export class FullScreen {
-  constructor(config, guiContainer) {
+export class FullScreenComponent {
+  constructor(config, guiContainer, eventHandler) {
     this._config = config
     this._guiContainer = guiContainer
+    this._eventHandler = eventHandler
     this._init()
   }
 
@@ -21,20 +17,7 @@ export class FullScreen {
     console.debug(format(init))
 
     getByIdObj(button).addEventListener(EVENT.CLICK, async () =>
-      this._requestFullscreen()
+      this._eventHandler.handleFullscreenRequest()
     )
-  }
-
-  async _requestFullscreen() {
-    const { hide, menu } = this._config
-
-    toggleObj({ element: queryObj(hide), ...hide })
-
-    requestFullscreen()
-
-    await loadComponentsObj({
-      uiContainer: this._guiContainer,
-      ...menu,
-    })
   }
 }
