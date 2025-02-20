@@ -1,9 +1,9 @@
+import { EVENT } from '../../shared_lib_2/constants.js'
 import format from './../../shared_lib_2/format.js'
-import { loadComponents } from './../../shared_lib/ui.js'
-import { requestFullscreen } from './../../shared_lib_2/fullscreen.js'
 import { getByIdObj, queryObj } from './../../shared_lib_2/select.js'
 import { toggleObj } from './../../shared_lib_2/style.js'
-import { EVENT } from '../../shared_lib_2/constants.js'
+import { requestFullscreen } from './../../shared_lib_2/fullscreen.js'
+import { loadComponentsObj } from './../../shared_lib_2/component.js'
 
 export class FullScreen {
   constructor(config, guiContainer) {
@@ -32,7 +32,7 @@ export class FullScreen {
 
     requestFullscreen()
 
-    await loadComponents({
+    await loadComponentsObj({
       uiContainer: this._guiContainer,
       ...menu,
     })
