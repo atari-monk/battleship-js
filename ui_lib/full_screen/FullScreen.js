@@ -1,5 +1,6 @@
 import format from './../../shared_lib_2/format.js'
-import { requestFullscreen, loadComponents } from './../../shared_lib/ui.js'
+import { loadComponents } from './../../shared_lib/ui.js'
+import { requestFullscreen } from './../../shared_lib_2/fullscreen.js'
 import { getByIdObj, queryObj } from './../../shared_lib_2/select.js'
 import { toggleObj } from './../../shared_lib_2/style.js'
 import { EVENT } from '../../shared_lib_2/constants.js'

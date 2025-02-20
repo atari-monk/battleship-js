@@ -416,4 +416,4 @@
 2. 09:48 - 10:22, refactor(constants): remove Object.freeze from constants for improved flexibility
    refactor(FullScreen): enhance event handling and configuration structure
    feat(event): add setEvent and setEventObj functions for streamlined event management
-3. 
+3. 10:23 - 10:40, feat(fullscreen): implement requestFullscreen function and update imports for fullscreen handling
