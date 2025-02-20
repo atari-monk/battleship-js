@@ -413,4 +413,7 @@
 ### 20
 
 1. 09:06 - 09:47, refactor(full_screen): update FullScreen component to use query and toggle object functions
-2. 09:48 - ,
+2. 09:48 - 10:22, refactor(constants): remove Object.freeze from constants for improved flexibility
+   refactor(FullScreen): enhance event handling and configuration structure
+   feat(event): add setEvent and setEventObj functions for streamlined event management
+3. 
