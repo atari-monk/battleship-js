@@ -3,6 +3,9 @@ from http.server import SimpleHTTPRequestHandler
 from socketserver import TCPServer
 import mimetypes
 
+def get_project_root():
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
     def guess_type(self, path):
         mime_type, _ = mimetypes.guess_type(path)
@@ -12,11 +15,11 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
             mime_type = "text/markdown"
         return mime_type
 
-project_root = os.path.dirname(os.path.abspath(__file__))
+project_root = get_project_root()
 
 PORT = 8000
 
-with TCPServer(("", PORT), CustomHTTPRequestHandler) as httpd:
+with TCPServer(("", PORT), lambda *args, **kwargs: CustomHTTPRequestHandler(*args, directory=project_root, **kwargs)) as httpd:
     print(f"Serving files from {project_root} at http://localhost:{PORT}/")
     try:
         httpd.serve_forever()
