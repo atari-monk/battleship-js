@@ -1,4 +1,4 @@
-import { format, EVENT, getByIdObj } from './../../shared_lib_2/index.js'
+import { format, EVENT, getByIdObj } from '../../shared_lib_2/index.js'
 
 export class FullScreenComponent {
   constructor(config, guiContainer, eventHandler) {
