@@ -1,8 +1,10 @@
-# Log Task 2025
+# Log
 
-## 1
+## 2025
 
-### 10
+### 1
+
+#### 10
 
 1. 10:04 - 10:36, Project reorganization.
 2. 10:37 - 10:43, Docs reorganization.
@@ -16,12 +18,12 @@
 10. 20:31 - 22:04, Toggle button.
 11. 22:05 - 23:15, Toggle button in grid.
 
-### 11
+#### 11
 
 1. 13:10 - 15:00, Integrate grid to page.
 2. 21:31 - 22:20, Fix toogle button; Ship is not moved to it on switching orientation; Remove divs now generated in load component function.
 
-### 12
+#### 12
 
 1. 16:22 - 16:56, Place fleet.
 2. 16:56 - 17:12, Mobile version and pc version of grid are mostly same code so there will be no separate version at this point. Maybe release will be separate.
@@ -30,7 +32,7 @@
 5. 18:02 - 18:37, Passing dataService form app module to components and set grid data for player1.
 6. 21:45 - 21:53, Test of fleet placing and battle in one grid; Better do them as separate components.
 
-### 13
+#### 13
 
 1. 08:57 - 10:15, Generate fleet placing component.  
    Strings to vars.
@@ -40,7 +42,7 @@
 5. 20:28 - 20:52, ShipPreview class.
 6. 22:38 - 23:32, GridRenderer class.
 
-### 14
+#### 14
 
 1. 07:53 - 08:14, EventHandler class.
 2. 10:02 - 11:04, FleetLogic class.
@@ -48,18 +50,18 @@
 4. 15:47 - 16:29, FleetGridConfig class.
 5. 18:57 - 20:47, Using Fleet Grid component with many js in page, updated component loader for this.
 
-### 15
+#### 15
 
 1. 13:06 - 15:46, Component system; From one method loading component to 4 classes.
 
-### 16
+#### 16
 
 1. 10:47 - 11:07, component_service - gui component classes
 2. 11:08 - 11:41, use new guiContener in page
 3. 13:37 - 15:20, load components setters with dependency on service
 4. 17:13 - 17:45, fixed toggle ship orientation button
 
-### 17
+#### 17
 
 1. 06:24 - 06:45, set fleet for player2
 2. 06:46 - 07:30, battle grid SOLID
@@ -68,7 +70,7 @@
 5. 09:51 - 12:34, test grid in component battle grid fleet (test page in component folder)
 6. 17:20 - 18:26, react to ship hit using fleet placement data in gui
 
-### 18
+#### 18
 
 1. 05:47 - 06:19, feat(data): add game turn model
 2. 06:20 - 07:10, refactor(config): fix config format
@@ -84,7 +86,7 @@
 - Total 493 min = 8 hours and 14 minutes
 - Honest day work :)
 
-### 19
+#### 19
 
 1. 09:36 - 10:22, refactor(log): improved numbered logs
 2. 13:25 - 14:10, fix(grid): bugs in selectors of battle grid renderer
@@ -97,7 +99,7 @@
   Because there was only one shared instance of the grid, only one UI was being updated, leading to incorrect rendering.  
   After adding a factory to generate two separate instances of the grid, it properly handles multiple turns and ensure both grids rendered and updated correctly.
 
-### 20
+#### 20
 
 1. 13:14 - 13:44, fix(log): consistent log format
 2. 13:45 - 14:57, feat(data): fleet data for test; numbered logger; disable fleetGrid
@@ -106,7 +108,7 @@
 
 - Total 211 min = 3 hours 31 minutes
 
-### 21
+#### 21
 
 1. 06:33 - 07:24, feat(board): callback for AI
 2. 09:32 - 11:19, feat(board): battleship ai
@@ -118,7 +120,7 @@
 - Total 434 min = 7 hours 14 minutes
 - Calculating enemy move
 
-### 22
+#### 22
 
 1. 14:19 - 16:32, refactor(predictor): implement board space counting
 2. 20:57 - 21:07, feat(spaceCounter): enhance space counting logic and improve logging output
@@ -127,7 +129,7 @@
 
 - Total 296 min = 4 hours 56 minutes
 
-### 23
+#### 23
 
 1. 08:40 - 09:15, feat(predictor): ship placement logic horizontal and vertical methods
 2. 09:19 - 09:37, feat(predictor): implement automated ship placement and board filling logic
@@ -141,7 +143,7 @@
 - Total 435 min = 7 hours 15 minutes
 - Predicted all combinations of 2x2 game case, to learn something about predicting batleship grid
 
-### 24
+#### 24
 
 1. 11:10 - 11:25, chore(predictor): move 2x2 predictor prototype
 2. 11:26 - 11:43, feat(predictor): add 10x10 predictor prototype
@@ -149,7 +151,7 @@
 
 - Total 197 min = 3 hours 17 minutes
 
-### 25
+#### 25
 
 1. 06:30 - 11:55, chore(predictor): remove unused 10x10 predictor files, hard fail
 2. 17:47 - 18:26
@@ -157,7 +159,7 @@
 
 - Total 398 min = 6 hours 38 minutes
 
-### 26
+#### 26
 
 1. 15:53 - 18:22, refactor: update AI logic and remove unused classes
 2. 20:50 - 21:34, feat: enhance PlayerAI with targeted attack logic
@@ -165,7 +167,7 @@
 
 - Total 231 minutes = 3 hours 51 minutes
 
-### 27
+#### 27
 
 1. 16:00 - 17:00
 2. 18:47 - 19:21, refactor: PlayerAI, doc
@@ -173,7 +175,7 @@
 
 - Total 312 minutes = 5 hours 12 minutes
 
-### 28
+#### 28
 
 1. 14:08 - 15:18, refactor: FullScreen class for improved configuration and event handling,  
                   refactor: improve error handling and logging in FullScreen class methods
@@ -182,7 +184,7 @@
 
 - Total 219 minutes = 3 hours 39 minutes
 
-### 29
+#### 29
 
 1. 11:00 - 12:08, refactor: Toggle class with configuration, event handling
 2. 14:45 - 15:11, refactor: centralize event configuration in FLEET_GRID_CONFIG and simplify EventHandler 
@@ -193,7 +195,7 @@
 - Total 224 minutes = 3 hours 44 minutes
 - Refactoring code to make it pretty
 
-### 30
+#### 30
 
 1. 08:52 - 09:20, refactor: centralize grid configuration in FLEET_GRID_CONFIG and simplify GridRenderer
 2. 09:21 - 10:09, refactor: remove config dependency from FleetGrid and PlacementHandler, centralize configuration usage
@@ -207,16 +209,16 @@
 - Refactoring code to make it pretty
 - Merging configs to one file
 
-### 31
+#### 31
 
 1. 17:29 - 18:29, refactor: integrate BattleAI into GridRenderer and simplify attack handling
 
 - Total 60 minutes = 1 hour
 - When i think about it i just freeze, when i am doing, i am doing
 
-## 2
+### 2
 
-### 1
+#### 1
 
 1. 13:41 - 14:44, refactor: modularize menu loading by introducing FleetGridLoader and ToggleLoader classes
 2. 19:58 - 20:29, refactor: introduce BattleGridLoader for improved battle grid loading in Menu
@@ -224,21 +226,21 @@
 - Total 94 minutes = 1 hour 34 minutes
 - Refactoring, making parts smaller and SRP.
 
-### 2
+#### 2
 
 1. 16:16 - 16:56, refactor: enhance Board class with hit tracking and win condition; simplify DataService methods
 2. 17:33 - 17:47, refactor: integrate BattleGridLoader into FleetService
 
 - Total 54 minutes
 
-### 3
+#### 3
 
 1. 13:42 - 15:52, refactor: update PlayerAI and BattleAI to use logger for debug messages; modify GridRenderer to pass AI flag; use delay instead click to end turn
 2. 16:49 - 18:00, refactor: enhance LogService with error logging; update FullScreen methods for better visibility control; rename generate to init in battle_grid
 
 - Total 201 minutes = 3 hour 21 minutes
 
-### 4
+#### 4
 
 1. 06:32 - 07:03, refactor: update BattleAI and GridRenderer to improve turn management and click handling
 2. 07:04 - 07:14, refactor: update Board and DataServiceFactory to support configuration; add test cell functionality in Fleet
@@ -250,7 +252,7 @@
 
 - Total 271 minutes = 4 hour 31 minutes
 
-### 5
+#### 5
 
 1. 08:55 - 10:39, refactor: replace LogService with LogFormatter for improved logging consistency; update imports across various components
 2. 11:58 - 12:51, refactor: simplify LogFormatter methods and update toggleClass function signature for improved readability
@@ -260,7 +262,7 @@
 
 - Total 441 minutes = 7 hour 21 minutes
 
-### 6
+#### 6
 
 1. 09:43 - 10:33, refactor(menu): fix serviceContainer dependency
 2. 10:52 - 11:36, refactor(toggle): fix container dependency
@@ -270,7 +272,7 @@
 
 - Total 212 minutes = 3 hour 32 minutes
 
-### 7
+#### 7
 
 1. 11:12 - 11:27, refactor(GridRenderer): simplify grid item generation and setup for player/AI
 2. 11:28 - 11:54, refactor(GridRenderer): streamline grid item setup and click handling
@@ -283,7 +285,7 @@
 
 - Total 336 minutes = 5 hour 36 minutes
 
-### 8
+#### 8
 
 1. 16:25 - 17:11, refactor(BattleAI, GridRenderer, AttackHandler, BattleTurnManager, ScreenCoordinates): modularize code by extracting classes and improving attack handling
 2. 17:12 - 17:45, refactor: centralize grid configuration by replacing BATTLE_GRID_CONFIG with BATTLE_GRID
@@ -291,7 +293,7 @@
 
 - Total 134 minutes = 2 hour 14 minutes
 
-### 9
+#### 9
 
 1. 15:02 - 16:09, refactor(ScreenCoordinates): use util functions
 2. 16:28 - 18:13, refactor(AttackHandler, BattleAI): improve attack handling by modularizing element setup and coordinate calculations
@@ -300,7 +302,7 @@
 
 - Total 286 minutes = 4 hour 46 minutes
 
-### 10
+#### 10
 
 1. 11:38 - 12:11, refactor(AttackHandler, BattleAI, GridRenderer): modularize element setup and improve hit handling logic
 2. 12:16 - 12:29, refactor(BattleGrid, GridRenderer): streamline grid item management and enhance event handling
@@ -317,7 +319,7 @@
 - More commits in same time is key, also improving code quality is big (start from quality also)  
   Make util functions to abstract common tasks from the start.
 
-### 11
+#### 11
 
 1. 20:59 - 22:30, refactor(AttackHandler): improve cell position handling and update attack logic  
    feat(script): add merge.py for merging project files and solid.py for SOLID principles prompt generation
@@ -325,7 +327,7 @@
 - Total 91 minutes = 1 hour 31 minutes
 - One optimization on chore day
 
-### 12
+#### 12
 
 1. 10:27 - 10:40, refactor(BattleAI): streamline AI hit handling and improve matrix to screen conversion
 2. 10:41 - 11:58, refactor(BattleAI): replace internal matrixToScreen method with shared utility function and streamline hit handling logic
@@ -339,7 +341,7 @@
 
 - Total 4 hours 23 minutes (263 minutes)
 
-### 13
+#### 13
 
 1. 20:14 - 20:58, refactor(BattleAI, ui): integrate updateColor function for improved hit indication
 2. 20:59 - 21:14, refactor(BattleGrid, BattleGridLoader): streamline grid initialization and event handling, remove GridGenerator
@@ -348,7 +350,7 @@
 
 - Total 1 hour 44 minutes (104 minutes)
 
-### 14
+#### 14
 
 1. 12:48 - 13:13, refactor(BattleGrid, ElementService): update constructor to accept ElementService, streamline element handling logic
 2. 14:32 - 17:52, refactor(BattleGrid, PlayerHitService, ActionService): introduce PlayerHitService and ActionService, streamline event handling and player actions
@@ -356,14 +358,14 @@
 
 - Total 5 hours 50 minutes (350 minutes)
 
-### 15
+#### 15
 
 1. 12:39 - 14:18, refactor(scripts SOLID principles): restructure scripts into classes for better organization and maintainability
 2. 15:15 - 16:30, refactor(battle_grid): Extract GridCells class (planned for 20 min)
 
 - Total 2 hours 54 minutes (174 minutes)
 
-### 16
+#### 16
 
 1. 21:00 - 00:00, refactor(docs): update log and todo documentation, remove pomodoro file
 
@@ -371,7 +373,7 @@
 - Lost entire day on ai agents. I am not able to move this since openai api is closed. Browser automation is to cumbersome.  
   Only thing i can do is generating specialized prompts using py and maybe stack them in chain for some production chain/line like factory line. 
 
-### 17
+#### 17
 
 1. 11:34 - 12:16, 2 pomodoro, refactor(battle_grid): replace ActionService with ActionRegistry, ActionResolver, and ActionExecutor for improved action handling
 2. 12:17 - 12:41, refactor(docs): prepare next SRP refactor doc
@@ -384,7 +386,7 @@
 
 - Total 4 hours 31 minutes (271 minutes)
 
-### 18
+#### 18
 
 1. 13:04 - 14:04, 3 pomodoro, refactor(battle_grid): restructure GridCells to make it more general
 2. 14:05 - 14:19, refactor(fleet_grid): enable fleet grid and integrate ToggleGridsUIController for improved grid management  
@@ -396,7 +398,7 @@
 
 - Total 4 hours 16 minutes (256 minutes)
 
-### 19
+#### 19
 
 1. 13:10 - 13:32, 1 pomodoro, refactor(fleet_grid): restructure FleetGrid initialization and enhance event handling
 2. 12:33 - 14:15, what next ?
@@ -410,7 +412,7 @@
 
 - Total 6 hours 41 minutes (401 minutes)
 
-### 20
+#### 20
 
 1. 09:06 - 09:47, refactor(full_screen): update FullScreen component to use query and toggle object functions
 2. 09:48 - 10:22, refactor(constants): remove Object.freeze from constants for improved flexibility
@@ -423,6 +425,37 @@
    feat(fullscreen): rename to FullScreenComponent
 7. 14:01 - 14:26, test chargpt refactoring, failed 
 8. 15:39 - 16:06, refactor(menu): start refactoring to FullScreenComponent pattern
-9. 17:40 - 18:06, feat(menu): extract LoadGameEventHandler for improved event handling and refactor Menu component
-10. 18:10 - 18:16, feat(menu): create MenuComponent class and refactor menu.js to use it
-11. 18:18 - 18:33, feat(menu): update LoadGameEventHandler to use MENU_COMPONENT_CONFIG and improve error handling
+9. 
+- Extract LoadGameEventHandler from MenuComponent class 
+- 17:40 - 18:06
+- feat(menu): extract LoadGameEventHandler for improved event handling and refactor Menu component
+10. 
+- Extract class MenuComponent from menu.js to its own file. Fix imports
+- 18:10 - 18:16
+- feat(menu): create MenuComponent class and refactor menu.js to use it
+11. 
+- Fix config. Move values from old to MENU_COMPONENT_CONFIG
+- 18:18 - 18:33
+- feat(menu): update LoadGameEventHandler to use MENU_COMPONENT_CONFIG and improve error handling
+12. 
+- Replace selectAndToggle with newer functions; Use {} for 4 dependencies to make 3 dependencies for class
+- 18:34 - 18:47
+- feat(menu): replace selectAndToggle with toggleObj and queryObj for improved functionality
+13. 
+- New log format
+- 18:48 - 19:08
+
+- Total 6 hours (360 minutes)
+- Weak used time.
+- Need new format for each point:
+    x. 
+    - todo
+    - estimated time
+    - real time
+    - note
+    - commit message
+  This should promote better use of time.
+
+#### 21
+
+1. 

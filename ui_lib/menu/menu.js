@@ -10,10 +10,13 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   const eventHandler = new LoadGameEventHandler(
     MENU_COMPONENT_CONFIG,
     serviceContainer,
-    new FleetGridLoader(guiContainer),
-    new ToggleLoader(guiContainer),
-    new BattleGridLoader(guiContainer),
-    new ToggleGridsUIController()
+    {
+      fleetGridLoader: new FleetGridLoader(guiContainer),
+      toggleLoader: new ToggleLoader(guiContainer),
+      battleGridLoader: new BattleGridLoader(guiContainer),
+      toggleGridsUIController: new ToggleGridsUIController(),
+    }
   )
+
   return new MenuComponent(MENU_COMPONENT_CONFIG, eventHandler)
 }

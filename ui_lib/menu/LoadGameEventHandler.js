@@ -1,14 +1,15 @@
-import { selectAndToggle } from './../../shared_lib/ui.js'
-import { LEVEL, format } from './../../shared_lib_2/index.js'
+import {
+  LEVEL,
+  format,
+  queryObj,
+  toggleObj,
+} from './../../shared_lib_2/index.js'
 
 export class LoadGameEventHandler {
   constructor(
     config,
     serviceContainer,
-    fleetGridLoader,
-    toggleLoader,
-    battleGridLoader,
-    toggleGridsUIController
+    { fleetGridLoader, toggleLoader, battleGridLoader, toggleGridsUIController }
   ) {
     this._config = config
     this._dataService = serviceContainer.getServiceByName(
@@ -26,7 +27,7 @@ export class LoadGameEventHandler {
       error: { gameLoadingFailed },
     } = this._config
     try {
-      selectAndToggle({ ...hide })
+      toggleObj({ element: queryObj(hide), ...hide })
 
       await this._loadFleetGrid()
       await this._loadBattleGrid()

@@ -1,4 +1,4 @@
-import { EVENT } from '../../shared_lib_2/constants.js'
+import { EVENT } from '../../shared_lib_2/index.js'
 
 export const MENU_COMPONENT_CONFIG = {
   dependency: {
@@ -15,11 +15,6 @@ export const MENU_COMPONENT_CONFIG = {
     selector: '.game-menu',
     cssClass: 'game-menu--hidden',
     forceState: true,
-  },
-  menu: {
-    componentName: 'menu',
-    cssClass: 'game-menu',
-    elements: [{ elementId: 'game-menu-1' }],
   },
   error: {
     gameLoadingFailed: 'Error in loading game',
