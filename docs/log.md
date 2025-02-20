@@ -423,3 +423,4 @@
    feat(fullscreen): rename to FullScreenComponent
 7. 14:01 - 14:26, test chargpt refactoring, failed 
 8. 15:39 - 16:06, refactor(menu): start refactoring to FullScreenComponent pattern
+9. 17:40 - 18:06, feat(menu): extract LoadGameEventHandler for improved event handling and refactor Menu component

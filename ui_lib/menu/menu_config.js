@@ -18,4 +18,5 @@ export const MENU_COMPONENT_CONFIG = {
     cssClass: 'game-menu',
     elements: [{ elementId: 'game-menu-1' }],
   },
+  error: {},
 }
