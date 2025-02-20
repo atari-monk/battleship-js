@@ -1,3 +1,9 @@
+import {
+  EVENT,
+  format as format2,
+  getByIdObj,
+} from './../../shared_lib_2/index.js'
+import { MENU_COMPONENT_CONFIG } from './menu_config.js'
 import { format } from './../../shared_lib/LogFormatter.js'
 import { setEvent, selectAndToggle } from './../../shared_lib/ui.js'
 import { MENU_CONFIG, MENU_BUTTON, MENU_HIDE } from './../config.js'
@@ -8,12 +14,14 @@ import { ToggleGridsUIController } from './../battle_grid/action/ui/ToggleGridsU
 
 export class Menu {
   constructor(
+    config,
     serviceContainer,
     fleetGridLoader,
     toggleLoader,
     battleGridLoader,
     toggleGridsUIController
   ) {
+    this._config = config
     this.dataService = serviceContainer.getServiceByName(
       MENU_CONFIG.dataServiceName
     )
@@ -24,13 +32,24 @@ export class Menu {
   }
 
   init() {
-    console.debug(...format.debug(MENU_CONFIG.initMsg))
-    setEvent({
-      ...MENU_BUTTON,
-      handler: async () => {
-        await this.handleClick()
-      },
-    })
+    const {
+      button,
+      message: { init },
+    } = this._config
+
+    console.debug(format2(init))
+
+    getByIdObj(button).addEventListener(
+      EVENT.CLICK,
+      async () => await this.handleClick()
+    )
+
+    // setEvent({
+    //   ...MENU_BUTTON,
+    //   handler: async () => {
+    //     await this.handleClick()
+    //   },
+    // })
   }
 
   async handleClick() {
@@ -61,11 +80,14 @@ export class Menu {
 }
 
 export default function init({ serviceContainer, guiContainer } = {}) {
-  new Menu(
+  const menu = new Menu(
+    MENU_COMPONENT_CONFIG,
     serviceContainer,
     new FleetGridLoader(guiContainer),
     new ToggleLoader(guiContainer),
     new BattleGridLoader(guiContainer),
     new ToggleGridsUIController()
-  ).init()
+  )
+  menu.init()
+  return menu
 }

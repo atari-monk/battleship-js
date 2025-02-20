@@ -16,8 +16,9 @@ export class FullScreenComponent {
 
     console.debug(format(init))
 
-    getByIdObj(button).addEventListener(EVENT.CLICK, async () =>
-      this._eventHandler.handleFullscreenRequest()
+    getByIdObj(button).addEventListener(
+      EVENT.CLICK,
+      async () => await this._eventHandler.handleFullscreenRequest()
     )
   }
 }

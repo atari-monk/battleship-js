@@ -1,5 +1,5 @@
-import { FULL_SCREEN } from './config.js'
-import { FullScreenComponent } from './FullScreen.js'
+import { FULL_SCREEN } from './full_screen_config.js'
+import { FullScreenComponent } from './FullScreenComponent.js'
 import { FullscreenEventHandler } from './FullscreenEventHandler.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
