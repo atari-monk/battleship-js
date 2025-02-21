@@ -1,58 +1,67 @@
-import { toggle, selectById } from './../../shared_lib/ui.js'
-import { TOGGLE_CONFIG, TOGGLE_SELECT } from './../config.js'
+import { toggleObj } from './../../shared_lib_2/index.js'
 
 export class ToggleEventHandler {
-  constructor(guiContainer) {
+  constructor(config, guiContainer) {
+    this._config = config
     this._guiContainer = guiContainer
-    this.isToggled = false
-    this.isTouch = false
-    this.fleetGrid = this._guiContainer.getInstanceById(
-      TOGGLE_CONFIG.fleetGridId
-    ).jsInstance
+    this._isToggled = false
+    this._isTouch = false
+    this._fleetGrid = this._setFleetGrid()
   }
 
-  setToggleButton() {
-    this.toggleButton = selectById(TOGGLE_SELECT)
+  init(button) {
+    const {
+      button: { toggledOn, toggledOff },
+      error: { noRequiredElements },
+    } = this._config
 
-    this.toggleOff = {
-      element: this.toggleButton,
-      cssClass: TOGGLE_CONFIG.toggledOff,
+    if (!this._fleetGrid || !button) {
+      throw new Error(noRequiredElements)
     }
 
-    this.toggleOn = {
-      element: this.toggleButton,
-      cssClass: TOGGLE_CONFIG.toggledOn,
+    this._toggleOff = {
+      element: button,
+      cssClass: toggledOff,
     }
 
-    if (!this.fleetGrid || !this.toggleButton) {
-      console.warn(...format.warn(TOGGLE_CONFIG.componentsNotFoundWarn))
+    this._toggleOn = {
+      element: button,
+      cssClass: toggledOn,
     }
 
-    toggle(this.toggleOff)
+    toggleObj(this._toggleOff)
   }
 
-  handleToggle() {
-    this.isToggled = !this.isToggled
-
-    toggle(this.toggleOn)
-    toggle(this.toggleOff)
-
-    this.fleetGrid.fleetService.toggleOrientation()
-    this.fleetGrid.paintOnHover(
-      this.fleetGrid.placementHandler.currentHoverPosition
-    )
-  }
-
-  handleClick(event) {
-    if (this.isTouch) {
-      this.isTouch = false
+  handleClick() {
+    if (this._isTouch) {
+      this._isTouch = false
       return
     }
-    this.handleToggle()
+
+    this._handleToggle()
   }
 
   handleTouch() {
-    this.isTouch = true
-    this.handleToggle()
+    this._isTouch = true
+
+    this._handleToggle()
+  }
+
+  _setFleetGrid() {
+    const { id } = this._config.fleetGrid
+    return this._guiContainer.getInstanceById(id).jsInstance
+  }
+
+  _handleToggle() {
+    this._isToggled = !this._isToggled
+
+    toggleObj(this._toggleOn)
+    toggleObj(this._toggleOff)
+
+    this._fleetGrid.fleetService.toggleOrientation()
+
+    this._fleetGrid.paintOnHover(
+      this._fleetGrid.placementHandler.currentHoverPosition
+    )
   }
 }

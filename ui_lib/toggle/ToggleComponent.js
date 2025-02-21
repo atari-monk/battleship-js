@@ -1,36 +1,32 @@
-import { format } from './../../shared_lib/LogFormatter.js'
-import { setEvent, toggle } from './../../shared_lib/ui.js'
-import { TOGGLE_CONFIG, TOGGLE_CLICK, TOGGLE_TOUCH } from './../config.js'
+import { EVENT, format, getById } from './../../shared_lib_2/index.js'
 
 export class ToggleComponent {
-  constructor(eventHandler) {
+  constructor(config, eventHandler) {
+    this._config = config
     this._eventHandler = eventHandler
     this._init()
   }
 
   _init() {
-    console.debug(...format.debug(TOGGLE_CONFIG.initMsg))
+    const {
+      message: { init },
+      button: { id },
+    } = this._config
 
-    this._eventHandler.setToggleButton()
+    console.debug(format(init))
 
-    setEvent({
-      ...TOGGLE_CLICK,
-      handler: (event) => {
-        if (this.isTouch) {
-          this.isTouch = false
-          return
-        }
-        this._eventHandler.handleToggle(event)
-      },
-    })
+    const element = getById(id)
 
-    setEvent({
-      ...TOGGLE_TOUCH,
-      handler: () => {
-        this.isTouch = true
-        this._eventHandler.handleToggle()
-      },
-      isPassive: true,
-    })
+    this._eventHandler.init(element)
+
+    element.addEventListener(EVENT.CLICK, () =>
+      this._eventHandler.handleClick()
+    )
+
+    element.addEventListener(
+      EVENT.TOUCH_START,
+      () => this._eventHandler.handleTouch(),
+      { passive: true }
+    )
   }
 }
