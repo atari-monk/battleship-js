@@ -1,5 +1,7 @@
-import { ToggleComponent } from './ToggleComponent.1.js'
+import { ToggleComponent } from './ToggleComponent.js'
+import { ToggleEventHandler } from './ToggleEventHandler.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
-  return new ToggleComponent(guiContainer)
+  const eventHandler = new ToggleEventHandler(guiContainer)
+  return new ToggleComponent(eventHandler)
 }

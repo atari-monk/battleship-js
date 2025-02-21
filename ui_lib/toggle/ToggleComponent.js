@@ -1,33 +1,17 @@
-import { format } from '../../shared_lib/LogFormatter'
-import { setEvent, toggle, selectById } from '../../shared_lib/ui'
-import {
-  TOGGLE_CONFIG,
-  TOGGLE_CLICK,
-  TOGGLE_TOUCH,
-  TOGGLE_SELECT,
-} from '../config'
+import { format } from './../../shared_lib/LogFormatter.js'
+import { setEvent, toggle } from './../../shared_lib/ui.js'
+import { TOGGLE_CONFIG, TOGGLE_CLICK, TOGGLE_TOUCH } from './../config.js'
 
 export class ToggleComponent {
-  constructor(guiContainer) {
-    this.guiContainer = guiContainer
-    this.isToggled = false
-    this.isTouch = false
+  constructor(eventHandler) {
+    this._eventHandler = eventHandler
     this._init()
   }
 
   _init() {
     console.debug(...format.debug(TOGGLE_CONFIG.initMsg))
 
-    this.setToggleButton()
-
-    this.fleetGrid = this.guiContainer.getInstanceById(
-      TOGGLE_CONFIG.fleetGridId
-    ).jsInstance
-
-    if (!this.fleetGrid || !this.toggleButton) {
-      console.warn(...format.warn(TOGGLE_CONFIG.componentsNotFoundWarn))
-      return
-    }
+    this._eventHandler.setToggleButton()
 
     setEvent({
       ...TOGGLE_CLICK,
@@ -36,7 +20,7 @@ export class ToggleComponent {
           this.isTouch = false
           return
         }
-        this.handleToggle(event)
+        this._eventHandler.handleToggle(event)
       },
     })
 
@@ -44,37 +28,9 @@ export class ToggleComponent {
       ...TOGGLE_TOUCH,
       handler: () => {
         this.isTouch = true
-        this.handleToggle()
+        this._eventHandler.handleToggle()
       },
       isPassive: true,
     })
-
-    toggle(this.toggleOff)
-  }
-
-  setToggleButton() {
-    this.toggleButton = selectById(TOGGLE_SELECT)
-
-    this.toggleOff = {
-      element: this.toggleButton,
-      cssClass: TOGGLE_CONFIG.toggledOff,
-    }
-
-    this.toggleOn = {
-      element: this.toggleButton,
-      cssClass: TOGGLE_CONFIG.toggledOn,
-    }
-  }
-
-  handleToggle() {
-    this.isToggled = !this.isToggled
-
-    toggle(this.toggleOn)
-    toggle(this.toggleOff)
-
-    this.fleetGrid.fleetService.toggleOrientation()
-    this.fleetGrid.paintOnHover(
-      this.fleetGrid.placementHandler.currentHoverPosition
-    )
   }
 }
