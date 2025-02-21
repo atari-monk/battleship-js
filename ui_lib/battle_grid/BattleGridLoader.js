@@ -1,18 +1,21 @@
-import { format } from './../../shared_lib/LogFormatter.js'
-import { BATTLE_GRID } from './config.js'
+import { LEVEL, format } from './../../shared_lib_2/index.js'
 import { loadComponents } from './../../shared_lib/ui.js'
 
 export class BattleGridLoader {
-  constructor(guiContainer) {
-    this._container = guiContainer
+  constructor(config, guiContainer) {
+    this._config = config
+    this._guiContainer = guiContainer
   }
 
   async load(dataService) {
-    const { name, cssClass, elements, loadBattleGridError } = BATTLE_GRID
+    const {
+      component: { name, cssClass, elements },
+      error: { loadingComponent },
+    } = this._config
 
     try {
       const grids = await loadComponents({
-        uiContainer: this._container,
+        uiContainer: this._guiContainer,
         componentName: name,
         cssClass,
         elements,
@@ -23,7 +26,7 @@ export class BattleGridLoader {
         grid.dataService = dataService
       })
     } catch (error) {
-      console.error(...format.error(loadBattleGridError, error))
+      console.error(format(LEVEL.ERROR, loadingComponent, error))
     }
   }
 }

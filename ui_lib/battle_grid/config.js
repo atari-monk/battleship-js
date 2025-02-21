@@ -36,3 +36,17 @@ export const BATTLE_GRID = {
     },
   },
 }
+
+export const BATTLE_GRID_COMPONENT_CONFIG = {
+  component: {
+    name: 'battle_grid',
+    cssClass: 'battle-grid',
+    elements: [
+      { elementId: 'battle-grid-1', type: 'ai' },
+      { elementId: 'battle-grid-2', type: 'player' },
+    ],
+  },
+  error: {
+    loadingComponent: 'Error in loading component: toggle',
+  },
+}

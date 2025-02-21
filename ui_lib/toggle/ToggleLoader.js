@@ -1,18 +1,27 @@
-import { format } from './../../shared_lib/LogFormatter.js'
-import { TOGGLE_CONFIG } from './../config.js'
+import { LEVEL, format } from './../../shared_lib_2/index.js'
+import { loadComponents } from './../../shared_lib/ui.js'
 
 export class ToggleLoader {
-  constructor(guiContainer) {
-    this.guiContainer = guiContainer
+  constructor(config, guiContainer) {
+    this._config = config
+    this._guiContainer = guiContainer
   }
 
   async load() {
-    const { name, cssClass, id, loadToggleError } = TOGGLE_CONFIG
+    const {
+      component: { name, cssClass, elements },
+      error: { loadingComponent },
+    } = this._config
+
     try {
-      await this.guiContainer.loadComponentResources(name)
-      this.guiContainer.createInstance(name, cssClass, id)
+      await loadComponents({
+        uiContainer: this._guiContainer,
+        componentName: name,
+        cssClass,
+        elements,
+      })
     } catch (error) {
-      console.error(...format.error(loadToggleError, error))
+      console.error(format(LEVEL.ERROR, loadingComponent, error))
     }
   }
 }

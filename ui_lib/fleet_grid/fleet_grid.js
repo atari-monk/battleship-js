@@ -10,6 +10,7 @@ import { PlacementValidator } from './PlacementValidator.js'
 import { FleetService } from './FleetService.js'
 import { PlacementHandler } from './PlacementHandler.js'
 import { EventHandler } from './EventHandler.js'
+import { BATTLE_GRID_COMPONENT_CONFIG } from './../battle_grid/config.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
   const gridMetrics = new GridMetrics(Config2)
@@ -18,7 +19,10 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   const placementValidator = new PlacementValidator()
   const shipPreview = new ShipPreview()
 
-  const battleGridLoader = new BattleGridLoader(guiContainer)
+  const battleGridLoader = new BattleGridLoader(
+    BATTLE_GRID_COMPONENT_CONFIG,
+    guiContainer
+  )
   const toggleGridsUIController = new ToggleGridsUIController()
   const fleetService = new FleetService(
     battleGridLoader,

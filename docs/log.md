@@ -459,3 +459,10 @@
 #### 21
 
 1. 
+- Refactor ToogleLoader to use util method. Use config.
+- 20 min
+- 13:23 - 13:54
+- feat(toggle): refactor ToggleLoader to use config and improve error handling
+  feat(battle_grid): refactor BattleGridLoader to utilize new config structure
+  feat(config): add BATTLE_GRID_COMPONENT_CONFIG and TOGGLE_COMPONENT_CONFIG for better component management
+2.
