@@ -466,3 +466,7 @@
   feat(battle_grid): refactor BattleGridLoader to utilize new config structure
   feat(config): add BATTLE_GRID_COMPONENT_CONFIG and TOGGLE_COMPONENT_CONFIG for better component management
 2.
+- Extract component and eventHandler class from toogle.
+- 20 min
+- 14:56 -
+-
