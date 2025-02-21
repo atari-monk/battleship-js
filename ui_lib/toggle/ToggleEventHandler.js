@@ -58,10 +58,8 @@ export class ToggleEventHandler {
     toggleObj(this._toggleOn)
     toggleObj(this._toggleOff)
 
-    this._fleetGrid.fleetService.toggleOrientation()
+    this._fleetGrid.toggleOrientation()
 
-    this._fleetGrid.paintOnHover(
-      this._fleetGrid.placementHandler.currentHoverPosition
-    )
+    this._fleetGrid.paintOnHover()
   }
 }

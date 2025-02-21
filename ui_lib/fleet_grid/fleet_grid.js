@@ -9,7 +9,7 @@ import { GridCells } from './../grid/GridCells.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { FleetService } from './FleetService.js'
 import { PlacementHandler } from './PlacementHandler.js'
-import { EventHandler } from './EventHandler.js'
+import { EventAttacher } from './EventAttacher.js'
 import { BATTLE_GRID_COMPONENT_CONFIG } from './../battle_grid/config.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
@@ -24,6 +24,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
     guiContainer
   )
   const toggleGridsUIController = new ToggleGridsUIController()
+
   const fleetService = new FleetService(
     battleGridLoader,
     toggleGridsUIController
@@ -37,24 +38,27 @@ export default function init({ serviceContainer, guiContainer } = {}) {
     fleetService
   )
 
-  const eventHandler = new EventHandler()
+  const eventAttacher = new EventAttacher(
+    FLEET_GRID_CONFIG,
+    gridCells,
+    placementHandler,
+    fleetService
+  )
 
-  const fleetGrid = new FleetGrid({
-    config: FLEET_GRID_CONFIG,
+  const fleetGrid = new FleetGrid(
+    FLEET_GRID_CONFIG,
     gridMetrics,
     gridCells,
-    eventHandler,
+    eventAttacher,
     fleetService,
-    placementHandler,
-  })
-
-  eventHandler.setFleetGrid(fleetGrid)
+    placementHandler
+  )
 
   if (serviceContainer) {
     const dataService = serviceContainer.getServiceByName('data_service')
-    fleetGrid.dataService = dataService
+    fleetService.dataService = dataService
+    placementHandler.dataService = dataService
   }
 
-  fleetGrid.init()
   return fleetGrid
 }

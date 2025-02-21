@@ -12,5 +12,8 @@ export const TOGGLE_COMPONENT_CONFIG = {
   message: {
     init: 'Load component: toggle',
   },
+  error: {
+    noRequiredElements: 'Requried fleetGrid and toggle button not found',
+  },
   fleetGrid: { id: 'fleet-grid-1' },
 }

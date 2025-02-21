@@ -476,3 +476,10 @@
 - 20 min
 - 15:45 - 17:03
 - feat(toggle): refactor ToggleComponent and ToggleEventHandler to use configuration object for improved initialization and error handling
+4.
+- Refactor one fleet_grid event handler class
+- 20 min
+- 20:49 - 22:31
+- feat(fleet_grid): refactor event handling by introducing EventAttacher class for improved event management and separation of concerns
+
+- Total 4 hours 11 min (251 minutes)
