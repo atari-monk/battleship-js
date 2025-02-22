@@ -1,4 +1,4 @@
-import { format } from './../../shared_lib/LogFormatter.js'
+import { format } from '../../shared_lib/LogFormatter.js'
 
 export class FleetGrid {
   //   set dataService(dataService) {
