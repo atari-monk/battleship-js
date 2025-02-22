@@ -62,7 +62,7 @@ export const FLEET_GRID_CONFIG = {
   player1Data: (playerName, fleet) =>
     `7. Load data:\n\tPlayer 1 - '${playerName}'\n\tFleet:\n\t\t${fleet}`,
   initMsg: 'Load component: fleet_grid',
-  loadFleetGridError: 'Error in loadFleetGrid:',
+  loadFleetGridError: 'Error in FleetGrid loader:',
 }
 
 export const TOGGLE_CONFIG = {

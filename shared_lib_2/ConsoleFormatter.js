@@ -50,6 +50,7 @@ export class ConsoleFormatter {
 
     const formattedArgs = args.map((arg) => {
       if (arg === null) return TYPE.NULL
+      if (arg instanceof Error) return arg.stack || arg.message
       if (typeof arg === TYPE.OBJECT) return JSON.stringify(arg, null, 2)
       return String(arg)
     })

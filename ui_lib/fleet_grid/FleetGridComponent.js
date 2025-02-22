@@ -9,7 +9,7 @@ export class FleetGridComponent {
     fleetService,
     fleetPaintOnHoverEventHandler
   ) {
-    this.config = config
+    this._config = config
     this._gridMetric = gridMetrics
     this._gridCells = gridCells
     this._eventAttacher = eventAttacher
@@ -31,11 +31,9 @@ export class FleetGridComponent {
 
   _init() {
     const {
-      init,
-      component: {
-        elements: [{ elementId }],
-      },
-    } = this.config
+      message: { init },
+      elements: [{ elementId }],
+    } = this._config
 
     console.debug(format(init))
 

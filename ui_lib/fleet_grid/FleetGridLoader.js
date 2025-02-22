@@ -1,23 +1,33 @@
-import { format } from './../../shared_lib/LogFormatter.js'
-import { FLEET_GRID_CONFIG } from '../config.js'
+import { LEVEL, format } from './../../shared_lib_2/index.js'
 
 export class FleetGridLoader {
-  constructor(guiContainer) {
-    this.guiContainer = guiContainer
+  constructor(config, guiContainer) {
+    this._config = config
+    this._guiContainer = guiContainer
   }
 
   async load(dataService) {
-    const { name, cssClass, id, scripts, loadFleetGridError } =
-      FLEET_GRID_CONFIG
+    const {
+      name,
+      cssClass,
+      elements: [{ elementId }],
+      scripts,
+      error: { loader },
+    } = this._config
+
     try {
-      await this.guiContainer.loadComponentResources(name, scripts)
-      const fleetGrid = this.guiContainer.createInstance(name, cssClass, id)
+      await this._guiContainer.loadComponentResources(name, scripts)
+      const fleetGrid = this._guiContainer.createInstance(
+        name,
+        cssClass,
+        elementId
+      )
 
       if (dataService && fleetGrid) {
         fleetGrid.jsInstance.dataService = dataService
       }
     } catch (error) {
-      console.error(...format.error(loadFleetGridError, error))
+      console.error(format(LEVEL.ERROR, loader, error))
     }
   }
 }

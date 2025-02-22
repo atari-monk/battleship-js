@@ -50,7 +50,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   )
 
   const eventAttacher = new EventAttacher(
-    FLEET_GRID_CONFIG,
+    FLEET_GRID_COMPONENT_CONFIG,
     gridCells,
     fleetService,
     {
