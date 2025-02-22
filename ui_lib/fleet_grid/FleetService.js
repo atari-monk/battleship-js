@@ -1,18 +1,20 @@
-import { FLEET_GRID_CONFIG, TOGGLE_CONFIG, COLOR } from './../config.js'
+import { COLOR } from './../../shared_lib_2/index.js'
 
 export class FleetService {
-  set dataService(dataService) {
+  constructor(config, dataService, battleGridLoader, toggleGridsUIController) {
+    this._config = config
     this._dataService = dataService
-  }
-
-  constructor(battleGridLoader, toggleGridsUIController) {
-    this.battleGridLoader = battleGridLoader
+    this._battleGridLoader = battleGridLoader
     this._toggleGridsUIController = toggleGridsUIController
-    this.shipSizes = [5, 4, 3, 3, 2]
+
+    const { GRID_SIZE, SHIP_SIZES } = config.grid
+    this.shipSizes = SHIP_SIZES
     this.currentShipIndex = 0
     this.isHorizontal = true
     this.placedShips = new Set()
-    this.gridArray = Array.from({ length: 10 }, () => Array(10).fill(0))
+    this.gridArray = Array.from({ length: GRID_SIZE }, () =>
+      Array(GRID_SIZE).fill(0)
+    )
   }
 
   toggleOrientation() {
@@ -36,7 +38,7 @@ export class FleetService {
         this.isHorizontal,
         this.placedShips,
         gridItems,
-        COLOR.blue
+        COLOR.BLUE
       )
 
       if (this.isHorizontal) {
@@ -44,8 +46,10 @@ export class FleetService {
           this.placedShips.add(index + i)
         }
       } else {
+        const { GRID_SIZE } = this._config.grid
+
         for (let i = 0; i < shipSize; i++) {
-          this.placedShips.add(index + i * 10)
+          this.placedShips.add(index + i * GRID_SIZE)
         }
       }
 
@@ -57,8 +61,10 @@ export class FleetService {
   }
 
   addShipToGrid(startIndex, shipSize) {
-    const startRow = Math.floor((startIndex - 1) / 10)
-    const startCol = (startIndex - 1) % 10
+    const { GRID_SIZE } = this._config.grid
+
+    const startRow = Math.floor((startIndex - 1) / GRID_SIZE)
+    const startCol = (startIndex - 1) % GRID_SIZE
 
     if (this.isHorizontal) {
       for (let i = 0; i < shipSize; i++) {
@@ -76,28 +82,30 @@ export class FleetService {
   }
 
   async saveGridData() {
-    if (!this._dataService) {
-      console.warn('FleetService dataService prop not found')
-      return
-    }
     this._dataService.player1.board.matrix = this.gridArray
 
     this.hideFleetGrid()
 
-    await this.battleGridLoader.load(this._dataService)
+    await this._battleGridLoader.load(this._dataService)
 
     this._dataService.initializeTurn()
 
+    const {
+      turn: { currentPlayer },
+      player1: { name },
+    } = this._dataService
+
     this._toggleGridsUIController.toggleGrids({
-      currentPlayer: this._dataService.turn.currentPlayer,
-      player1Name: this._dataService.player1.name,
+      currentPlayer,
+      player1Name: name,
     })
   }
 
   hideFleetGrid() {
-    const { fleetGrid, hiddenStyle: hidden1 } = FLEET_GRID_CONFIG
-    const { toogle, hiddenStyle: hidden2 } = TOGGLE_CONFIG
-    document.querySelector(fleetGrid).classList.add(hidden1)
-    document.querySelector(toogle).classList.add(hidden2)
+    const { selector: selectorA, hide: hideA } = this._config.fleetGrid
+    const { selector: selectorB, hide: hideB } = this._config.toogle
+
+    document.querySelector(selectorA).classList.add(hideA)
+    document.querySelector(selectorB).classList.add(hideB)
   }
 }

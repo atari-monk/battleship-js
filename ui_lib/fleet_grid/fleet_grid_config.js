@@ -1,9 +1,8 @@
-//import { EVENT } from '../../shared_lib_2/constants.js'
-
 export const FLEET_GRID_COMPONENT_CONFIG = {
   name: 'fleet_grid',
   cssClass: 'fleet-grid',
   selector: '.fleet-grid',
+  hide: 'fleet-grid--hidden',
   elements: [{ elementId: 'fleet-grid-1' }],
   event: {
     startsWith: 'touch',

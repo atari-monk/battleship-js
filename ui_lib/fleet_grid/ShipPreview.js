@@ -1,6 +1,10 @@
-import { COLOR } from './../config.js'
+import { COLOR } from './../../shared_lib_2/index.js'
 
 export class ShipPreview {
+  constructor(config) {
+    this._config = config
+  }
+
   paintPreview(
     startIndex,
     shipSize,
@@ -9,8 +13,10 @@ export class ShipPreview {
     gridItems,
     color
   ) {
-    const startRow = Math.floor((startIndex - 1) / 10)
-    const startCol = (startIndex - 1) % 10
+    const { GRID_SIZE } = this._config
+
+    const startRow = Math.floor((startIndex - 1) / GRID_SIZE)
+    const startCol = (startIndex - 1) % GRID_SIZE
 
     if (isHorizontal) {
       this.paintHorizontal(
@@ -42,10 +48,13 @@ export class ShipPreview {
     gridItems,
     color
   ) {
+    const { GRID_SIZE, GRID_ITEM_COUNT } = this._config
+
     for (let offset = 0; offset < shipSize; offset++) {
       const currentIndex = startIndex + offset
 
-      if (startCol + offset >= 10 || currentIndex > 100) break
+      if (startCol + offset >= GRID_SIZE || currentIndex > GRID_ITEM_COUNT)
+        break
 
       if (!placedShips.has(currentIndex)) {
         this.applyColorToGridItem(currentIndex, gridItems, color)
@@ -62,14 +71,16 @@ export class ShipPreview {
     gridItems,
     color
   ) {
+    const { GRID_SIZE, GRID_ITEM_COUNT } = this._config
+
     for (let offset = 0; offset < shipSize; offset++) {
-      const currentIndex = startIndex + offset * 10
-      const currentRow = Math.floor((currentIndex - 1) / 10)
+      const currentIndex = startIndex + offset * GRID_SIZE
+      const currentRow = Math.floor((currentIndex - 1) / GRID_SIZE)
 
       if (
         currentRow !== startRow + offset ||
-        currentIndex > 100 ||
-        startCol >= 10
+        currentIndex > GRID_ITEM_COUNT ||
+        startCol >= GRID_SIZE
       )
         break
 
@@ -86,7 +97,7 @@ export class ShipPreview {
   resetPreview(gridItems) {
     gridItems.forEach((item) => {
       if (
-        item.style.backgroundColor !== COLOR.blue &&
+        item.style.backgroundColor !== COLOR.BLUE &&
         item.style.backgroundColor
       ) {
         item.style.backgroundColor = ''

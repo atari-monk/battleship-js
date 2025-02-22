@@ -18,6 +18,14 @@ export const CONSOLE_COLOR = {
   RESET: '\x1b[0m',
 }
 
+export const COLOR = {
+  BLUE: 'blue',
+  GREEN: 'green',
+  RED: 'red',
+  LIGHTRED: 'rgba(255, 0, 0, 0.7)',
+  GREY: 'rgba(128, 128, 128, 0.7)',
+}
+
 export const EVENT = {
   MOUSE_MOVE: 'mousemove',
   MOUSE_ENTER: 'mouseenter',

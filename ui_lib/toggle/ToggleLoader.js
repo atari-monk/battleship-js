@@ -7,9 +7,7 @@ export class ToggleLoader {
   }
 
   async load() {
-    const {
-      component: { name, cssClass, elements },
-    } = this._config
+    const { name, cssClass, elements } = this._config
 
     await loadComponentsObj({
       uiContainer: this._guiContainer,

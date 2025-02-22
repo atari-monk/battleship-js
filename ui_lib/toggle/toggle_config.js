@@ -1,9 +1,9 @@
 export const TOGGLE_COMPONENT_CONFIG = {
-  component: {
-    name: 'toggle',
-    cssClass: 'toggle',
-    elements: [{ elementId: 'toggle-1' }],
-  },
+  name: 'toggle',
+  cssClass: 'toggle',
+  selector: '.toggle',
+  hide: 'toggle--hidden',
+  elements: [{ elementId: 'toggle-1' }],
   button: {
     id: 'toggle-button',
     toggledOn: 'toggle__button--toggled-on',

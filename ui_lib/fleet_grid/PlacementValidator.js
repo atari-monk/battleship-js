@@ -1,11 +1,13 @@
 export class PlacementValidator {
-  constructor(gridSize = 10) {
-    this.gridSize = gridSize
+  constructor(config) {
+    this._config = config
   }
 
   validatePlacement(startIndex, shipSize, isHorizontal, placedShips) {
-    const startRow = Math.floor((startIndex - 1) / 10)
-    const startCol = (startIndex - 1) % 10
+    const { GRID_SIZE, GRID_ITEM_COUNT } = this._config
+
+    const startRow = Math.floor((startIndex - 1) / GRID_SIZE)
+    const startCol = (startIndex - 1) % GRID_SIZE
 
     if (isHorizontal) {
       for (let i = 0; i < shipSize; i++) {
@@ -13,7 +15,7 @@ export class PlacementValidator {
         const currentCol = startCol + i
         if (
           currentCol >= this.gridSize ||
-          currentIndex > 100 ||
+          currentIndex > GRID_ITEM_COUNT ||
           placedShips.has(currentIndex)
         ) {
           return false
@@ -21,11 +23,11 @@ export class PlacementValidator {
       }
     } else {
       for (let i = 0; i < shipSize; i++) {
-        const currentIndex = startIndex + i * 10
-        const currentRow = Math.floor((currentIndex - 1) / 10)
+        const currentIndex = startIndex + i * GRID_SIZE
+        const currentRow = Math.floor((currentIndex - 1) / GRID_SIZE)
         if (
           currentRow !== startRow + i ||
-          currentIndex > 100 ||
+          currentIndex > GRID_ITEM_COUNT ||
           placedShips.has(currentIndex)
         ) {
           return false
