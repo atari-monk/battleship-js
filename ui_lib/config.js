@@ -46,7 +46,7 @@ export const FLEET_GRID_CONFIG = {
     'EventAttacher.js',
     'FleetPaintOnHoverEventHandler.js',
     'FleetPlacementClickEventHandler.js',
-    'FleetGrid.js',
+    'FleetGridComponent.js',
   ],
   events: [
     EVENT.mousemove,

@@ -1,4 +1,4 @@
-import { FleetGrid } from './FleetGrid.js'
+import { FleetGridComponent } from './FleetGridComponent.js'
 import { ShipPreview } from './ShipPreview.js'
 import { FLEET_GRID_CONFIG } from './../config.js'
 import { BattleGridLoader } from './../battle_grid/BattleGridLoader.js'
@@ -12,6 +12,7 @@ import { EventAttacher } from './EventAttacher.js'
 import { BATTLE_GRID_COMPONENT_CONFIG } from './../battle_grid/config.js'
 import { FleetPaintOnHoverEventHandler } from './FleetPaintOnHoverEventHandler.js'
 import { FleetPlacementClickEventHandler } from './FleetPlacementClickEventHandler.js'
+import { FLEET_GRID_COMPONENT_CONFIG } from './fleet_grid_config.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
   const dataService = serviceContainer.getServiceByName('data_service')
@@ -58,8 +59,8 @@ export default function init({ serviceContainer, guiContainer } = {}) {
     }
   )
 
-  return new FleetGrid(
-    FLEET_GRID_CONFIG,
+  return new FleetGridComponent(
+    FLEET_GRID_COMPONENT_CONFIG,
     gridMetrics,
     gridCells,
     eventAttacher,

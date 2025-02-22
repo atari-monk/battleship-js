@@ -1,17 +1,11 @@
-import { format } from '../../shared_lib/LogFormatter.js'
+import { format } from './../../shared_lib_2/index.js'
 
-export class FleetGrid {
-  //   set dataService(dataService) {
-  //     this.fleetService.dataService = dataService
-  //     this.placementHandler.dataService = dataService
-  //   }
-
+export class FleetGridComponent {
   constructor(
     config,
     gridMetrics,
     gridCells,
     eventAttacher,
-    //eventHandler,
     fleetService,
     fleetPaintOnHoverEventHandler
   ) {
@@ -35,25 +29,19 @@ export class FleetGrid {
     )
   }
 
-  //   handleClick(event) {
-  //     this.placementHandler.handleClick(event, this.cells)
-  //   }
-
-  //   handleWheel(event) {
-  //     this.fleetService.isHorizontal =
-  //       event.deltaY > 0 || event.deltaX > 0 ? false : true
-  //     this.placementHandler.paintOnHover(event, this.cells)
-  //   }
-
   _init() {
-    const { initMsg } = this.config
+    const {
+      init,
+      component: {
+        elements: [{ elementId }],
+      },
+    } = this.config
 
-    console.debug(...format.debug(initMsg))
+    console.debug(format(init))
 
-    this._gridCells.generate('fleet-grid-1')
+    this._gridCells.generate(elementId)
 
-    //this.cells = this._gridCells.cells
-    this._gridMetric.setGridMetrics('fleet-grid-1')
+    this._gridMetric.setGridMetrics(elementId)
 
     this._eventAttacher.attachEvents()
   }
