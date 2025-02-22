@@ -483,3 +483,11 @@
 - feat(fleet_grid): refactor event handling by introducing EventAttacher class for improved event management and separation of concerns
 
 - Total 4 hours 11 min (251 minutes)
+
+#### 22
+
+1. 
+- PlacementHandler, SRP, fix config.
+- 20 min
+- 13:53 - 14:33 
+- feat(fleet_grid): refactor event handling by removing PlacementHandler and introducing FleetPaintOnHoverEventHandler and FleetPlacementClickEventHandler for improved event management and separation of concerns

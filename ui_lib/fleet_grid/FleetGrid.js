@@ -13,14 +13,14 @@ export class FleetGrid {
     eventAttacher,
     //eventHandler,
     fleetService,
-    placementHandler
+    fleetPaintOnHoverEventHandler
   ) {
     this.config = config
     this._gridMetric = gridMetrics
     this._gridCells = gridCells
     this._eventAttacher = eventAttacher
     this._fleetService = fleetService
-    this._placementHandler = placementHandler
+    this._fleetPaintOnHoverEventHandler = fleetPaintOnHoverEventHandler
     this._init()
   }
 
@@ -29,8 +29,8 @@ export class FleetGrid {
   }
 
   paintOnHover() {
-    this._placementHandler.paintOnHover(
-      this._placementHandler.currentHoverPosition,
+    this._fleetPaintOnHoverEventHandler.handle(
+      this._fleetPaintOnHoverEventHandler.currentHoverPosition,
       this._gridCells.cells
     )
   }

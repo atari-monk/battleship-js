@@ -8,11 +8,13 @@ import { FLEET_GRID_CONFIG as Config2 } from './config.js'
 import { GridCells } from './../grid/GridCells.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { FleetService } from './FleetService.js'
-import { PlacementHandler } from './PlacementHandler.js'
 import { EventAttacher } from './EventAttacher.js'
 import { BATTLE_GRID_COMPONENT_CONFIG } from './../battle_grid/config.js'
+import { FleetPaintOnHoverEventHandler } from './FleetPaintOnHoverEventHandler.js'
+import { FleetPlacementClickEventHandler } from './FleetPlacementClickEventHandler.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
+  const dataService = serviceContainer.getServiceByName('data_service')
   const gridMetrics = new GridMetrics(Config2)
   const gridCells = new GridCells(Config2)
 
@@ -29,36 +31,39 @@ export default function init({ serviceContainer, guiContainer } = {}) {
     battleGridLoader,
     toggleGridsUIController
   )
+  fleetService.dataService = dataService
 
-  const placementHandler = new PlacementHandler(
-    gridCells,
-    gridMetrics,
+  const fleetPaintOnHoverEventHandler = new FleetPaintOnHoverEventHandler(
+    fleetService,
     placementValidator,
     shipPreview,
-    fleetService
+    gridMetrics
+  )
+
+  const fleetPlacementClickEventHandler = new FleetPlacementClickEventHandler(
+    fleetService,
+    placementValidator,
+    shipPreview,
+    gridMetrics,
+    dataService
   )
 
   const eventAttacher = new EventAttacher(
     FLEET_GRID_CONFIG,
     gridCells,
-    placementHandler,
-    fleetService
+    fleetService,
+    {
+      fleetPaintOnHoverEventHandler,
+      fleetPlacementClickEventHandler,
+    }
   )
 
-  const fleetGrid = new FleetGrid(
+  return new FleetGrid(
     FLEET_GRID_CONFIG,
     gridMetrics,
     gridCells,
     eventAttacher,
     fleetService,
-    placementHandler
+    fleetPaintOnHoverEventHandler
   )
-
-  if (serviceContainer) {
-    const dataService = serviceContainer.getServiceByName('data_service')
-    fleetService.dataService = dataService
-    placementHandler.dataService = dataService
-  }
-
-  return fleetGrid
 }

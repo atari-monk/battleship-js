@@ -40,11 +40,12 @@ export const FLEET_GRID_CONFIG = {
   id: 'fleet-grid-1',
   scripts: [
     './../config.js',
-    'EventHandler.js',
     'FleetService.js',
     'PlacementValidator.js',
     'ShipPreview.js',
-    'PlacementHandler.js',
+    'EventAttacher.js',
+    'FleetPaintOnHoverEventHandler.js',
+    'FleetPlacementClickEventHandler.js',
     'FleetGrid.js',
   ],
   events: [

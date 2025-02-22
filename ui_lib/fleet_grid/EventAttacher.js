@@ -1,11 +1,17 @@
 import { EVENT, query } from '../../shared_lib_2/index.js'
 
 export class EventAttacher {
-  constructor(config, gridCells, placementHandler, fleetService) {
+  constructor(
+    config,
+    gridCells,
+    fleetService,
+    { fleetPaintOnHoverEventHandler, fleetPlacementClickEventHandler }
+  ) {
     this._config = config
     this._gridCells = gridCells
-    this._placementHandler = placementHandler
     this._fleetService = fleetService
+    this._fleetPaintOnHoverEventHandler = fleetPaintOnHoverEventHandler
+    this._fleetPlacementClickEventHandler = fleetPlacementClickEventHandler
   }
 
   attachEvents() {
@@ -26,11 +32,11 @@ export class EventAttacher {
   _getEvents() {
     const options = { passive: true }
 
-    const paintOnHover = this._placementHandler.paintOnHover.bind(
-      this._placementHandler
+    const paintHandler = this._fleetPaintOnHoverEventHandler.handle.bind(
+      this._fleetPaintOnHoverEventHandler
     )
-    const handleClick = this._placementHandler.handleClick.bind(
-      this._placementHandler
+    const clickHandler = this._fleetPlacementClickEventHandler.handle.bind(
+      this._fleetPlacementClickEventHandler
     )
 
     const commonEvents = [
@@ -41,14 +47,14 @@ export class EventAttacher {
     ]
     const events = commonEvents.map((eventName) => ({
       eventName,
-      handler: paintOnHover,
+      handler: paintHandler,
       options: eventName.startsWith('touch') ? options : undefined,
     }))
     events.push(
-      { eventName: EVENT.CLICK, handler: handleClick },
+      { eventName: EVENT.CLICK, handler: clickHandler },
       {
         eventName: EVENT.WHEEL,
-        handler: paintOnHover,
+        handler: paintHandler,
         logic: (event) => this._setIsHorizontal(event),
         options,
       }
