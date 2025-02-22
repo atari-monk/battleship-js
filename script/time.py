@@ -5,12 +5,13 @@ import tkinter as tk
 from threading import Thread
 
 class Alarm:
-    def __init__(self, duration=20 * 60, sound_frequency=1000, sound_time=5000):
-        self.duration = duration
+    def __init__(self, duration, sound_frequency=1000, sound_time=2000):
+        self.duration = duration * 60
         self.sound_frequency = sound_frequency
         self.sound_time = sound_time
 
     def start(self):
+        print(f"Alarm set for {self.duration // 60} minutes.")
         time.sleep(self.duration)
         Thread(target=self.show_red_screen, daemon=True).start()
         self.play_sound()
@@ -36,5 +37,13 @@ class Alarm:
             os.system(f'play -nq -t alsa synth {self.sound_time / 1000} sine {self.sound_frequency}')
 
 if __name__ == "__main__":
-    alarm = Alarm()
+    try:
+        duration = int(input("Enter alarm duration in minutes (default 20): ") or 20)
+        if duration <= 0:
+            raise ValueError("Duration must be a positive number.")
+    except ValueError as e:
+        print(f"Invalid input: {e}. Using default 20 minutes.")
+        duration = 20
+
+    alarm = Alarm(duration)
     alarm.start()
