@@ -526,7 +526,7 @@
 - 32
 - feat(fleet_grid): refactor config
 2.
-- FleetService class fix to standard
+- FleetService class fix to standard, read, what it does
 - 20 min
 - 16:49 - 18:35
 - 1 hr 46 min
@@ -535,6 +535,10 @@
   feat(fleet_grid): refactor FleetService to use new coordinate conversion utility and improve ship placement logic
   feat(fleet_grid): inverse if, order methods
 - This class enables custom placing of the fleet
-
-x. PlacementValidator class fix to standard
+3. PlacementValidator class fix to standard, read, what it does
+- 20 min
+- 20:14 -
+- feat(fleet_grid): enhance PlacementValidator with self commenting methods
+-
+- FleetService class fix to standard
 x. ShipPreview class fix to standard
