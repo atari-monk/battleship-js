@@ -530,6 +530,7 @@
 - 20 min
 - 16:49 -
 - feat(grid): enhance getCellPosition function and introduce new coordinate conversion utilities
+  feat(grid): add utility functions for grid generation and coordinate conversion
 
 x. PlacementValidator class fix to standard
 x. ShipPreview class fix to standard

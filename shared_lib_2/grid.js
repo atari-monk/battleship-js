@@ -1,3 +1,7 @@
+export function generateGridArray(gridSize) {
+  return Array.from({ length: gridSize }, () => Array(gridSize).fill(0))
+}
+
 export function convertScreenCoordsTo2DArrayPosition(x, y, cellSize) {
   const col = Math.floor(x / cellSize.width)
   const row = Math.floor(y / cellSize.height)
@@ -22,4 +26,14 @@ export function getCellPosition(x, y, cellSize, numColumns, offset = 0) {
     offset
   )
   return { row, col, index }
+}
+
+export function convert1DArrayIndexTo2DArrayPosition(
+  index,
+  numColumns,
+  offset = 0
+) {
+  const row = Math.floor((index - offset) / numColumns)
+  const col = (index - offset) % numColumns
+  return { row, col }
 }

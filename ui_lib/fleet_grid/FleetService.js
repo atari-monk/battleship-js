@@ -1,4 +1,4 @@
-import { COLOR } from './../../shared_lib_2/index.js'
+import { COLOR, generateGridArray } from './../../shared_lib_2/index.js'
 
 export class FleetService {
   constructor(config, dataService, battleGridLoader, toggleGridsUIController) {
@@ -12,9 +12,7 @@ export class FleetService {
     this.currentShipIndex = 0
     this.isHorizontal = true
     this.placedShips = new Set()
-    this.gridArray = Array.from({ length: GRID_SIZE }, () =>
-      Array(GRID_SIZE).fill(0)
-    )
+    this.gridArray = generateGridArray(GRID_SIZE)
   }
 
   toggleOrientation() {
