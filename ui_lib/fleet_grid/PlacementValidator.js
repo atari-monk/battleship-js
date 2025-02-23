@@ -10,9 +10,7 @@ export class PlacementValidator {
 
     const { row: startRow, col: startCol } =
       convert1DArrayIndexTo2DArrayPosition(startIndex, GRID_SIZE, 1)
-    //const startRow = Math.floor((startIndex - 1) / GRID_SIZE)
-    //const startCol = (startIndex - 1) % GRID_SIZE
-
+    
     if (isHorizontal) {
       for (let i = 0; i < shipSize; i++) {
         const currentIndex = startIndex + i

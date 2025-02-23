@@ -1,4 +1,8 @@
-import { COLOR, generateGridArray } from './../../shared_lib_2/index.js'
+import {
+  COLOR,
+  generateGridArray,
+  convert1DArrayIndexTo2DArrayPosition,
+} from './../../shared_lib_2/index.js'
 
 export class FleetService {
   constructor(config, dataService, battleGridLoader, toggleGridsUIController) {
@@ -8,6 +12,7 @@ export class FleetService {
     this._toggleGridsUIController = toggleGridsUIController
 
     const { GRID_SIZE, SHIP_SIZES } = config.grid
+    this.gridSize = GRID_SIZE
     this.shipSizes = SHIP_SIZES
     this.currentShipIndex = 0
     this.isHorizontal = true
@@ -39,39 +44,44 @@ export class FleetService {
         COLOR.BLUE
       )
 
-      if (this.isHorizontal) {
-        for (let i = 0; i < shipSize; i++) {
-          this.placedShips.add(index + i)
-        }
-      } else {
-        const { GRID_SIZE } = this._config.grid
+      const { row: startRow, col: startCol } =
+        convert1DArrayIndexTo2DArrayPosition(index, this.gridSize, 1)
 
-        for (let i = 0; i < shipSize; i++) {
-          this.placedShips.add(index + i * GRID_SIZE)
-        }
+      if (this.isHorizontal) {
+        this._markHorizontalShip(index, shipSize)
+        this._addHorizontalShipToGrid(startRow, startCol, shipSize)
+      } else {
+        this._markVerticalShip(index, shipSize)
+        this._addVerticalShipToGrid(startRow, startCol, shipSize)
       }
 
-      this.addShipToGrid(index, shipSize)
       this.currentShipIndex++
       return true
     }
     return false
   }
 
-  addShipToGrid(startIndex, shipSize) {
-    const { GRID_SIZE } = this._config.grid
+  _markHorizontalShip(index, shipSize) {
+    for (let i = 0; i < shipSize; i++) {
+      this.placedShips.add(index + i)
+    }
+  }
 
-    const startRow = Math.floor((startIndex - 1) / GRID_SIZE)
-    const startCol = (startIndex - 1) % GRID_SIZE
+  _markVerticalShip(index, shipSize) {
+    for (let i = 0; i < shipSize; i++) {
+      this.placedShips.add(index + i * this.gridSize)
+    }
+  }
 
-    if (this.isHorizontal) {
-      for (let i = 0; i < shipSize; i++) {
-        this.gridArray[startRow][startCol + i] = 1
-      }
-    } else {
-      for (let i = 0; i < shipSize; i++) {
-        this.gridArray[startRow + i][startCol] = 1
-      }
+  _addHorizontalShipToGrid(startRow, startCol, shipSize) {
+    for (let i = 0; i < shipSize; i++) {
+      this.gridArray[startRow][startCol + i] = 1
+    }
+  }
+
+  _addVerticalShipToGrid(startRow, startCol, shipSize) {
+    for (let i = 0; i < shipSize; i++) {
+      this.gridArray[startRow + i][startCol] = 1
     }
   }
 

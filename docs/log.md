@@ -531,6 +531,7 @@
 - 16:49 -
 - feat(grid): enhance getCellPosition function and introduce new coordinate conversion utilities
   feat(grid): add utility functions for grid generation and coordinate conversion
+  feat(fleet_grid): refactor FleetService to use new coordinate conversion utility and improve ship placement logic
 
 x. PlacementValidator class fix to standard
 x. ShipPreview class fix to standard
