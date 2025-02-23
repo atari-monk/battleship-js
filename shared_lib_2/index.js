@@ -11,4 +11,8 @@ export { getById, getByIdObj, query, queryObj } from './select.js'
 export { toggle, toggleObj } from './style.js'
 export { requestFullscreen, requestFullscreenObj } from './fullscreen.js'
 export { loadComponents, loadComponentsObj } from './component.js'
-export { getCellPosition } from './grid.js'
+export {
+  convertScreenCoordsTo2DArrayPosition,
+  convert2DArrayPositionTo1DArrayIndex,
+  getCellPosition,
+} from './grid.js'

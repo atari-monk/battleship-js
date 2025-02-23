@@ -1,5 +1,4 @@
-import { getCellPosition2 } from './../../shared_lib/ui.js'
-import { COLOR } from './../config.js'
+import { getCellPosition, COLOR } from './../../shared_lib_2/index.js'
 
 export class FleetPaintOnHoverEventHandler {
   constructor(fleetService, placementValidator, shipPreview, gridMetric) {
@@ -37,11 +36,11 @@ export class FleetPaintOnHoverEventHandler {
       this.fleetService.isHorizontal,
       this.fleetService.placedShips,
       gridItems,
-      isValidPlacement ? COLOR.green : COLOR.red
+      isValidPlacement ? COLOR.GREEN : COLOR.RED
     )
   }
 
   getCellIndex(clientX, clientY) {
-    return getCellPosition2(clientX, clientY, this._gridMetric.cellSize)
+    return getCellPosition(clientX, clientY, this._gridMetric.cellSize, 10, 1)
   }
 }

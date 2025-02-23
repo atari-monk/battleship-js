@@ -525,7 +525,11 @@
 - 16:15 - 16:47
 - 32
 - feat(fleet_grid): refactor config
+2.
+- FleetService class fix to standard
+- 20 min
+- 16:49 -
+- feat(grid): enhance getCellPosition function and introduce new coordinate conversion utilities
 
-x. FleetService class fix to standard
 x. PlacementValidator class fix to standard
 x. ShipPreview class fix to standard

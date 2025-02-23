@@ -1,7 +1,5 @@
-import {
-  getRelativeCoordinates,
-  getCellPosition,
-} from './../../../../shared_lib/ui.js'
+import { getRelativeCoordinates } from './../../../../shared_lib/ui.js'
+import { getCellPosition } from './../../../../shared_lib_2/index.js'
 import { EventEmitter } from './../EventEmitter.js'
 
 export class CellHitManager extends EventEmitter {
@@ -12,7 +10,7 @@ export class CellHitManager extends EventEmitter {
 
   processCellHit(event, cells, gridRect, cellSize) {
     const { x, y } = getRelativeCoordinates(event, gridRect)
-    const { row, col, index } = getCellPosition(x, y, cellSize)
+    const { row, col, index } = getCellPosition(x, y, cellSize, 10)
 
     const isHit = this._gameStateService.hitCell(row, col)
 

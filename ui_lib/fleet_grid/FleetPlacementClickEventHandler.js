@@ -52,6 +52,6 @@ export class FleetPlacementClickEventHandler {
   }
 
   getCellIndex(clientX, clientY) {
-    return getCellPosition(clientX, clientY, this._gridMetric.cellSize)
+    return getCellPosition(clientX, clientY, this._gridMetric.cellSize, 10, 1)
   }
 }
