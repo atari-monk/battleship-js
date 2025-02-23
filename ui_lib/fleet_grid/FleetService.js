@@ -28,37 +28,61 @@ export class FleetService {
     const shipSize = this.shipSizes[this.currentShipIndex]
 
     if (
-      placementValidator.validatePlacement(
+      !placementValidator.validatePlacement(
         index,
         shipSize,
         this.isHorizontal,
         this.placedShips
       )
-    ) {
-      shipPreview.paintPreview(
-        index,
-        shipSize,
-        this.isHorizontal,
-        this.placedShips,
-        gridItems,
-        COLOR.BLUE
-      )
+    )
+      return false
 
-      const { row: startRow, col: startCol } =
-        convert1DArrayIndexTo2DArrayPosition(index, this.gridSize, 1)
+    shipPreview.paintPreview(
+      index,
+      shipSize,
+      this.isHorizontal,
+      this.placedShips,
+      gridItems,
+      COLOR.BLUE
+    )
 
-      if (this.isHorizontal) {
-        this._markHorizontalShip(index, shipSize)
-        this._addHorizontalShipToGrid(startRow, startCol, shipSize)
-      } else {
-        this._markVerticalShip(index, shipSize)
-        this._addVerticalShipToGrid(startRow, startCol, shipSize)
-      }
+    const { row: startRow, col: startCol } =
+      convert1DArrayIndexTo2DArrayPosition(index, this.gridSize, 1)
 
-      this.currentShipIndex++
-      return true
+    if (this.isHorizontal) {
+      this._markHorizontalShip(index, shipSize)
+      this._addHorizontalShipToGrid(startRow, startCol, shipSize)
+    } else {
+      this._markVerticalShip(index, shipSize)
+      this._addVerticalShipToGrid(startRow, startCol, shipSize)
     }
-    return false
+
+    this.currentShipIndex++
+    return true
+  }
+
+  isPlacementComplete() {
+    return this.currentShipIndex >= this.shipSizes.length
+  }
+
+  async saveGridData() {
+    this._dataService.player1.board.matrix = this.gridArray
+
+    this._hideFleetGrid()
+
+    await this._battleGridLoader.load(this._dataService)
+
+    this._dataService.initializeTurn()
+
+    const {
+      turn: { currentPlayer },
+      player1: { name },
+    } = this._dataService
+
+    this._toggleGridsUIController.toggleGrids({
+      currentPlayer,
+      player1Name: name,
+    })
   }
 
   _markHorizontalShip(index, shipSize) {
@@ -85,31 +109,7 @@ export class FleetService {
     }
   }
 
-  isPlacementComplete() {
-    return this.currentShipIndex >= this.shipSizes.length
-  }
-
-  async saveGridData() {
-    this._dataService.player1.board.matrix = this.gridArray
-
-    this.hideFleetGrid()
-
-    await this._battleGridLoader.load(this._dataService)
-
-    this._dataService.initializeTurn()
-
-    const {
-      turn: { currentPlayer },
-      player1: { name },
-    } = this._dataService
-
-    this._toggleGridsUIController.toggleGrids({
-      currentPlayer,
-      player1Name: name,
-    })
-  }
-
-  hideFleetGrid() {
+  _hideFleetGrid() {
     const { selector: selectorA, hide: hideA } = this._config.fleetGrid
     const { selector: selectorB, hide: hideB } = this._config.toogle
 
