@@ -537,8 +537,7 @@
 - This class enables custom placing of the fleet
 3. PlacementValidator class fix to standard, read, what it does
 - 20 min
-- 20:14 -
+- 20:14 - 20:45, 21:18 - 
 - feat(fleet_grid): enhance PlacementValidator with self commenting methods
 -
-- FleetService class fix to standard
-x. ShipPreview class fix to standard
+4. ShipPreview class fix to standard

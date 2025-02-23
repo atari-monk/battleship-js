@@ -1,4 +1,8 @@
-import { convert1DArrayIndexTo2DArrayPosition } from './../../shared_lib_2/index.js'
+import {
+  convert1DArrayIndexTo2DArrayPosition,
+  calculateVerticalIndex,
+  getRowFromIndex,
+} from './../../shared_lib_2/index.js'
 
 export class PlacementValidator {
   constructor(config) {
@@ -30,17 +34,17 @@ export class PlacementValidator {
   }
 
   _validateHorizontalPlacement(startIndex, startCol, shipSize, placedShips) {
-    const { GRID_SIZE, GRID_ITEM_COUNT } = this._config
+    const { GRID_SIZE } = this._config
 
     for (let i = 0; i < shipSize; i++) {
       const currentIndex = startIndex + i
       const currentCol = startCol + i
+
       const exceedsRightBoundary = currentCol >= GRID_SIZE
-      if (
-        exceedsRightBoundary ||
-        currentIndex > GRID_ITEM_COUNT ||
-        placedShips.has(currentIndex)
-      ) {
+      const { exceedsGridBounds, shipAlreadyPlaced } =
+        this._checkPlacementConditions(currentIndex, placedShips)
+
+      if (exceedsRightBoundary || exceedsGridBounds || shipAlreadyPlaced) {
         return false
       }
     }
@@ -48,19 +52,32 @@ export class PlacementValidator {
   }
 
   _validateVerticalPlacement(startIndex, startRow, shipSize, placedShips) {
-    const { GRID_SIZE, GRID_ITEM_COUNT } = this._config
+    const { GRID_SIZE } = this._config
 
     for (let i = 0; i < shipSize; i++) {
-      const currentIndex = startIndex + i * GRID_SIZE
-      const currentRow = Math.floor((currentIndex - 1) / GRID_SIZE)
+      const currentIndex = calculateVerticalIndex(startIndex, i, GRID_SIZE)
+      const currentRow = getRowFromIndex(currentIndex, GRID_SIZE)
+
+      const isVerticalAlignmentCorrect = currentRow !== startRow + i
+      const { exceedsGridBounds, shipAlreadyPlaced } =
+        this._checkPlacementConditions(currentIndex, placedShips)
+
       if (
-        currentRow !== startRow + i ||
-        currentIndex > GRID_ITEM_COUNT ||
-        placedShips.has(currentIndex)
+        isVerticalAlignmentCorrect ||
+        exceedsGridBounds ||
+        shipAlreadyPlaced
       ) {
         return false
       }
     }
     return true
+  }
+
+  _checkPlacementConditions(currentIndex, placedShips) {
+    const { GRID_ITEM_COUNT } = this._config
+    const exceedsGridBounds = currentIndex > GRID_ITEM_COUNT
+    const shipAlreadyPlaced = placedShips.has(currentIndex)
+
+    return { exceedsGridBounds, shipAlreadyPlaced }
   }
 }

@@ -17,4 +17,6 @@ export {
   convert2DArrayPositionTo1DArrayIndex,
   getCellPosition,
   convert1DArrayIndexTo2DArrayPosition,
+  calculateVerticalIndex,
+  getRowFromIndex,
 } from './grid.js'

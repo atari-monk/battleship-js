@@ -37,3 +37,11 @@ export function convert1DArrayIndexTo2DArrayPosition(
   const col = (index - offset) % numColumns
   return { row, col }
 }
+
+export function calculateVerticalIndex(startIndex, i, GRID_SIZE) {
+  return startIndex + i * GRID_SIZE
+}
+
+export function getRowFromIndex(currentIndex, GRID_SIZE) {
+  return Math.floor((currentIndex - 1) / GRID_SIZE)
+}
