@@ -1,16 +1,15 @@
-import { getCellPosition2 } from './../../shared_lib/ui.js'
-import { format } from './../../shared_lib/LogFormatter.js'
-import { FLEET_GRID_CONFIG } from './../config.js'
-import { EVENT } from './../../shared_lib_2/index.js'
+import { format, EVENT, getCellPosition } from './../../shared_lib_2/index.js'
 
 export class FleetPlacementClickEventHandler {
   constructor(
+    config,
     fleetService,
     placementValidator,
     shipPreview,
     gridMetric,
     dataService
   ) {
+    this._config = config
     this.fleetService = fleetService
     this.placementValidator = placementValidator
     this.shipPreview = shipPreview
@@ -19,7 +18,11 @@ export class FleetPlacementClickEventHandler {
   }
 
   handle(event, gridItems) {
-    const { fleetGridGrid, player1Data } = FLEET_GRID_CONFIG
+    const {
+      css: { gridSelector },
+      message: { player1Data },
+    } = this._config
+
     const touch = event.touches ? event.touches[0] : event
     const { row, col, index } = this.getCellIndex(touch.clientX, touch.clientY)
 
@@ -32,7 +35,7 @@ export class FleetPlacementClickEventHandler {
       )
     ) {
       if (this.fleetService.isPlacementComplete()) {
-        const element = document.querySelector(fleetGridGrid)
+        const element = document.querySelector(gridSelector)
         if (!element) throw new Error('Element not found')
         element.removeEventListener(EVENT.CLICK, this.handle.bind(this))
 
@@ -42,13 +45,13 @@ export class FleetPlacementClickEventHandler {
           .join('\n\t\t')
 
         console.debug(
-          ...format.debug(player1Data(this._dataService.player1.name, fleet))
+          format(player1Data(this._dataService.player1.name, fleet))
         )
       }
     }
   }
 
   getCellIndex(clientX, clientY) {
-    return getCellPosition2(clientX, clientY, this._gridMetric.cellSize)
+    return getCellPosition(clientX, clientY, this._gridMetric.cellSize)
   }
 }

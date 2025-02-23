@@ -30,41 +30,6 @@ export const MENU_HIDE = {
   cssClass: MENU_CONFIG.hiddenStyle,
 }
 
-export const FLEET_GRID_CONFIG = {
-  name: 'fleet_grid',
-  fleetGrid: '.fleet-grid',
-  fleetGridGrid: '.fleet-grid__grid',
-  fleetGridCell: 'fleet-grid__item',
-  hiddenStyle: 'fleet-grid--hidden',
-  cssClass: 'fleet-grid',
-  id: 'fleet-grid-1',
-  scripts: [
-    './../config.js',
-    'FleetService.js',
-    'PlacementValidator.js',
-    'ShipPreview.js',
-    'EventAttacher.js',
-    'FleetPaintOnHoverEventHandler.js',
-    'FleetPlacementClickEventHandler.js',
-    'FleetGridComponent.js',
-  ],
-  events: [
-    EVENT.mousemove,
-    EVENT.mouseenter,
-    EVENT.touchmove,
-    EVENT.touchstart,
-    EVENT.click,
-    EVENT.wheel,
-  ],
-  handlerWarn: 'Handler for event not found',
-  gridError: (selector) => `Container with selector ${selector} not found.`,
-  itemsError: 'Grid items have not been generated yet.',
-  player1Data: (playerName, fleet) =>
-    `7. Load data:\n\tPlayer 1 - '${playerName}'\n\tFleet:\n\t\t${fleet}`,
-  initMsg: 'Load component: fleet_grid',
-  loadFleetGridError: 'Error in FleetGrid loader:',
-}
-
 export const TOGGLE_CONFIG = {
   name: 'toggle',
   toogle: '.toggle',

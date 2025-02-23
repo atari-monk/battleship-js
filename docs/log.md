@@ -490,30 +490,42 @@
 - PlacementHandler, SRP, fix config.
 - 20 min
 - 13:53 - 14:33
+- 40
 - feat(fleet_grid): refactor event handling by removing PlacementHandler and introducing FleetPaintOnHoverEventHandler and FleetPlacementClickEventHandler for improved event management and separation of concerns
 2.
 - Make time script more flexible
 - 10 min
 - 16:20 - 16:31
+- 11
 - feat(alarm): enhance Alarm class to accept user-defined duration and improve input validation
 2.
 - FleetGridComponent class fix to standard
 - 10 min
 - 16:32 - 16:53
+- 21
 - feat(fleet_grid): replace FleetGrid with FleetGridComponent and introduce FLEET_GRID_COMPONENT_CONFIG for improved structure and configuration management
 3.
-- fleet_grid_config.js
+- fleet_grid_config.js, use it in component, remove old configs
 - 30 min
 - 17:28 - 18:27
+- 59
 - feat(fleet_grid): update FleetGrid configuration and error handling for improved clarity and structure
 - 30 min
 - 20:07 - 21:20
+- 73
 - feat(fleet_grid): refactor FleetService and PlacementValidator to use dynamic grid size and improve configuration management
 
 - Total 3 hours 24 min (204 minutes)
 
 #### 23
 
-4. FleetService class fix to standard
-5. PlacementValidator class fix to standard
-6. ShipPreview class fix to standard
+1. 
+- fleet_grid_config.js, use it in component, remove old configs
+- 30 min
+- 16:15 - 16:47
+- 32
+- feat(fleet_grid): refactor config
+
+x. FleetService class fix to standard
+x. PlacementValidator class fix to standard
+x. ShipPreview class fix to standard
