@@ -1,4 +1,9 @@
-import { COLOR } from './../../shared_lib_2/index.js'
+import {
+  COLOR,
+  convert1DArrayIndexTo2DArrayPosition,
+  calculateVerticalIndex,
+  getRowFromIndex,
+} from './../../shared_lib_2/index.js'
 
 export class ShipPreview {
   constructor(config) {
@@ -15,8 +20,8 @@ export class ShipPreview {
   ) {
     const { GRID_SIZE } = this._config
 
-    const startRow = Math.floor((startIndex - 1) / GRID_SIZE)
-    const startCol = (startIndex - 1) % GRID_SIZE
+    const { row: startRow, col: startCol } =
+      convert1DArrayIndexTo2DArrayPosition(startIndex, GRID_SIZE, 1)
 
     if (isHorizontal) {
       this.paintHorizontal(
@@ -74,8 +79,8 @@ export class ShipPreview {
     const { GRID_SIZE, GRID_ITEM_COUNT } = this._config
 
     for (let offset = 0; offset < shipSize; offset++) {
-      const currentIndex = startIndex + offset * GRID_SIZE
-      const currentRow = Math.floor((currentIndex - 1) / GRID_SIZE)
+      const currentIndex = calculateVerticalIndex(startIndex, offset, GRID_SIZE)
+      const currentRow = getRowFromIndex(currentIndex, GRID_SIZE)
 
       if (
         currentRow !== startRow + offset ||

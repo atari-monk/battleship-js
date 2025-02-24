@@ -523,13 +523,13 @@
 - fleet_grid_config.js, use it in component, remove old configs
 - 30 min
 - 16:15 - 16:47
-- 32
+- 32 min
 - feat(fleet_grid): refactor config
 2.
 - FleetService class fix to standard, read, what it does
 - 20 min
 - 16:49 - 18:35
-- 1 hr 46 min
+- 106 min
 - feat(grid): enhance getCellPosition function and introduce new coordinate conversion utilities
   feat(grid): add utility functions for grid generation and coordinate conversion
   feat(fleet_grid): refactor FleetService to use new coordinate conversion utility and improve ship placement logic
@@ -537,7 +537,18 @@
 - This class enables custom placing of the fleet
 3. PlacementValidator class fix to standard, read, what it does
 - 20 min
-- 20:14 - 20:45, 21:18 - 
+- 20:14 - 20:45, 21:18 - 22:00
+- 73 min
 - feat(fleet_grid): enhance PlacementValidator with self commenting methods
--
-4. ShipPreview class fix to standard
+- feat(fleet_grid): refactor PlacementValidator to use new utility functions for placement validation
+- This class validates if fleet placement is valid
+
+- Total 3 hours 31 min (211 minutes)
+
+#### 24
+
+1. ShipPreview class fix to standard, read, what it does
+- 10 min
+- 12:13 - 12:54
+- feat(fleet_grid): update ShipPreview to use new coordinate conversion utilities for improved readability
+- Just read a class and tested
