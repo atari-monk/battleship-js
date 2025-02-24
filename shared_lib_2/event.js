@@ -18,3 +18,14 @@ export function setEventObj({
 }) {
   return setEvent(element, handler, eventType, isPassive)
 }
+
+export function observeVisibilityChange(element, callback) {
+  const observer = new IntersectionObserver((entries) => {
+    const entry = entries[0]
+    if (entry.isIntersecting) {
+      callback()
+    }
+  })
+
+  observer.observe(element)
+}

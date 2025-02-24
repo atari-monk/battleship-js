@@ -167,17 +167,6 @@ export async function loadComponents({
   }
 }
 
-export function observeVisibilityChange(element, callback) {
-  const observer = new IntersectionObserver((entries) => {
-    const entry = entries[0]
-    if (entry.isIntersecting) {
-      callback()
-    }
-  })
-
-  observer.observe(element)
-}
-
 export function generateElements({
   parentElement,
   numElements = 100,
@@ -204,16 +193,6 @@ export function matrixToScreen({ gridRect, cellSize, row, col }) {
   }
 }
 
-export function handleAction({ logMessages, waitTime, callback }) {
-  logMessages.forEach((message) => {
-    console.debug(...format.debug(message))
-  })
-
-  setTimeout(() => {
-    callback()
-  }, waitTime)
-}
-
 export function getRelativeCoordinates(event, rect) {
   return {
     x: event.x - rect.left,
@@ -231,8 +210,4 @@ export function getCellPosition2(x, y, cellSize) {
   const col = Math.floor(x / cellSize.width)
   const row = Math.floor(y / cellSize.height)
   return { row, col, index: row * 10 + col + 1 }
-}
-
-export function updateColor({ element, isOn, isOnColor, isOffColor }) {
-  element.style.backgroundColor = isOn ? isOnColor : isOffColor
 }

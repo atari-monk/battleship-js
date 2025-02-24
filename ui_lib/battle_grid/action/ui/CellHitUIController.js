@@ -1,8 +1,8 @@
-import { updateColor } from './../../../../shared_lib/ui.js'
-import { BATTLE_GRID } from './../../config.js'
+import { COLOR, updateColor } from './../../../../shared_lib_2/index.js'
 
 export class CellHitUIController {
-  constructor(cellHitManager) {
+  constructor(config, cellHitManager) {
+    this._config = config
     this.cellHitManager = cellHitManager
 
     this.cellHitManager.on('cellHit', this.updateCellUI.bind(this))
@@ -13,14 +13,16 @@ export class CellHitUIController {
       throw new Error('Clicked outside of grid bounds.')
     }
 
+    const { cellError } = this._config
+
     const cell = cells[index]
-    if (!cell) throw new Error(BATTLE_GRID.cellError)
+    if (!cell) throw new Error(cellError)
 
     updateColor({
       element: cell,
       isOn: isHit,
-      isOnColor: BATTLE_GRID.color.red,
-      isOffColor: BATTLE_GRID.color.grey,
+      isOnColor: COLOR.RED,
+      isOffColor: COLOR.GREY,
     })
   }
 }

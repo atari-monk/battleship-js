@@ -1,4 +1,4 @@
-import { matrixToScreen } from './../../shared_lib/ui.js'
+import { convert2DArrayToScreenCoords } from './../../shared_lib_2/index.js'
 
 export class AIHitService {
   constructor(gameStateService, cellHitManager) {
@@ -9,7 +9,12 @@ export class AIHitService {
   hitCell(cells, gridRect, cellSize) {
     const [x, y] = this._gameStateService.aiTarget()
 
-    const event = matrixToScreen({ gridRect, cellSize, row: x, col: y })
+    const event = convert2DArrayToScreenCoords({
+      gridRect,
+      cellSize,
+      row: x,
+      col: y,
+    })
 
     this._cellHitManager.processCellHit(event, cells, gridRect, cellSize)
   }

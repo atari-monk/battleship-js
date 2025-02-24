@@ -1,8 +1,8 @@
-import { BATTLE_GRID } from './../../config.js'
-import { handleAction } from './../../../../shared_lib/ui.js'
+import { handleAction } from './../../../../shared_lib_2/index.js'
 
 export class WinUIController {
-  constructor(winManager, guiContainer) {
+  constructor(config, winManager, guiContainer) {
+    this._config = config
     this.guiContainer = guiContainer
     this.winManager = winManager
 
@@ -10,7 +10,7 @@ export class WinUIController {
   }
 
   handleWin({ winner }) {
-    const { winMsg, waitOnReset, waitMsg, elements } = BATTLE_GRID
+    const { winMsg, waitOnReset, waitMsg, elements } = this._config
 
     handleAction({
       logMessages: [winMsg(winner), waitMsg(waitOnReset)],

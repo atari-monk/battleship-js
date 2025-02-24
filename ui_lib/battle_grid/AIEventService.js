@@ -1,4 +1,4 @@
-import { observeVisibilityChange } from '../../shared_lib/ui.js'
+import { observeVisibilityChange } from './../../shared_lib_2/index.js'
 
 export class AIEventService {
   constructor(gridMetrics, aiHitService, actionExecutor) {

@@ -549,6 +549,14 @@
 
 1. ShipPreview class fix to standard, read, what it does
 - 10 min
-- 12:13 - 12:54
+- 12:13 - 13:11
+- 58 min
 - feat(fleet_grid): update ShipPreview to use new coordinate conversion utilities for improved readability
 - Just read a class and tested
+2. Refactor, battle grid.
+- 20 min
+- 19:20 - 20:12, 22:32 - 23:36
+- 52 + 64 = 116 min
+- feat(battle_grid): refactor to use shared_lib_2 for improved modularity and maintainability
+
+- Total 2 hours 54 min (174 minutes)

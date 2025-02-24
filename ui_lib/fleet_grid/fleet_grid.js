@@ -7,7 +7,7 @@ import { GridCells } from './../grid/GridCells.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { FleetService } from './FleetService.js'
 import { EventAttacher } from './EventAttacher.js'
-import { BATTLE_GRID_COMPONENT_CONFIG } from './../battle_grid/config.js'
+import { BATTLE_GRID_COMPONENT_CONFIG } from './../battle_grid/battle_grid_config.js'
 import { FleetPaintOnHoverEventHandler } from './FleetPaintOnHoverEventHandler.js'
 import { FleetPlacementClickEventHandler } from './FleetPlacementClickEventHandler.js'
 import { FLEET_GRID_COMPONENT_CONFIG } from './fleet_grid_config.js'
@@ -15,25 +15,25 @@ import { GRID_CONFIG } from './../grid/grid_config.js'
 import { TOGGLE_COMPONENT_CONFIG } from './../toggle/toggle_config.js'
 
 export default function init({ serviceContainer, guiContainer } = {}) {
+  const config = {
+    grid: GRID_CONFIG,
+    fleetGrid: FLEET_GRID_COMPONENT_CONFIG,
+    toogle: TOGGLE_COMPONENT_CONFIG,
+    battleGrid: BATTLE_GRID_COMPONENT_CONFIG,
+  }
+
   const dataService = serviceContainer.getServiceByName('data_service')
-  const gridMetrics = new GridMetrics(FLEET_GRID_COMPONENT_CONFIG)
-  const gridCells = new GridCells(FLEET_GRID_COMPONENT_CONFIG)
+  const gridMetrics = new GridMetrics(config.fleetGrid)
+  const gridCells = new GridCells(config.fleetGrid)
 
-  const placementValidator = new PlacementValidator(GRID_CONFIG)
-  const shipPreview = new ShipPreview(GRID_CONFIG)
+  const placementValidator = new PlacementValidator(config.grid)
+  const shipPreview = new ShipPreview(config.grid)
 
-  const battleGridLoader = new BattleGridLoader(
-    BATTLE_GRID_COMPONENT_CONFIG,
-    guiContainer
-  )
-  const toggleGridsUIController = new ToggleGridsUIController()
+  const battleGridLoader = new BattleGridLoader(config.battleGrid, guiContainer)
+  const toggleGridsUIController = new ToggleGridsUIController(config.battleGrid)
 
   const fleetService = new FleetService(
-    {
-      grid: GRID_CONFIG,
-      fleetGrid: FLEET_GRID_COMPONENT_CONFIG,
-      toogle: TOGGLE_COMPONENT_CONFIG,
-    },
+    config,
     dataService,
     battleGridLoader,
     toggleGridsUIController
@@ -48,7 +48,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   )
 
   const fleetPlacementClickEventHandler = new FleetPlacementClickEventHandler(
-    FLEET_GRID_COMPONENT_CONFIG,
+    config.fleetGrid,
     fleetService,
     placementValidator,
     shipPreview,
@@ -57,7 +57,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   )
 
   const eventAttacher = new EventAttacher(
-    FLEET_GRID_COMPONENT_CONFIG,
+    config.fleetGrid,
     gridCells,
     fleetService,
     {
@@ -67,7 +67,7 @@ export default function init({ serviceContainer, guiContainer } = {}) {
   )
 
   return new FleetGridComponent(
-    FLEET_GRID_COMPONENT_CONFIG,
+    config.fleetGrid,
     gridMetrics,
     gridCells,
     eventAttacher,

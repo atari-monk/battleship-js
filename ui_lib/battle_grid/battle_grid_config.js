@@ -1,4 +1,4 @@
-export const BATTLE_GRID = {
+export const BATTLE_GRID_COMPONENT_CONFIG = {
   name: 'battle_grid',
   cssClass: 'battle-grid',
   battleGridGrid: 'battle-grid__grid',
@@ -9,7 +9,9 @@ export const BATTLE_GRID = {
     { elementId: 'battle-grid-2', type: 'player' },
   ],
   hiddenStyle: 'battle-grid--hidden',
-  initMsg: (id) => `Load component: ${id}`,
+  message: {
+    init: (id) => `Load component: ${id}`,
+  },
   winMsg: (name) => `Player ${name} WON!`,
   waitOnReset: 3000,
   waitMsg: (s) => `Waiting ${s / 1000}s`,
@@ -23,7 +25,9 @@ export const BATTLE_GRID = {
   loadBattleGridError: 'Error in loadBattleGrid:',
   itemsError: 'Grid items have not been generated yet.',
   cellError: 'No cell found!',
-
+  error: {
+    loadingComponent: 'Error in loading component: toggle',
+  },
   gridCells: {
     selector: (id, cssClass) => `#${id} .${cssClass}`,
     cssClass: {
@@ -36,7 +40,7 @@ export const BATTLE_GRID = {
     },
   },
 }
-
+/*
 export const BATTLE_GRID_COMPONENT_CONFIG = {
   component: {
     name: 'battle_grid',
@@ -50,3 +54,4 @@ export const BATTLE_GRID_COMPONENT_CONFIG = {
     loadingComponent: 'Error in loading component: toggle',
   },
 }
+*/

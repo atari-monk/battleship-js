@@ -9,7 +9,9 @@ export class BattleGridLoader {
 
   async load(dataService) {
     const {
-      component: { name, cssClass, elements },
+      name,
+      cssClass,
+      elements,
       error: { loadingComponent },
     } = this._config
 

@@ -1,7 +1,6 @@
-import { BATTLE_GRID } from './config.js'
-
 export class GameStateService {
-  constructor(dataService) {
+  constructor(config, dataService) {
+    this._config = config
     this._dataService = dataService
   }
 
@@ -30,9 +29,11 @@ export class GameStateService {
   }
 
   nextAction() {
-    return this._dataService.getBoard().isWin()
-      ? BATTLE_GRID.actions.win
-      : BATTLE_GRID.actions.endTurn
+    const {
+      actions: { win, endTurn },
+    } = this._config
+
+    return this._dataService.getBoard().isWin() ? win : endTurn
   }
 
   reset() {

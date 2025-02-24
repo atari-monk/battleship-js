@@ -1,4 +1,4 @@
-import { BATTLE_GRID } from './config.js'
+import { BATTLE_GRID_COMPONENT_CONFIG } from './battle_grid_config.js'
 import { BattleGrid } from './BattleGrid.js'
 import { GridMetrics } from './../grid/GridMetrics.js'
 import { GameStateService } from './GameStateService.js'
@@ -19,15 +19,24 @@ import { CellHitUIController } from './action/ui/CellHitUIController.js'
 import { ToggleGridsUIController } from './action/ui/ToggleGridsUIController.js'
 
 export default function init({ serviceContainer, guiContainer, type } = {}) {
+  const configObj = { battleGrid: BATTLE_GRID_COMPONENT_CONFIG }
+  const config = configObj.battleGrid
+
   const dataService = serviceContainer.getServiceByName('data_service')
-  const gridMetrics = new GridMetrics(BATTLE_GRID)
-  const gameStateService = new GameStateService(dataService)
+  const gridMetrics = new GridMetrics(config)
+  const gameStateService = new GameStateService(config, dataService)
 
   const cellHitManager = new CellHitManager(gameStateService)
   const turnManager = new GameTurnManager(gameStateService)
   const winManager = new GameWinManager(gameStateService)
 
-  setupUIControllers(cellHitManager, turnManager, winManager, guiContainer)
+  setupUIControllers(
+    config,
+    cellHitManager,
+    turnManager,
+    winManager,
+    guiContainer
+  )
 
   const actionExecutor = setupActions(turnManager, winManager, gameStateService)
 
@@ -38,19 +47,20 @@ export default function init({ serviceContainer, guiContainer, type } = {}) {
     gameStateService
   )
 
-  return new BattleGrid(new GridCells(BATTLE_GRID), eventService[type])
+  return new BattleGrid(config, new GridCells(config), eventService[type])
 }
 
 function setupUIControllers(
+  config,
   cellHitManager,
   turnManager,
   winManager,
   guiContainer
 ) {
-  const toggleGridsUIController = new ToggleGridsUIController()
-  new CellHitUIController(cellHitManager)
-  new TurnUIController(turnManager, toggleGridsUIController)
-  new WinUIController(winManager, guiContainer)
+  const toggleGridsUIController = new ToggleGridsUIController(config)
+  new CellHitUIController(config, cellHitManager)
+  new TurnUIController(config, turnManager, toggleGridsUIController)
+  new WinUIController(config, winManager, guiContainer)
 }
 
 function setupActions(turnManager, winManager, gameStateService) {

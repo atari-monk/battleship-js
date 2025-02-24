@@ -1,5 +1,4 @@
-import { BATTLE_GRID } from './config.js'
-import { setEventForElement } from '../../shared_lib/ui.js'
+import { EVENT } from './../../shared_lib_2/index.js'
 
 export class PlayerEventService {
   constructor(gridMetrics, playerHitService, actionExecutor) {
@@ -9,13 +8,11 @@ export class PlayerEventService {
   }
 
   setEvent(id, grid, cells) {
-    return setEventForElement({
-      element: grid,
-      eventType: BATTLE_GRID.event.click,
-      handler: (event) => {
-        this._move(id, event, cells)
-      },
-    })
+    grid.addEventListener(
+      EVENT.CLICK,
+      (event) => this._move(id, event, cells),
+      { passive: true }
+    )
   }
 
   _move(id, event, cells) {

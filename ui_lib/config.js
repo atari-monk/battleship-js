@@ -1,3 +1,4 @@
+/*
 export const EVENT = {
   mousemove: 'mousemove',
   mouseenter: 'mouseenter',
@@ -72,3 +73,4 @@ export const COLOR = {
   lightRed: 'rgba(255, 0, 0, 0.7)',
   grey: 'rgba(128, 128, 128, 0.7)',
 }
+*/
