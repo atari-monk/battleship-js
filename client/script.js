@@ -1,12 +1,12 @@
 import {
   GUIContainerFactory,
   ServiceContainerFactory,
-} from './../component_loader_lib/index.js'
+} from './../lib/component_loader/index.js'
 import { DataServiceFactory } from './../lib/data/index.js'
 
 export const serviceContainer = new ServiceContainerFactory().generete()
 export const guiContainer = new GUIContainerFactory(serviceContainer).generete(
-  './../../ui_lib'
+  './../../../lib/ui'
 )
 
 async function init() {
