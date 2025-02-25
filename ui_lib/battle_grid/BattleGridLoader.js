@@ -1,5 +1,4 @@
-import { LEVEL, format } from './../../shared_lib_2/index.js'
-import { loadComponents } from './../../shared_lib/ui.js'
+import { LEVEL, format, loadComponentsObj } from './../../shared_lib_2/index.js'
 
 export class BattleGridLoader {
   constructor(config, guiContainer) {
@@ -16,7 +15,7 @@ export class BattleGridLoader {
     } = this._config
 
     try {
-      const grids = await loadComponents({
+      const grids = await loadComponentsObj({
         uiContainer: this._guiContainer,
         componentName: name,
         cssClass,

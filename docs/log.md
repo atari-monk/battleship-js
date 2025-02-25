@@ -560,3 +560,11 @@
 - feat(battle_grid): refactor to use shared_lib_2 for improved modularity and maintainability
 
 - Total 2 hours 54 min (174 minutes)
+
+#### 25
+
+1. Remove shared_lib and make shared_lib_2 to shared_lib.
+- 1h
+- 13:56 - 15:41
+- 105 min
+- feat(shared_lib_2): introduce new utility functions and refactor imports for improved modularity

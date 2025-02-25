@@ -1,4 +1,4 @@
-import { selectElementOrThrow } from '../../shared_lib/ui.js'
+import { getById, query } from './../../shared_lib_2/index.js'
 
 export class GridMetrics {
   constructor(config) {
@@ -22,10 +22,7 @@ export class GridMetrics {
   }
 
   _setGridRect(id) {
-    this.gridRect = selectElementOrThrow({
-      selector: id,
-      isId: true,
-    }).getBoundingClientRect()
+    this.gridRect = getById(id).getBoundingClientRect()
   }
 
   _setCellSize(id) {
@@ -34,8 +31,6 @@ export class GridMetrics {
       cssClass: { cellCssClass },
     } = this._config
 
-    this.cellSize = selectElementOrThrow({
-      selector: selector(id, cellCssClass),
-    }).getBoundingClientRect()
+    this.cellSize = query(selector(id, cellCssClass)).getBoundingClientRect()
   }
 }

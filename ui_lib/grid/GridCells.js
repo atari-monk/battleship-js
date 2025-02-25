@@ -1,8 +1,8 @@
 import {
-  selectElementOrThrow,
-  generateElements,
-  selectAll,
-} from '../../shared_lib/ui.js'
+  query,
+  queryAll,
+  generateElementsObj,
+} from './../../shared_lib_2/index.js'
 
 export class GridCells {
   constructor(config) {
@@ -17,19 +17,16 @@ export class GridCells {
       cssClass: { gridCssClass, cellCssClass },
     } = this._config
 
-    this.grid = selectElementOrThrow({
-      selector: selector(id, gridCssClass),
-      isId: false,
-    })
+    this.grid = query(selector(id, gridCssClass))
 
     this.grid.innerHTML = ''
 
-    generateElements({
+    generateElementsObj({
       parentElement: this.grid,
       childCssClassName: cellCssClass,
     })
 
-    this.cells = selectAll(selector(id, cellCssClass))
+    this.cells = queryAll(selector(id, cellCssClass))
   }
 
   reset() {

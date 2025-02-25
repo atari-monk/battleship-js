@@ -9,11 +9,12 @@ export {
 export { setEvent, setEventObj, observeVisibilityChange } from './event.js'
 export { handleAction } from './flow.js'
 export { default as format } from './format.js'
-export { getById, getByIdObj, query, queryObj } from './select.js'
+export { getById, getByIdObj, query, queryObj, queryAll } from './select.js'
 export { toggle, toggleObj, updateColor } from './style.js'
 export { requestFullscreen, requestFullscreenObj } from './fullscreen.js'
 export { loadComponents, loadComponentsObj } from './component.js'
 export {
+  generateElementsObj,
   generateGridArray,
   convertScreenCoordsTo2DArrayPosition,
   convert2DArrayPositionTo1DArrayIndex,
@@ -24,3 +25,4 @@ export {
   getRowFromIndex,
   toggleGrids,
 } from './grid.js'
+export { getRelativeCoordinates } from './gameMath.js'

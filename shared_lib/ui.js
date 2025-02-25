@@ -3,39 +3,39 @@ import { format } from './LogFormatter.js'
 const defaultNotFoundMsg = (identifierType, identifier) =>
   `Element with ${identifierType} "${identifier}" not found`
 
-export function selectElementOrThrow({
-  selector,
-  isId = false,
-  notFoundMsg = defaultNotFoundMsg,
-} = {}) {
-  const element = isId
-    ? document.getElementById(selector)
-    : document.querySelector(selector)
+// export function selectElementOrThrow({
+//   selector,
+//   isId = false,
+//   notFoundMsg = defaultNotFoundMsg,
+// } = {}) {
+//   const element = isId
+//     ? document.getElementById(selector)
+//     : document.querySelector(selector)
 
-  if (!element) {
-    const errorMsg = notFoundMsg(isId ? 'id' : 'selector', selector)
-    console.error(...format.error(errorMsg))
-    throw new Error(errorMsg)
-  }
+//   if (!element) {
+//     const errorMsg = notFoundMsg(isId ? 'id' : 'selector', selector)
+//     console.error(...format.error(errorMsg))
+//     throw new Error(errorMsg)
+//   }
 
-  return element
-}
+//   return element
+// }
 
-export function selectById({ id } = {}) {
-  const element = document.getElementById(id)
-  if (!element) {
-    console.warn(...format.warn(defaultNotFoundMsg('id', id)))
-  }
-  return element
-}
+// export function selectById({ id } = {}) {
+//   const element = document.getElementById(id)
+//   if (!element) {
+//     console.warn(...format.warn(defaultNotFoundMsg('id', id)))
+//   }
+//   return element
+// }
 
-export function selectAll(selector) {
-  const elements = document.querySelectorAll(selector)
-  if (!elements) {
-    console.warn(...format.warn(defaultNotFoundMsg('selector', selector)))
-  }
-  return elements
-}
+// export function selectAll(selector) {
+//   const elements = document.querySelectorAll(selector)
+//   if (!elements) {
+//     console.warn(...format.warn(defaultNotFoundMsg('selector', selector)))
+//   }
+//   return elements
+// }
 
 export function toggle({ element, cssClass, forceState } = {}) {
   if (typeof forceState === 'boolean') {

@@ -1,6 +1,25 @@
 import { getByIdObj } from './select.js'
 import { toggleObj } from './style.js'
 
+export function generateElementsObj({
+  parentElement,
+  numElements = 100,
+  elementType = 'div',
+  childCssClassName = '',
+}) {
+  if (!parentElement) {
+    throw new Error('A valid parent element must be provided.')
+  }
+
+  for (let i = 1; i <= numElements; i++) {
+    const element = document.createElement(elementType)
+    if (childCssClassName) {
+      element.classList.add(childCssClassName)
+    }
+    parentElement.appendChild(element)
+  }
+}
+
 export function generateGridArray(gridSize) {
   return Array.from({ length: gridSize }, () => Array(gridSize).fill(0))
 }

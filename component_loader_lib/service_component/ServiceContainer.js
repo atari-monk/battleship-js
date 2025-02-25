@@ -1,4 +1,4 @@
-import { format } from './../../shared_lib/LogFormatter.js'
+import { format, LEVEL } from './../../shared_lib_2/index.js'
 
 export class ServiceContainer {
   constructor(serviceLoader, serviceUnloader, serviceStorage) {
@@ -16,7 +16,9 @@ export class ServiceContainer {
 
   loadService(serviceName, serviceInstance) {
     if (this.storage.isServiceLoaded(serviceName)) {
-      console.warn(...format.warn(this.msg.SERVICE_ALREADY_LOADED(serviceName)))
+      console.warn(
+        format(LEVEL.WARN, this.msg.SERVICE_ALREADY_LOADED(serviceName))
+      )
       return
     }
 
@@ -26,14 +28,14 @@ export class ServiceContainer {
     const serviceData = this.loader.loadService()
     if (serviceData) {
       this.storage.addService(serviceName, serviceData.instance)
-      console.debug(...format.debug(this.msg.SERVICE_LOADED(serviceName)))
+      console.debug(format(this.msg.SERVICE_LOADED(serviceName)))
     }
   }
 
   unloadService(serviceName) {
     const serviceIndex = this.storage.findServiceIndex(serviceName)
     if (serviceIndex === -1) {
-      console.warn(...format.warn(this.msg.SERVICE_NOT_LOADED(serviceName)))
+      console.warn(format(LEVEL.WARN, this.msg.SERVICE_NOT_LOADED(serviceName)))
       return
     }
 
@@ -41,7 +43,7 @@ export class ServiceContainer {
     this.unloader.unloadService(serviceData.instance)
 
     this.storage.removeService(serviceIndex)
-    console.debug(...format.debug(this.msg.SERVICE_UNLOADED(serviceName)))
+    console.debug(format(this.msg.SERVICE_UNLOADED(serviceName)))
   }
 
   getServiceByName(serviceName) {

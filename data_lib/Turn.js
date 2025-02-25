@@ -1,4 +1,4 @@
-import { format } from './../shared_lib/LogFormatter.js'
+import { format } from './../shared_lib_2/index.js'
 
 export class Turn {
   constructor(player1Name, player2Name) {
@@ -29,7 +29,7 @@ export class Turn {
     const currentIndex = this.players.indexOf(this.currentPlayer)
 
     console.debug(
-      ...format.debug(
+      format(
         `Turn: ${this.turnNr}, ${
           currentIndex === 0 ? 'Player 1' : 'Player 2'
         } - '${this.currentPlayer}'`

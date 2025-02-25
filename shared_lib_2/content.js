@@ -1,6 +1,6 @@
 import { CONTENT, getLanguage } from './translation.js'
 
-export const SELECTOR = Object.freeze({
+export const SELECTOR = {
   get id() {
     const content = CONTENT[getLanguage()]
     return content.selector.id
@@ -9,9 +9,9 @@ export const SELECTOR = Object.freeze({
     const content = CONTENT[getLanguage()]
     return content.selector.selector
   },
-})
+}
 
-export const ERROR = Object.freeze({
+export const ERROR = {
   element: {
     notFound: (identifierType, identifier) => {
       const content = CONTENT[getLanguage()]
@@ -28,4 +28,4 @@ export const ERROR = Object.freeze({
       return content.error.cssClass.invalid
     },
   },
-})
+}

@@ -1,5 +1,5 @@
+import { format, LEVEL } from './../shared_lib_2/index.js'
 import { Turn } from './Turn.js'
-import { format } from './../shared_lib/LogFormatter.js'
 
 export class DataService {
   constructor() {
@@ -17,7 +17,10 @@ export class DataService {
       this.turn.printTurnInfo()
     } else {
       console.error(
-        ...format.error('Players must be initialized before starting turns.')
+        format(
+          LEVEL.ERROR,
+          'Players must be initialized before starting turns.'
+        )
       )
     }
   }
@@ -55,7 +58,7 @@ export class DataService {
   }
 
   logPlayers() {
-    console.debug(...format.debug(`Load data: \n\t${this.toString()}`))
+    console.debug(format(`Load data: \n\t${this.toString()}`))
   }
 
   async reset() {

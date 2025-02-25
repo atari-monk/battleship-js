@@ -1,4 +1,4 @@
-import { format } from './../../shared_lib/LogFormatter.js'
+import { format } from './../../shared_lib_2/index.js'
 
 export class PlayerAI {
   constructor(board) {
@@ -37,16 +37,14 @@ export class PlayerAI {
   attack() {
     if (this.noTargetsOrHits()) {
       if (this.preloadedTargets.length > 0) {
-        console.debug(
-          ...format.debug(`Preloaded, left ${this.preloadedTargets.length}`)
-        )
+        console.debug(format(`Preloaded, left ${this.preloadedTargets.length}`))
         return this.attackFromPreloadedTargets()
       } else {
-        console.debug(...format.debug(`Random, ${100 - this.visited.size}`))
+        console.debug(format(`Random, ${100 - this.visited.size}`))
         return this.randomAttack()
       }
     } else if (this.hasPotentialTargets()) {
-      console.debug(...format.debug(`Targeted`))
+      console.debug(format(`Targeted`))
       return this.targetedAttack()
     } else if (this.hasHits()) {
       this.resetTargeting()
