@@ -564,13 +564,18 @@
 #### 25
 
 1. Remove shared_lib and make shared_lib_2 to shared_lib.
-- 1h
+- 1h (estimate)
 - 13:56 - 15:50, 19:10 - 19:22,
-- 114 min + 12
+- 126 min
 - feat(shared_lib): introduce new utility functions and refactor imports for improved modularity
 - feat(shared_lib): migrate utilities from shared_lib_2 to shared_lib for improved consistency and modularity
-2. Refactor data lib. 
-- 19:23 - 
+2. Refactor data lib.
+- 2h (estimate)
+- 19:23 - 21:24
+- 121 min
 - refactor: remove obsolete files
 - refactor: move lib to lib/data folder and update imports
 - refactor: move libs to lib forlder and fix imports
+- refactor(data): refactor Board and DataServiceFactory to use new configuration structure and improve grid handling
+
+- Total 4 hours 7 min (247 minutes)
