@@ -3,7 +3,7 @@ import { DataService } from './DataService.js'
 import { Player } from './Player.js'
 import { Fleet } from './Fleet.js'
 import { Board } from './Board.js'
-import { PlayerAI } from './player_ai/PlayerAI.js'
+import { PlayerAI } from './../ai_lib/PlayerAI.js'
 
 export class DataServiceFactory {
   async generete() {

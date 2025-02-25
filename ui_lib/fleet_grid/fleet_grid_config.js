@@ -12,7 +12,7 @@ export const FLEET_GRID_COMPONENT_CONFIG = {
     startsWith: 'touch',
   },
   scripts: [
-    './../config.js',
+    'fleet_grid_config.js',
     'FleetService.js',
     'PlacementValidator.js',
     'ShipPreview.js',

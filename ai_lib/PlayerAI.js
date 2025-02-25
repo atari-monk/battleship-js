@@ -1,4 +1,4 @@
-import { format } from './../../shared_lib/index.js'
+import { format } from '../shared_lib/index.js'
 
 export class PlayerAI {
   constructor(board) {
