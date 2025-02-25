@@ -2,7 +2,7 @@ import {
   convert1DArrayIndexTo2DArrayPosition,
   calculateVerticalIndex,
   getRowFromIndex,
-} from './../../shared_lib_2/index.js'
+} from './../../shared_lib/index.js'
 
 export class PlacementValidator {
   constructor(config) {

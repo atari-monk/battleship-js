@@ -1,4 +1,4 @@
-import { toggleObj } from './../../shared_lib_2/index.js'
+import { toggleObj } from './../../shared_lib/index.js'
 
 export class ToggleEventHandler {
   constructor(config, guiContainer) {

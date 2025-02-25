@@ -1,4 +1,4 @@
-import { convert2DArrayToScreenCoords } from './../../shared_lib_2/index.js'
+import { convert2DArrayToScreenCoords } from './../../shared_lib/index.js'
 
 export class AIHitService {
   constructor(gameStateService, cellHitManager) {

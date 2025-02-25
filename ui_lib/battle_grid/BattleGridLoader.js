@@ -1,4 +1,4 @@
-import { LEVEL, format, loadComponentsObj } from './../../shared_lib_2/index.js'
+import { LEVEL, format, loadComponentsObj } from './../../shared_lib/index.js'
 
 export class BattleGridLoader {
   constructor(config, guiContainer) {

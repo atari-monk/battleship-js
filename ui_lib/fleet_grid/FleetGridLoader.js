@@ -1,4 +1,4 @@
-import { LEVEL, format } from './../../shared_lib_2/index.js'
+import { LEVEL, format } from './../../shared_lib/index.js'
 
 export class FleetGridLoader {
   constructor(config, guiContainer) {

@@ -1,4 +1,4 @@
-import { EVENT } from '../../shared_lib_2/index.js'
+import { EVENT } from '../../shared_lib/index.js'
 
 export const MENU_COMPONENT_CONFIG = {
   dependency: {

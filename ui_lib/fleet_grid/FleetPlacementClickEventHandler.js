@@ -1,4 +1,4 @@
-import { format, EVENT, getCellPosition } from './../../shared_lib_2/index.js'
+import { format, EVENT, getCellPosition } from './../../shared_lib/index.js'
 
 export class FleetPlacementClickEventHandler {
   constructor(

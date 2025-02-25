@@ -3,7 +3,7 @@ import {
   toggleObj,
   requestFullscreen,
   loadComponentsObj,
-} from './../../shared_lib_2/index.js'
+} from './../../shared_lib/index.js'
 
 export class FullscreenEventHandler {
   constructor(config, guiContainer) {

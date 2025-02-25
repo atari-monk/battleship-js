@@ -1,4 +1,4 @@
-import { handleAction } from './../../../../shared_lib_2/index.js'
+import { handleAction } from './../../../../shared_lib/index.js'
 
 export class WinUIController {
   constructor(config, winManager, guiContainer) {

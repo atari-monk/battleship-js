@@ -2,7 +2,7 @@ import {
   COLOR,
   generateGridArray,
   convert1DArrayIndexTo2DArrayPosition,
-} from './../../shared_lib_2/index.js'
+} from './../../shared_lib/index.js'
 
 export class FleetService {
   constructor(config, dataService, battleGridLoader, toggleGridsUIController) {

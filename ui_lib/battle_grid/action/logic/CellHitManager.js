@@ -1,7 +1,7 @@
 import {
   getRelativeCoordinates,
   getCellPosition,
-} from './../../../../shared_lib_2/index.js'
+} from './../../../../shared_lib/index.js'
 import { EventEmitter } from './../EventEmitter.js'
 
 export class CellHitManager extends EventEmitter {

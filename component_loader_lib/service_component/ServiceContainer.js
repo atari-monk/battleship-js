@@ -1,4 +1,4 @@
-import { format, LEVEL } from './../../shared_lib_2/index.js'
+import { format, LEVEL } from './../../shared_lib/index.js'
 
 export class ServiceContainer {
   constructor(serviceLoader, serviceUnloader, serviceStorage) {

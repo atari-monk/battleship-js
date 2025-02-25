@@ -1,4 +1,4 @@
-import { getCellPosition, COLOR } from './../../shared_lib_2/index.js'
+import { getCellPosition, COLOR } from './../../shared_lib/index.js'
 
 export class FleetPaintOnHoverEventHandler {
   constructor(fleetService, placementValidator, shipPreview, gridMetric) {

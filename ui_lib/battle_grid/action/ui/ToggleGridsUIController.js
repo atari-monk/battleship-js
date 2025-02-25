@@ -1,4 +1,4 @@
-import { toggleGrids } from './../../../../shared_lib_2/index.js'
+import { toggleGrids } from './../../../../shared_lib/index.js'
 
 export class ToggleGridsUIController {
   constructor(config) {

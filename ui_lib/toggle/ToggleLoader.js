@@ -1,4 +1,4 @@
-import { loadComponentsObj } from './../../shared_lib_2/index.js'
+import { loadComponentsObj } from './../../shared_lib/index.js'
 
 export class ToggleLoader {
   constructor(config, guiContainer) {

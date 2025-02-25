@@ -1,4 +1,4 @@
-import { format } from './../../shared_lib_2/index.js'
+import { format } from './../../shared_lib/index.js'
 
 export class BattleGrid {
   constructor(config, gridCells, eventService) {
@@ -17,7 +17,7 @@ export class BattleGrid {
     this._girdCells.generate(id)
 
     const { grid, cells } = this._girdCells
-    
+
     this._eventService.setEvent(id, grid, cells)
   }
 

@@ -1,4 +1,4 @@
-import { getById, query } from './../../shared_lib_2/index.js'
+import { getById, query } from './../../shared_lib/index.js'
 
 export class GridMetrics {
   constructor(config) {

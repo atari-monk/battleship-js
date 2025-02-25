@@ -1,4 +1,4 @@
-import { EVENT } from '../../shared_lib_2/constants.js'
+import { EVENT } from '../../shared_lib/constants.js'
 
 export const FULL_SCREEN = {
   message: {

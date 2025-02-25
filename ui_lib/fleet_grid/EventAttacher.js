@@ -1,4 +1,4 @@
-import { EVENT, query } from '../../shared_lib_2/index.js'
+import { EVENT, query } from '../../shared_lib/index.js'
 
 export class EventAttacher {
   constructor(

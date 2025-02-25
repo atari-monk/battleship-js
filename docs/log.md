@@ -565,6 +565,7 @@
 
 1. Remove shared_lib and make shared_lib_2 to shared_lib.
 - 1h
-- 13:56 - 15:41
-- 105 min
-- feat(shared_lib_2): introduce new utility functions and refactor imports for improved modularity
+- 13:56 - 15:50, 19:10 - 19:22,
+- 114 min + 12
+- feat(shared_lib): introduce new utility functions and refactor imports for improved modularity
+- feat(shared_lib): migrate utilities from shared_lib_2 to shared_lib for improved consistency and modularity

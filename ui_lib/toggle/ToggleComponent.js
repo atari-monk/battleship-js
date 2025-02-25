@@ -1,4 +1,4 @@
-import { EVENT, format, getById } from './../../shared_lib_2/index.js'
+import { EVENT, format, getById } from './../../shared_lib/index.js'
 
 export class ToggleComponent {
   constructor(config, eventHandler) {

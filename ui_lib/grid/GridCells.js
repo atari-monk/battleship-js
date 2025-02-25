@@ -2,7 +2,7 @@ import {
   query,
   queryAll,
   generateElementsObj,
-} from './../../shared_lib_2/index.js'
+} from './../../shared_lib/index.js'
 
 export class GridCells {
   constructor(config) {

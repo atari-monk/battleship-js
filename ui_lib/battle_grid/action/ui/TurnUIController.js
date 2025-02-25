@@ -1,4 +1,4 @@
-import { handleAction } from './../../../../shared_lib_2/index.js'
+import { handleAction } from './../../../../shared_lib/index.js'
 
 export class TurnUIController {
   constructor(config, turnManager, toggleGridsUIController) {
