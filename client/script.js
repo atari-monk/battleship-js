@@ -2,7 +2,7 @@ import {
   GUIContainerFactory,
   ServiceContainerFactory,
 } from './../component_loader_lib/index.js'
-import { DataServiceFactory } from './../data_lib/index.js'
+import { DataServiceFactory } from './../lib/data/index.js'
 
 export const serviceContainer = new ServiceContainerFactory().generete()
 export const guiContainer = new GUIContainerFactory(serviceContainer).generete(
