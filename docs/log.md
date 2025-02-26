@@ -9,11 +9,11 @@
 1. 10:04 - 10:36, Project reorganization.
 2. 10:37 - 10:43, Docs reorganization.
 3. 10:44 - 11:34, Organizing mail; Moving ship.
-4. 13:29 - 14:29, Improving cable organization to level well.
+4. 13:29 - 14:29, Improving cable organization to level well. (workspace)
 5. 14:30 - 15:31, Horizontal/Vertical ship orientation.
-6. 15:32 - 15:55, Improve desk, new music.
+6. 15:32 - 15:55, Improve desk, new music. (workspace)
 7. 17:54 - 18:08, Ship placement validation.
-8. 18:09 - 18:33, Coffee, 10 pushups, 4 min step.
+8. 18:09 - 18:33, Coffee, 10 pushups, 4 min step. (workspace)
 9. 18:34 - 19:27, Ship placement.
 10. 20:31 - 22:04, Toggle button.
 11. 22:05 - 23:15, Toggle button in grid.
@@ -585,5 +585,15 @@
 1. Refactor data lib.
 - 2h (estimate)
 - 07:05 - 07:29
-- refactor(data): update Fleet and DataServiceFactory to utilize grid configuration and improve matrix handling
 - 24 min
+- refactor(data): update Fleet and DataServiceFactory to utilize grid configuration and improve matrix handling
+2. Read ai code.
+- 20 min
+- 07:55 - 08:12
+- 17 min
+- Class is to big.
+3. Refactor, cleaning.
+- 20 min (estimate)
+- 08:13 - 09:02
+- 49 min
+- refactor: reorganize project structure, remove obsolete documentation
