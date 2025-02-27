@@ -415,32 +415,44 @@
 #### 20
 
 1. 09:06 - 09:47, refactor(full_screen): update FullScreen component to use query and toggle object functions
+
 2. 09:48 - 10:22, refactor(constants): remove Object.freeze from constants for improved flexibility
    refactor(FullScreen): enhance event handling and configuration structure
    feat(event): add setEvent and setEventObj functions for streamlined event management
+
 3. 10:23 - 10:40, feat(fullscreen): implement requestFullscreen function and update imports for fullscreen handling
+
 4. 10:41 - 11:22, refactor(FullScreen): replace loadComponents with loadComponentsObj for improved component loading
+
 5. 11:54 - 12:57, feat(fullscreen): refactor FullScreen component to use FullscreenEventHandler for improved event management
+
 6. 12:58 - 13:30, refactor: remove obsolete serve, solid, and time modules to streamline the codebase
    feat(fullscreen): rename to FullScreenComponent
+   
 7. 14:01 - 14:26, test chargpt refactoring, failed 
+
 8. 15:39 - 16:06, refactor(menu): start refactoring to FullScreenComponent pattern
+
 9. 
 - Extract LoadGameEventHandler from MenuComponent class 
 - 17:40 - 18:06
 - feat(menu): extract LoadGameEventHandler for improved event handling and refactor Menu component
+
 10. 
 - Extract class MenuComponent from menu.js to its own file. Fix imports
 - 18:10 - 18:16
 - feat(menu): create MenuComponent class and refactor menu.js to use it
+
 11. 
 - Fix config. Move values from old to MENU_COMPONENT_CONFIG
 - 18:18 - 18:33
 - feat(menu): update LoadGameEventHandler to use MENU_COMPONENT_CONFIG and improve error handling
+
 12. 
 - Replace selectAndToggle with newer functions; Use {} for 4 dependencies to make 3 dependencies for class
 - 18:34 - 18:47
 - feat(menu): replace selectAndToggle with toggleObj and queryObj for improved functionality
+
 13. 
 - New log format
 - 18:48 - 19:08
@@ -465,17 +477,20 @@
 - feat(toggle): refactor ToggleLoader to use config and improve error handling
   feat(battle_grid): refactor BattleGridLoader to utilize new config structure
   feat(config): add BATTLE_GRID_COMPONENT_CONFIG and TOGGLE_COMPONENT_CONFIG for better component management
+
 2.
 - Extract component and eventHandler class from toogle.
 - 20 min
 - 14:56 - 15:36
 - feat(toggle): extract ToggleComponent class and refactor toggle initialization
   feat(toggle): extract ToggleEventHandler class and refactor ToggleComponent for improved separation of concerns
+
 3.
 - Fix ToggleComponent config
 - 20 min
 - 15:45 - 17:03
 - feat(toggle): refactor ToggleComponent and ToggleEventHandler to use configuration object for improved initialization and error handling
+
 4.
 - Refactor one fleet_grid event handler class
 - 20 min
@@ -492,19 +507,22 @@
 - 13:53 - 14:33
 - 40
 - feat(fleet_grid): refactor event handling by removing PlacementHandler and introducing FleetPaintOnHoverEventHandler and FleetPlacementClickEventHandler for improved event management and separation of concerns
+
 2.
 - Make time script more flexible
 - 10 min
 - 16:20 - 16:31
 - 11
 - feat(alarm): enhance Alarm class to accept user-defined duration and improve input validation
-2.
+
+3.
 - FleetGridComponent class fix to standard
 - 10 min
 - 16:32 - 16:53
 - 21
 - feat(fleet_grid): replace FleetGrid with FleetGridComponent and introduce FLEET_GRID_COMPONENT_CONFIG for improved structure and configuration management
-3.
+
+4.
 - fleet_grid_config.js, use it in component, remove old configs
 - 30 min
 - 17:28 - 18:27
@@ -525,6 +543,7 @@
 - 16:15 - 16:47
 - 32 min
 - feat(fleet_grid): refactor config
+
 2.
 - FleetService class fix to standard, read, what it does
 - 20 min
@@ -535,6 +554,7 @@
   feat(fleet_grid): refactor FleetService to use new coordinate conversion utility and improve ship placement logic
   feat(fleet_grid): inverse if, order methods
 - This class enables custom placing of the fleet
+
 3. PlacementValidator class fix to standard, read, what it does
 - 20 min
 - 20:14 - 20:45, 21:18 - 22:00
@@ -553,6 +573,7 @@
 - 58 min
 - feat(fleet_grid): update ShipPreview to use new coordinate conversion utilities for improved readability
 - Just read a class and tested
+
 2. Refactor, battle grid.
 - 20 min
 - 19:20 - 20:12, 22:32 - 23:36
@@ -569,6 +590,7 @@
 - 126 min
 - feat(shared_lib): introduce new utility functions and refactor imports for improved modularity
 - feat(shared_lib): migrate utilities from shared_lib_2 to shared_lib for improved consistency and modularity
+
 2. Refactor data lib.
 - 2h (estimate)
 - 19:23 - 21:24
@@ -587,11 +609,13 @@
 - time: 07:05 - 07:29
 - minutes: 24 min
 - commit: refactor(data): update Fleet and DataServiceFactory to utilize grid configuration and improve matrix handling
+
 2. Read ai code.
 - minutes estimate: 20
 - time: 07:55 - 08:12
 - minutes: 17 min
 - Class is to big.
+
 3. Refactor, cleaning.
 - minutes estimate: 20
 - time: 08:13 - 09:02
@@ -606,13 +630,14 @@
 - minutes: 44
 - commit: refactor(loader): streamline GUIComponentLoader and GUIComponentContainer for improved configuration and loading
 
-2. Refactor GUIComponentUnloader, GUIInstanceStorage, GUIComponentStorage.
+2. Refactor GUIComponentUnloader, GUIInstanceStorage, GUIComponentStorage, GUIComponentContainer.
 - minutes estimate: 40
-- time: 11:11 - 11:26, 12:02 - 12:12, 12:13 - 12:19
-- minutes: 15 + 10 + 6 
+- time: 11:11 - 11:26, 12:02 - 12:12, 12:13 - 12:19, 12:20 - 12:34
+- minutes: 45
 - commit: refactor(loader): enhance GUIComponentLoader and GUIComponentUnloader with required parameter validation  
   refactor(storage): optimize GUIInstanceStorage for efficient instance management and retrieval  
-  refactor(storage): replace loadedComponents array with componentsByName map for improved component management
+  refactor(storage): replace loadedComponents array with componentsByName map for improved component management  
+  refactor(loader): enhance GUIComponentContainer with improved container and instance creation methods
 ---
 
 x.
