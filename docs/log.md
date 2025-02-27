@@ -642,10 +642,14 @@
 
 3. Refactor service_loader
 - minutes estimate: 30
-- time: 18:55 - 19:27, 19:28 - 19:42
-- minutes: 46
+- time: 18:55 - 19:27, 19:28 - 19:49
+- minutes: 53
 - commit: refactor(service_loader): simplify ServiceContainer by removing ServiceLoader and ServiceUnloader dependencies, refactor storage  
-  refactor(service_loader): streamline ServiceContainer by encapsulating storage and improving service message handling
+  refactor(service_loader): streamline ServiceContainer by encapsulating storage and improving service message handling  
+  refactor(service_loader): update data service retrieval method to use getService
+
+- Total 2 hours 37 min (157 minutes)
+- Rewrite always shows stuff.
 
 ---
 
