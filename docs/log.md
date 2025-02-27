@@ -428,7 +428,7 @@
 
 6. 12:58 - 13:30, refactor: remove obsolete serve, solid, and time modules to streamline the codebase
    feat(fullscreen): rename to FullScreenComponent
-   
+
 7. 14:01 - 14:26, test chargpt refactoring, failed 
 
 8. 15:39 - 16:06, refactor(menu): start refactoring to FullScreenComponent pattern
@@ -624,20 +624,21 @@
 
  #### 27
 
-1. Refactor GUIComponentLoader. 
+1. Refactor GUIComponentLoader.
 - minutes estimate: 20
 - time: 07:48 - 08:32
 - minutes: 44
 - commit: refactor(loader): streamline GUIComponentLoader and GUIComponentContainer for improved configuration and loading
 
-2. Refactor GUIComponentUnloader, GUIInstanceStorage, GUIComponentStorage, GUIComponentContainer.
+2. Refactor GUIComponentUnloader, GUIInstanceStorage, GUIComponentStorage, GUIComponentContainer. Extract as lib.
 - minutes estimate: 40
-- time: 11:11 - 11:26, 12:02 - 12:12, 12:13 - 12:19, 12:20 - 12:34
-- minutes: 45
+- time: 11:11 - 11:26, 12:02 - 12:12, 12:13 - 12:19, 12:20 - 12:34, 12:35 - 12:50
+- minutes: 60
 - commit: refactor(loader): enhance GUIComponentLoader and GUIComponentUnloader with required parameter validation  
   refactor(storage): optimize GUIInstanceStorage for efficient instance management and retrieval  
   refactor(storage): replace loadedComponents array with componentsByName map for improved component management  
-  refactor(loader): enhance GUIComponentContainer with improved container and instance creation methods
+  refactor(loader): enhance GUIComponentContainer with improved container and instance creation methods  
+  refactor(loader): restructure service and component loading to separate libs
 ---
 
 x.
