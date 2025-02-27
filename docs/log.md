@@ -605,6 +605,11 @@
 - time: 07:48 - 08:32
 - minutes: 44
 - commit: refactor(loader): streamline GUIComponentLoader and GUIComponentContainer for improved configuration and loading
+2. Refactor GUIComponentUnloader
+- minutes estimate: 20
+- time: 11:11 - 11:26, 
+- minutes: 15 + 
+- commit: refactor(loader): refactor GUIComponentUnloader
 
 ---
 
