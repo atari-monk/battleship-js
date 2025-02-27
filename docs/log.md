@@ -583,17 +583,33 @@
 #### 26
 
 1. Refactor data lib.
-- 2h (estimate)
-- 07:05 - 07:29
-- 24 min
-- refactor(data): update Fleet and DataServiceFactory to utilize grid configuration and improve matrix handling
+- minutes estimate: 2h
+- time: 07:05 - 07:29
+- minutes: 24 min
+- commit: refactor(data): update Fleet and DataServiceFactory to utilize grid configuration and improve matrix handling
 2. Read ai code.
-- 20 min
-- 07:55 - 08:12
-- 17 min
+- minutes estimate: 20
+- time: 07:55 - 08:12
+- minutes: 17 min
 - Class is to big.
 3. Refactor, cleaning.
-- 20 min (estimate)
-- 08:13 - 09:02
-- 49 min
-- refactor: reorganize project structure, remove obsolete documentation
+- minutes estimate: 20
+- time: 08:13 - 09:02
+- minutes: 49 min
+- commit: refactor: reorganize project structure, remove obsolete documentation
+
+ #### 27
+
+1. Refactor GUIComponentLoader. 
+- minutes estimate: 20 min
+- time: 07:48 - 08:32
+- minutes: 44
+- commit: refactor(loader): streamline GUIComponentLoader and GUIComponentContainer for improved configuration and loading
+
+---
+
+x.
+- minutes estimate:
+- time:
+- minutes:
+- commit:
