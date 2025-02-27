@@ -639,6 +639,13 @@
   refactor(storage): replace loadedComponents array with componentsByName map for improved component management  
   refactor(loader): enhance GUIComponentContainer with improved container and instance creation methods  
   refactor(loader): restructure service and component loading to separate libs
+
+3. Refactor service_loader
+- minutes estimate: 30
+- time: 18:55 - 19:27, 
+- minutes: 32 + 
+- commit: refactor(service_loader): simplify ServiceContainer by removing ServiceLoader and ServiceUnloader dependencies, refactor storage
+
 ---
 
 x.
