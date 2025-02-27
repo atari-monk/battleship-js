@@ -601,15 +601,17 @@
  #### 27
 
 1. Refactor GUIComponentLoader. 
-- minutes estimate: 20 min
+- minutes estimate: 20
 - time: 07:48 - 08:32
 - minutes: 44
 - commit: refactor(loader): streamline GUIComponentLoader and GUIComponentContainer for improved configuration and loading
-2. Refactor GUIComponentUnloader
-- minutes estimate: 20
-- time: 11:11 - 11:26, 
-- minutes: 15 + 
-- commit: refactor(loader): refactor GUIComponentUnloader
+
+2. Refactor GUIComponentUnloader, GUIInstanceStorage.
+- minutes estimate: 40
+- time: 11:11 - 11:26, 12:02 - 12:12
+- minutes: 15 + 10
+- commit: refactor(loader): enhance GUIComponentLoader and GUIComponentUnloader with required parameter validation  
+  refactor(storage): optimize GUIInstanceStorage for efficient instance management and retrieval
 
 ---
 
